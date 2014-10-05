@@ -1,0 +1,9 @@
+p
+
+  - @feeds.values.each do |feed|
+    p= feed.title
+    p= feed.url
+    - if feed.updated?
+      - feed.new_entries.each do |entry|
+        p= entry.title
+        p= entry.url
