@@ -1,9 +1,7 @@
 class FeedsUpdateJob < ActiveJob::Base
   queue_as :default
 
-  def perform shit
-    feed=FeedSource.new
-    feed.title=shit
-    feed.save
+  def perform
+    # TODO From Setting.feeds to FeedSource
   end
 end

@@ -1,12 +1,9 @@
 source 'https://rubygems.org'
 
-# Use Rails Web Console https://github.com/rails/web-console
-group :development do
-  gem 'web-console', '~> 2.0.0.beta4'
-end
-
 # Use Rails 4.2.0pre for Active Job implementation
 gem 'rails', '~> 4.2.0.beta2'
+# Use Rails Web Console https://github.com/rails/web-console
+gem 'web-console', '~> 2.0.0.beta4', group: :development
 # Use Feedjira feed parser
 gem 'feedjira'
 # Use Delayed::Job for Active Record Backend for scheduling background jobs
@@ -17,6 +14,7 @@ gem 'daemons'
 gem 'clockwork'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'rails-settings-cached', '~> 0.4.1'
 # Use Slim template engine for views
 gem 'slim-rails'
 # Use SCSS for stylesheets - 5.0.0 for Rails 4.2.0 support + autoprefixer

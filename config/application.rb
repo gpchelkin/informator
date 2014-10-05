@@ -22,7 +22,8 @@ module Informator
     config.i18n.default_locale = :ru
     config.active_job.queue_adapter = :delayed_job
 
-    # https://github.com/rails/web-console
+    # Mounts the terminal at /console https://github.com/rails/web-console
     config.web_console.automount = true
+    config.web_console.style.colors = 'monokai'
   end
 end

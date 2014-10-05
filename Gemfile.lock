@@ -111,6 +111,8 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.1)
       loofah (~> 2.0)
+    rails-settings-cached (0.4.1)
+      rails (>= 4.0.0)
     railties (4.2.0.beta2)
       actionpack (= 4.2.0.beta2)
       activesupport (= 4.2.0.beta2)
@@ -173,6 +175,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   rails (~> 4.2.0.beta2)
+  rails-settings-cached (~> 0.4.1)
   sass-rails (~> 5.0.0.beta1)
   slim-rails
   sqlite3
