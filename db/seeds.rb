@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Default settings:
+Setting.create(frequency: 10, mode: false, deprecated: 60, style: 1, file: 'feeds.txt')

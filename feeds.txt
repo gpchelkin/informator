@@ -1,0 +1,2 @@
+#http://news.yandex.ru/index.rss
+http://news.yandex.ru/politics.rss

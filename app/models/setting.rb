@@ -1,2 +1,5 @@
-class Setting < RailsSettings::CachedSettings
+class Setting < ActiveRecord::Base
+  def at
+    ''
+  end
 end

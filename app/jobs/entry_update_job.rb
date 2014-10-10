@@ -1,7 +1,7 @@
 class EntryUpdateJob < ActiveJob::Base
   queue_as :default
 
-  def perform mode
-    # TODO Fetch or update from FeedSource to Entry
+  def perform(*args)
+    Entry.update_all Setting.first.mode
   end
 end

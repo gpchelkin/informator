@@ -11,57 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141005153216) do
-
-  create_table "delayed_jobs", force: true do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+ActiveRecord::Schema.define(version: 20141008225855) do
 
   create_table "entries", force: true do |t|
-    t.string   "title"
     t.string   "url"
-    t.string   "text"
-    t.datetime "time"
-    t.integer  "FeedSource_id"
-    t.boolean  "checked"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "title"
+    t.string   "summary"
+    t.string   "description"
+    t.datetime "published"
+    t.boolean  "checked",     default: false
+    t.integer  "feed_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "entry_id"
+    t.string   "image"
   end
 
-  add_index "entries", ["FeedSource_id"], name: "index_entries_on_FeedSource_id"
-  add_index "entries", ["title"], name: "index_entries_on_title"
+  add_index "entries", ["feed_id"], name: "index_entries_on_feed_id"
 
-  create_table "feed_sources", force: true do |t|
+  create_table "feeds", force: true do |t|
     t.string   "title"
     t.string   "url"
-    t.boolean  "checked"
+    t.boolean  "use"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "feed_sources", ["title"], name: "index_feed_sources_on_title"
-
   create_table "settings", force: true do |t|
-    t.string   "var",                   null: false
-    t.text     "value"
-    t.integer  "thing_id"
-    t.string   "thing_type", limit: 30
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "frequency"
+    t.string   "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "mode"
+    t.integer  "style"
+    t.integer  "deprecated"
   end
-
-  add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
 
 end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FeedsUpdateJobTest < ActiveJob::TestCase
+class FeedFileLoadJobTest < ActiveJob::TestCase
   # test "the truth" do
   #   assert true
   # end

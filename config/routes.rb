@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'tessst/dfd'
+
   get 'inform/index'
 
   get 'inform/admin'

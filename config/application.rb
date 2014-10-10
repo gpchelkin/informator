@@ -15,12 +15,14 @@ module Informator
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Moscow'
-    config.active_record.default_timezone = 'Moscow'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ru
-    config.active_job.queue_adapter = :delayed_job
+
+    # Use Active Job Inline Adapter for running jobs immediately
+    # Can be set to :delayed_job
+    config.active_job.queue_adapter = :inline
 
     # Mounts the terminal at /console https://github.com/rails/web-console
     config.web_console.automount = true

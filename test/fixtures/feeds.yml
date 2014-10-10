@@ -3,9 +3,9 @@
 one:
   title: MyString
   url: MyString
-  checked: false
+  use: false
 
 two:
   title: MyString
   url: MyString
-  checked: false
+  use: false
