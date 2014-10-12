@@ -13,7 +13,7 @@ class Entry < ActiveRecord::Base
     if mode
       old.each {|entry| entry.destroy}
     else
-      oldch = old.where(checked: true)
+      oldch = old.where(checked: false)
       oldch.each {|entry| entry.destroy}
     end
   end
@@ -21,7 +21,7 @@ class Entry < ActiveRecord::Base
   private
   def self.add_entries entries, feed, mode, time
     entries.each do |entry|
-      # break if exists? :entry_id => entry.id
+      break if exists? :entry_id => entry.id
       break if entry.published < time # TODO Maybe Fix
         create(
           entry_id:     entry.id,

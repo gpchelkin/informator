@@ -6,27 +6,28 @@ Informator
 
 * [Ruby](https://www.ruby-lang.org/) version 2.1.2
 
-* Требуемые _Ruby Gem_'ы см. в файле `Gemfile`, для их автоматической установки следует использовать команду `bundle install`
-
-* _Gem_ [Feedjira](https://github.com/feedjira/feedjira), применяемый для загрузки и разбора потоков,
+* Gem [Feedjira](https://github.com/feedjira/feedjira), применяемый для загрузки и разбора потоков,
 использует для запросов _Gem_ [Curb](https://github.com/taf2/curb), который является
 привязкой библиотеки [libcurl](http://curl.haxx.se/libcurl/) к языку _Ruby_.
-Следовательно, в системе должна быть установлена библиотека [libcurl](http://curl.haxx.se/libcurl/).
+Поэтому в системе перед установкой **Feedjira** должна быть установлена библиотека [libcurl](http://curl.haxx.se/libcurl/).
 Описание установки см. на указанных страницах.
 
-Пояснения к решениям, используемым в приложении
+* Остальные требуемые **Ruby Gems** см. в файле `Gemfile`. Для их автоматической установки следует использовать команду `bundle install`
+
+
+Пояснения к принятым решениям
 ----------
 
-### _Gem_ [Ruby on Rails 4.2.0.beta2](https://github.com/rails/rails)
+### Ruby on Rails 4.2
 
-Предварительная версия **Ruby on Rails 4.2** необходима для использования
+Предварительная версия Gem [Ruby on Rails 4.2.0.beta2](https://github.com/rails/rails) необходима для использования
 нового фреймворка [Active Job](https://github.com/rails/rails/tree/master/activejob). 
 **Active Job** позволяет планировать и запускать отдельные задания (такие, 
 которые нужно периодически запускать в фоне, например, обновление записей в базе) - **Jobs** `(app/jobs)`
 используя один из предоставленных адаптеров к существующим queue-системам выполнения заданий. 
 Также предоставлен простейший **Inline**-адаптер, который не требует сторонних queue-систем и дополнительных процессов, 
 но не является _асинхронным_, т.е. вызвавший процесс ждет выполнения **Job**. 
-Для асинхронного выполнения заданий можно использовать _Gem_ [Delayed::Job](https://github.com/collectiveidea/delayed_job), 
+Для асинхронного выполнения заданий можно использовать Gem [Delayed::Job](https://github.com/collectiveidea/delayed_job), 
 который требует доп. таблицу в БД и запущенный фоновый процесс (_worker_). 
 При этом для переключения с **Inline** на **Delayed::Job** необходимо лишь поменять 
 соответствующую установку в `config/application.rb`, в приложении ничего менять не понадобится, 
@@ -43,13 +44,16 @@ Informator
 Сервисы
 ----------
 
-### [Clockwork](https://github.com/tomykaira/clockwork)
+### Clockwork
 
-Для запуска Jobs с определенным интервалом использован данный Gem - удобная альтернатива cron для Ruby.
-Для подробностей о работе см. раздел **Use with database events** в описании расширения.
+Для запуска Jobs с определенным интервалом использован Gem [Clockwork](https://github.com/tomykaira/clockwork) - удобная альтернатива cron для Ruby.
+
+...
+<!-- Для подробностей о работе см. раздел **Use with database events** в описании расширения.
 **Clockwork** использует таблицу Setting (см. Use with database events).
 В файле `config/clock.rb` указано, как часто проверять
-`bin/clockd start|stop|restart|run`
+`bin/clockd start|stop|restart|run` -->
+
 
 Настройки
 ----------

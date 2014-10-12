@@ -1,20 +1,22 @@
 source 'https://rubygems.org'
 
-# Use Rails 4.2.0 for Active Job implementation
+# Use Ruby on Rails 4.2 for Active Job implementation
 gem 'rails', '4.2.0.beta2'
-gem 'rails-html-sanitizer', '~> 1.0.1'
 # Use Feedjira feed parser
 gem 'feedjira', '~> 1.4.0'
+# Use Delayed::Job as Active Job backend
 # gem 'delayed_job_active_record', '~> 4.0.4'
 # Use Clockwork as a cron alternative for starting jobs every defined interval
 gem 'clockwork',  :git => 'git://github.com/tomykaira/clockwork.git'
+# Use Daemons to daemonize processes
 gem 'daemons', '~> 1.1.9'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Slim template engine for views
 gem 'slim-rails', '~> 2.1.5'
-# Use SCSS for stylesheets - 5.0.0 for Rails 4.2.0 support + autoprefixer
+# Use SCSS for stylesheets - pre for Rails 4.2 support
 gem 'sass-rails', '~> 5.0.0.beta1'
+# Use Autoprefixer to add vendor prefixes to CSS
 gem 'autoprefixer-rails'
 # Use Bootstrap CSS Framework
 gem 'bootstrap-sass', '~> 3.2.0.2'
@@ -32,7 +34,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '~> 0.4.0',          group: :doc
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # Use unicorn as the app server
@@ -43,10 +44,8 @@ gem 'jbuilder', '~> 2.0'
 group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0.0.beta4'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring'
 end
