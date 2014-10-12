@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+clockworkd -c config/clock.rb -l "$@"

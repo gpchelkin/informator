@@ -3,7 +3,7 @@ class FeedFileLoadJob < ActiveJob::Base
 
   def perform(*args)
     if Feed.table_exists? and Setting.first
-      Feed.file_load Rails.root.join(Setting.first.file)
+      Feed.file_load Rails.root.join(Setting.first.feedlist)
     end
   end
 end

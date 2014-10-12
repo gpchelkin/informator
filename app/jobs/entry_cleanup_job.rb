@@ -2,6 +2,6 @@ class EntryCleanupJob < ActiveJob::Base
   queue_as :default
 
   def perform(*args)
-    Entry.cleanup Time.now-Setting.first.deprecated.seconds
+    Entry.cleanup Setting.first.mode, Time.now-Setting.first.expiration.seconds if Setting.first.expiration != 0
   end
 end

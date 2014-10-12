@@ -7,7 +7,8 @@ gem 'rails-html-sanitizer', '~> 1.0.1'
 gem 'feedjira', '~> 1.4.0'
 # gem 'delayed_job_active_record', '~> 4.0.4'
 # Use Clockwork as a cron alternative for starting jobs every defined interval
-gem 'clockwork', '~> 1.0.0'
+gem 'clockwork',  :git => 'git://github.com/tomykaira/clockwork.git'
+gem 'daemons', '~> 1.1.9'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Slim template engine for views

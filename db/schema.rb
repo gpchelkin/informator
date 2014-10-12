@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008225855) do
+ActiveRecord::Schema.define(version: 20141012000937) do
 
   create_table "entries", force: true do |t|
     t.string   "url"
@@ -38,13 +38,13 @@ ActiveRecord::Schema.define(version: 20141008225855) do
   end
 
   create_table "settings", force: true do |t|
-    t.integer  "frequency"
-    t.string   "file"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean  "mode"
-    t.integer  "style"
-    t.integer  "deprecated"
+    t.integer  "frequency",  default: 14400
+    t.string   "feedlist",   default: "config/feeds.txt"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.boolean  "mode",       default: false
+    t.integer  "style",      default: 1
+    t.integer  "expiration", default: 86400
   end
 
 end
