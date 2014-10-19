@@ -1,2 +1,2 @@
-FeedFileLoadJob.perform_later
-Entry.delete_all if Entry.table_exists?
+Feed.load_file Setting.first.feedlist
+#EntryUpdateJob.perform_later

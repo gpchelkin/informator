@@ -1,0 +1,43 @@
+.container-fluid
+  .row
+    .col-xs-5
+      table.table.table-hover
+        thead
+          tr
+            th.col-xs-3 = t('Feed Title and URL')
+            th.col-xs-2 = t('Use')
+        tbody
+          - @feeds.each do |feed|
+            tr
+              td = link_to sanitize(feed.title), feed.url, target: "_blank"
+
+              td = form_tag 'togglefeed', remote: true, class: 'toggleFeed'
+                = hidden_field_tag 'feed_id', feed.id.to_s
+
+                button.col-xs-12.btn.btn-success.disableBtn name='commit' value='disable' style=("display: none;" unless feed.use?)
+                  span.glyphicon.glyphicon-off
+                  span = ' ' +t('Enabled')
+                button.col-xs-12.btn.btn-danger.enableBtn name='commit' value='enable' style=("display: none;" if feed.use?)
+                  span.glyphicon.glyphicon-off
+                  span = ' ' +t('Disabled')
+                button.col-xs-12.btn.btn-default.disableBtn.enableBtn.disabled style="display: none;"
+                  span.glyphicon.glyphicon-refresh
+                  span = ' ' +t('Wait') + '...'
+    .col-xs-5
+      | Режим отбора
+      = form_tag 'setting', remote: true, id: 'setting'
+
+        button.col-xs-12.btn.btn-danger.manualBtn name='commit' value='manual' style=("display: none;" unless @setting.mode?)
+          span.glyphicon.glyphicon-off
+          span = ' ' +t('Manual selection is disabled')
+        button.col-xs-12.btn.btn-success.autoBtn name='commit' value='auto' style=("display: none;" if @setting.mode?)
+          span.glyphicon.glyphicon-off
+          span = ' ' +t('Manual selection is enabled')
+        button.col-xs-12.btn.btn-default.manualBtn.autoBtn.disabled style="display: none;"
+          span.glyphicon.glyphicon-refresh
+          span = ' ' +t('Wait') + '...'
+
+
+
+
+/= console

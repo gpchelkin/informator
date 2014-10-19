@@ -20,4 +20,26 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
-  hello: "Привет мир"
+  Disabled: Выключен
+  Enabled: Включен
+  Feed Title and URL: Название и URL источника
+  Use: Использование
+  Entry: Запись
+  Show: Отображать
+  Delete: Удалить
+  Entry was deleted: Запись удалена
+  Entry will be shown: Запись будет отображена
+  Refresh: Обновить
+  Delete old: Удалить устаревшие
+  Fetch new: Загрузить новые
+  Image (if any): Изображение (если есть)
+  Wait: Подождите
+  Revert all: Сбросить все
+  Show all: Отображать все
+  Delete all: Удалить все
+  Entry Selection: Отбор записей
+  Shown Entries: Отображаемые записи
+  Manual selection is disabled: "Ручной отбор выключен"
+  Manual selection is enabled: "Ручной отбор включен"
+  Index: "Главная"
+  Announcements: Объявления

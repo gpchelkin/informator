@@ -1,40 +1,20 @@
 class Entry < ActiveRecord::Base
-  belongs_to :feed
 
-  def self.update_all mode, time
-    urls = Feed.where(use: true).pluck :url
-    success_callback = lambda { |url, feed| add_entries(feed.entries, Feed.find_by_url(url), mode, time) }
-    failure_callback = lambda { |curl, err| puts err }
-    feeds = Feedjira::Feed.fetch_and_parse urls, on_success: success_callback, on_failure: failure_callback
+  scope :shown, -> { where(checked: true) }
+  scope :unchecked, -> { where(checked: false) }
+  scope :desc_ord, -> { order(published: :desc) }
+
+
+  def self.clean_up mode=Setting.first.mode, time=Setting.first.expiration
+    where("checked = ? AND published < ?", mode, Time.now-time).delete_all
   end
 
-  def self.cleanup mode, time
-    old = where("published < ?", time)
-    if mode
-      old.each {|entry| entry.destroy}
-    else
-      oldch = old.where(checked: false)
-      oldch.each {|entry| entry.destroy}
-    end
+  def self.show_all
+    unchecked.update_all(checked: true)
   end
 
-  private
-  def self.add_entries entries, feed, mode, time
-    entries.each do |entry|
-      break if exists? :entry_id => entry.id
-      break if entry.published < time # TODO Maybe Fix
-        create(
-          entry_id:     entry.id,
-          feed_id:      feed.id,
-          url:          entry.url,
-          title:        entry.title,
-          summary:      entry.summary,
-          description:  entry.content,
-          published:    entry.published,
-          image:        entry.image,
-          checked:      mode
-        )
-    end
+  def self.clean_all checked
+    where(checked: checked).delete_all
   end
 
 end

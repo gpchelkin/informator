@@ -6,4 +6,17 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
+    .navbar.navbar-default role='navigation'
+      .navbar-header = link_to 'Informator', 'index', class: "navbar-brand"
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li class=("active" if action_name=='index')
+            = link_to t('Index'), 'index'
+          li class=("active" if action_name=='select')
+            = link_to t('Entry Selection'), 'select'
+          li class=("active" if action_name=='shown')
+            = link_to t('Shown Entries'), 'shown'
+          li class=("active" if action_name=='notice')
+            = link_to t('Announcements'), 'notice'
+
     = yield

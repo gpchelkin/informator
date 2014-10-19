@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012000937) do
+ActiveRecord::Schema.define(version: 20141018151057) do
 
   create_table "entries", force: true do |t|
     t.string   "url"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 20141012000937) do
     t.string   "title"
     t.string   "url"
     t.boolean  "use"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.datetime "last_updated", default: '1970-01-01 00:00:00', null: false
+  end
+
+  create_table "notices", force: true do |t|
+    t.string   "title"
+    t.string   "summary"
+    t.boolean  "checked"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

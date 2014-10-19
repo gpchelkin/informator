@@ -1,18 +1,25 @@
 Rails.application.routes.draw do
 
-  get 'tessst/dfd'
+  get 'admin/index'
+  post 'admin/togglefeed'
 
-  get 'inform/index'
+  get 'admin/select'
+  post 'admin/select'
 
-  get 'inform/admin'
+  get 'admin/shown'
+  post 'admin/shown'
+
+  post 'admin/checkentry'
+  post 'admin/setting'
+
+  get 'admin/notice'
+
+  root 'admin#index'
+  get 'admin' => 'admin#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  root 'inform#index'
-
-  get 'admin' => 'inform#admin'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
