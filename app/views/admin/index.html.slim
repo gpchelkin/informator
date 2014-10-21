@@ -1,7 +1,8 @@
 .container-fluid
   .row
     .col-xs-5
-      table.table.table-hover
+      h4 = t('Источники новостей')
+      table.table.table-hover.table-bordered
         thead
           tr
             th.col-xs-5 = t('Feed Title and URL')
@@ -22,28 +23,29 @@
                   button.col-xs-4.btn.btn-info.toggleBtn name='commit' value=(feed.use? ? 'disable' : 'enable') data-disable-with="<span class='glyphicon glyphicon-refresh'></span>"
                     span.glyphicon.glyphicon-off
 
-    .col-xs-5
-      = form_tag 'setting', remote: true, id: 'setting'
-        .row
-          span.col-xs-6.toggleText style=("display: none;" unless @setting.mode?)
-            = ' ' +t('Manual selection is disabled')
-          span.col-xs-6.toggleText style=("display: none;" if @setting.mode?)
-            = ' ' +t('Manual selection is enabled')
-          button.col-xs-1.btn.btn-info#modeBtn name='commit' value=(@setting.mode? ? 'manual' : 'auto') data-disable-with="<span class='glyphicon glyphicon-refresh'></span>"
-            span.glyphicon.glyphicon-off
+    .col-xs-2
+      h4 = t('Settings')
+      = form_tag 'setting', remote: true, id: 'setting', role: "form"
+        .form-group
+          .radio
+            label
+              = radio_button_tag 'mode', true, (true if @setting.mode?)
+              = t('Manual selection is disabled')
+          .radio
+            label
+              = radio_button_tag 'mode', false, (true unless @setting.mode?)
+              = t('Manual selection is enabled')
 
-        .row
 
-          .form-group
-            = label_tag 'frequency', t('Fetch frequency'), class: "col-xs-4"
-            = number_field_tag 'frequency', @setting.frequency, min: 10, class: "col-xs-4"
+        .form-group
+          = label_tag 'frequency', t('Fetch frequency')
+          = number_field_tag 'frequency', @setting.frequency, min: 10, class: "form-control"
 
-        .row
-          .form-group
-            = label_tag 'expiration', t('Expiration time'), class: "col-xs-4"
-            = number_field_tag 'expiration', @setting.expiration, min: 100, class: "col-xs-4"
+        .form-group
+          = label_tag 'expiration', t('Expiration time')
+          = number_field_tag 'expiration', @setting.expiration, min: 100, class: "form-control"
 
-        .row
-          button.col-xs-10.btn.btn-success name='commit' value='save' data-disable-with=t('Wait')
+        .form-group
+          button.col-xs-12.btn.btn-success name='commit' value='save' data-disable-with=t('Wait')
             span.glyphicon.glyphicon-ok
             span = ' ' +t('Save settings')

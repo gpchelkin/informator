@@ -1,18 +1,14 @@
 Rails.application.routes.draw do
 
   get 'admin/index'
-  post 'admin/togglefeed'
-
   get 'admin/select'
-  post 'admin/select'
-
   get 'admin/shown'
-  post 'admin/shown'
+  get 'admin/notice'
 
+  post 'admin/togglefeed'
+  post 'admin/entrytask'
   post 'admin/checkentry'
   post 'admin/setting'
-
-  get 'admin/notice'
 
   root 'admin#index'
   get 'admin' => 'admin#index'

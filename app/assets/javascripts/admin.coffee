@@ -13,14 +13,6 @@ ready = ->
     $( this ).parents( "tr" ).toggleClass("warning")
     $( this ).find(".toggleText").toggle()
 
-  $("#setting").on "ajax:success", ( e, data, status, xhr ) ->
-    $( this ).find( "." + $( this ).data('clicked')+"Btn" ).toggle()
-    switch data.done
-      when "auto"   then  $( this ).find( "#modeBtn" ).val("manual")
-      when "manual" then  $( this ).data("clicked", "auto")
-      else
-    $( this ).find(".toggleText").toggle()
-
   $("#jobToolbar").on "ajax:success", ( e, data, status, xhr ) ->
     $( "#entryTable" ).html( data )
 

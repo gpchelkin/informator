@@ -13,9 +13,9 @@ html
           li class=("active" if action_name=='index')
             = link_to t('Index'), action: 'index'
           li class=("active" if action_name=='select')
-            = link_to t('Entry Selection'), action: 'select'
+            = link_to content_tag(:span, @uncheckedsize, class: "badge pull-right") + t('Entry Selection'), action: 'select'
           li class=("active" if action_name=='shown')
-            = link_to t('Shown Entries'), action: 'shown'
+            = link_to content_tag(:span, @shownsize, class: "badge pull-right") + t('Shown Entries'), action: 'shown'
           li class=("active" if action_name=='notice')
             = link_to t('Announcements'), action: 'notice'
 
