@@ -4,46 +4,33 @@
 
 ready = ->
 
-  $(".toggleFeed")
-  .on "click", ( e ) ->
-    $( this ).data('clicked', $( e.target ).val() )
+  $(".toggleFeed").on "ajax:success", ( e, data, status, xhr ) ->
+    switch data.done
+      when "enable"  then $( this ).find( ".toggleBtn" ).val("disable")
+      when "disable" then $( this ).find( ".toggleBtn" ).val("enable")
+      else
+    $( this ).parents( "tr" ).toggleClass("success")
+    $( this ).parents( "tr" ).toggleClass("warning")
+    $( this ).find(".toggleText").toggle()
 
-  .on "ajax:before", ( e ) ->
+  $("#setting").on "ajax:success", ( e, data, status, xhr ) ->
     $( this ).find( "." + $( this ).data('clicked')+"Btn" ).toggle()
-    $( this ).data "clicked", if $( this ).data("clicked")=="disable" then "enable" else "disable"
+    switch data.done
+      when "auto"   then  $( this ).find( "#modeBtn" ).val("manual")
+      when "manual" then  $( this ).data("clicked", "auto")
+      else
+    $( this ).find(".toggleText").toggle()
 
-  .on "ajax:success", ( e, data, status, xhr ) ->
-    $( this ).find( "." + $( this ).data('clicked')+"Btn" ).toggle()
-
-
-  $("#jobToolbar")
-  .on "click", ( e ) ->
-    $( this ).data('clicked', $( e.target ).val() )
-
-  .on "ajax:before", ( e ) ->
-    $( this ).find( "." + $( this ).data('clicked') ).toggle()
-
-  .on "ajax:success", ( e, data, status, xhr ) ->
+  $("#jobToolbar").on "ajax:success", ( e, data, status, xhr ) ->
     $( "#entryTable" ).html( data )
-    $( this ).find( "." + $( this ).data('clicked') ).toggle()
 
-
-  $("#entryTable")
-  .on "ajax:success", ".checkEntry", ( e, data, status, xhr ) ->
-    $( this ).parents( "tr" ).addClass( if data.show then "success" else "danger" )
-    $( this ).parents( "td" ).find( "."+data.commit+"Entry" ).toggle()
-    $( this ).remove()
-
-  $("#setting")
-  .on "click", ( e ) ->
-    $( this ).data('clicked', $( e.target ).val() )
-
-  .on "ajax:before", ( e ) ->
-    $( this ).find( "." + $( this ).data('clicked')+"Btn" ).toggle()
-    $( this ).data "clicked", if $( this ).data("clicked")=="auto" then "manual" else "auto"
-
-  .on "ajax:success", ( e, data, status, xhr ) ->
-    $( this ).find( "." + $( this ).data('clicked')+"Btn" ).toggle()
+  $("#entryTable").on "ajax:success", ".checkEntry", ( e, data, status, xhr ) ->
+    switch data.done
+      when "show"   then  $( this ).parents( "tr" ).addClass("success")
+      when "delete" then  $( this ).parents( "tr" ).addClass("danger")
+      else
+    $( this ).parents( "td" ).find( "."+data.done+"Entry" ).toggle()
+    $( this ).toggle()
 
 $(document).ready ready
 $(document).on 'page:load', ready

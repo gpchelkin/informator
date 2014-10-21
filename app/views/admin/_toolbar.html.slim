@@ -2,54 +2,30 @@
 
   .btn-toolbar role="toolbar"
 
-    button.col-xs-2.btn.btn-primary.refresh name='commit' value='refresh'
+    button.col-xs-2.btn.btn-primary.refresh name='commit' value='refresh' data-disable-with=t('Wait')
       span.glyphicon.glyphicon-repeat
       span = ' ' + t('Refresh')
 
-    button.col-xs-2.btn.btn-primary.refresh.disabled style="display: none;"
-      span.glyphicon.glyphicon-refresh
-      span = ' ' +t('Wait') + '...'
-
     - unless @mode==false and action_name == 'shown'
-      button.col-xs-2.btn.btn-primary.fetchall name='commit' value='fetchall'
+      button.col-xs-2.btn.btn-primary.fetchall name='commit' value='fetchall' data-disable-with=t('Wait')
         span.glyphicon.glyphicon-download
         span = ' ' + t('Fetch new')
 
-      button.col-xs-2.btn.btn-primary.fetchall.disabled style="display: none;"
-        span.glyphicon.glyphicon-save
-        span = ' ' + t('Wait') + '...'
-
-    button.col-xs-2.btn.btn-primary.cleanup name='commit' value='cleanup'
+    button.col-xs-2.btn.btn-primary.cleanup name='commit' value='cleanup' data-disable-with=t('Wait')
       span.glyphicon.glyphicon-time
       span = ' ' + t('Delete old')
 
-    button.col-xs-2.btn.btn-primary.cleanup.disabled style="display: none;"
-      span.glyphicon.glyphicon-floppy-remove
-      span = ' ' + t('Wait') + '...'
-
-    button.col-xs-2.btn.btn-danger.revertall name='commit' value='revertall'
+    button.col-xs-2.btn.btn-danger.revertall name='commit' value='revertall' data-disable-with=t('Wait')
       span.glyphicon.glyphicon-remove-sign
       span = ' ' + t('Revert all')
-
-    button.col-xs-2.btn.btn-danger.revertall.disabled style="display: none;"
-      span.glyphicon.glyphicon-floppy-remove
-      span = ' ' + t('Wait') + '...'
 
     .col-xs-3.pull-right
 
       - if action_name == 'select'
-        button.col-xs-6.btn.btn-success.showall name='commit' value='showall'
+        button.col-xs-6.btn.btn-success.showall name='commit' value='showall' data-disable-with=t('Wait')
           span.glyphicon.glyphicon-ok
           span = ' ' + t('Show all')
 
-        button.col-xs-6.btn.btn-danger.showall.disabled style="display: none;"
-          span.glyphicon.glyphicon-refresh
-          span = ' ' +t('Wait') + '...'
-
-      button.pull-right.col-xs-6.btn.btn-danger.deleteallshown.deleteallselect name='commit' value=('deleteall' + action_name)
+      button.pull-right.col-xs-6.btn.btn-danger.deleteallshown.deleteallselect name='commit' value=('deleteall' + action_name) data-disable-with=t('Wait')
         span.glyphicon.glyphicon-remove
         span = ' ' + t('Delete all')
-
-      button.pull-right.col-xs-6.btn.btn-danger.deleteallshown.deleteallselect.disabled style="display: none;"
-        span.glyphicon.glyphicon-refresh
-        span = ' ' +t('Wait') + '...'

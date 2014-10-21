@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
 
+  layout 'admin'
+
   def index
       @feeds = Feed.all
       @setting = Setting.first
@@ -50,8 +52,14 @@ class AdminController < ApplicationController
 
   def togglefeed
     feed = Feed.find(params[:feed_id])
-    feed.update_use(params[:commit]=='enable' ? true : false, false)
-    render nothing: true
+    case params[:commit]
+      when 'enable'
+        feed.update_use(true, false)
+      when 'disable'
+        feed.update_use(false, false)
+      else
+    end
+    render json: {done: params[:commit]}
   end
 
   def checkentry
@@ -60,18 +68,30 @@ class AdminController < ApplicationController
       when 'show'
         entry.checked = true
         entry.save
-        render json: { commit: params[:commit], show: true }
       when 'delete'
         entry.delete
-        render json: { commit: params[:commit], show: false }
       else
     end
+    render json: {done: params[:commit]}
   end
 
   def setting
     setting = Setting.first
-    setting.update_mode(params[:commit]=='auto' ? true : false)
+    case params[:commit]
+      when 'auto'
+        setting.update_mode(true)
+      when 'manual'
+        setting.update_mode(false)
+      when 'save'
+        setting.update(setting_params)
+      else
+    end
     render nothing: true
+  end
+
+  private
+  def setting_params
+    params.permit(:frequency,:expiration)
   end
 
 end

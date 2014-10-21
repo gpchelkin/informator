@@ -4,40 +4,46 @@
       table.table.table-hover
         thead
           tr
-            th.col-xs-3 = t('Feed Title and URL')
+            th.col-xs-5 = t('Feed Title and URL')
             th.col-xs-2 = t('Use')
         tbody
           - @feeds.each do |feed|
-            tr
+            tr class=(feed.use? ? "success" : "warning")
               td = link_to sanitize(feed.title), feed.url, target: "_blank"
 
-              td = form_tag 'togglefeed', remote: true, class: 'toggleFeed'
-                = hidden_field_tag 'feed_id', feed.id.to_s
+              td
+                = form_tag 'togglefeed', remote: true, class: 'toggleFeed'
+                  = hidden_field_tag 'feed_id', feed.id.to_s
 
-                button.col-xs-12.btn.btn-success.disableBtn name='commit' value='disable' style=("display: none;" unless feed.use?)
-                  span.glyphicon.glyphicon-off
-                  span = ' ' +t('Enabled')
-                button.col-xs-12.btn.btn-danger.enableBtn name='commit' value='enable' style=("display: none;" if feed.use?)
-                  span.glyphicon.glyphicon-off
-                  span = ' ' +t('Disabled')
-                button.col-xs-12.btn.btn-default.disableBtn.enableBtn.disabled style="display: none;"
-                  span.glyphicon.glyphicon-refresh
-                  span = ' ' +t('Wait') + '...'
+                  span.col-xs-8.toggleText style=("display: none;" unless feed.use?)
+                    = ' ' +t('Enabled')
+                  span.col-xs-8.toggleText style=("display: none;" if feed.use?)
+                    = ' ' +t('Disabled')
+                  button.col-xs-4.btn.btn-info.toggleBtn name='commit' value=(feed.use? ? 'disable' : 'enable') data-disable-with="<span class='glyphicon glyphicon-refresh'></span>"
+                    span.glyphicon.glyphicon-off
+
     .col-xs-5
-      | Режим отбора
       = form_tag 'setting', remote: true, id: 'setting'
+        .row
+          span.col-xs-6.toggleText style=("display: none;" unless @setting.mode?)
+            = ' ' +t('Manual selection is disabled')
+          span.col-xs-6.toggleText style=("display: none;" if @setting.mode?)
+            = ' ' +t('Manual selection is enabled')
+          button.col-xs-1.btn.btn-info#modeBtn name='commit' value=(@setting.mode? ? 'manual' : 'auto') data-disable-with="<span class='glyphicon glyphicon-refresh'></span>"
+            span.glyphicon.glyphicon-off
 
-        button.col-xs-12.btn.btn-danger.manualBtn name='commit' value='manual' style=("display: none;" unless @setting.mode?)
-          span.glyphicon.glyphicon-off
-          span = ' ' +t('Manual selection is disabled')
-        button.col-xs-12.btn.btn-success.autoBtn name='commit' value='auto' style=("display: none;" if @setting.mode?)
-          span.glyphicon.glyphicon-off
-          span = ' ' +t('Manual selection is enabled')
-        button.col-xs-12.btn.btn-default.manualBtn.autoBtn.disabled style="display: none;"
-          span.glyphicon.glyphicon-refresh
-          span = ' ' +t('Wait') + '...'
+        .row
 
+          .form-group
+            = label_tag 'frequency', t('Fetch frequency'), class: "col-xs-4"
+            = number_field_tag 'frequency', @setting.frequency, min: 10, class: "col-xs-4"
 
+        .row
+          .form-group
+            = label_tag 'expiration', t('Expiration time'), class: "col-xs-4"
+            = number_field_tag 'expiration', @setting.expiration, min: 100, class: "col-xs-4"
 
-
-/= console
+        .row
+          button.col-xs-10.btn.btn-success name='commit' value='save' data-disable-with=t('Wait')
+            span.glyphicon.glyphicon-ok
+            span = ' ' +t('Save settings')

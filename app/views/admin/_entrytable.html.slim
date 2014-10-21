@@ -41,11 +41,11 @@
                 .btn-group
 
                   - if action_name == 'select'
-                    button.btn.btn-success name='commit' value='show'
+                    button.btn.btn-success name='commit' value='show' data-disable-with=t('Wait')
                       span.glyphicon.glyphicon-ok
                       span = ' ' +t('Show')
 
-                  button.btn.btn-danger name='commit' value='delete'
+                  button.btn.btn-danger name='commit' value='delete' data-disable-with=t('Wait')
                     span.glyphicon.glyphicon-remove
                     span = ' ' +t('Delete')
 
