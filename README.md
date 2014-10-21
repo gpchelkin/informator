@@ -4,7 +4,7 @@ Informator
 Системные зависимости
 ----------
 
-* [Ruby](https://www.ruby-lang.org/) version 2.1.3 (
+* [Ruby](https://www.ruby-lang.org/) version 2.1.3
 
 * Gem [Feedjira](https://github.com/feedjira/feedjira), применяемый для быстрой загрузки и разбора потоков,
 использует для запросов Gem [Curb](https://github.com/taf2/curb), который является
