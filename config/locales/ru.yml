@@ -50,3 +50,9 @@ ru:
   Job execution frequency: Интервал выполнения работы
   Clean up expired entries: Очищать устаревшие записи
   Settings: Настройки
+  News sources: Источники новостей
+  Misc: Прочее
+  News display style: Стиль отображения новостей
+  Entry selection mode: Режим отбора записей
+  All downloaded entries will be shown automatically: Все загруженные записи будут отображены автоматически
+  cleanuphelp: При каждом выполнении работы устаревшие записи будут очищены. В ручном режиме отбора очищаются только неотобранные записи.

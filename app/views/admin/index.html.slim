@@ -3,19 +3,19 @@
     .col-xs-5
       h3 = t('Settings')
       = form_tag 'setting', remote: true, id: 'setting', role: "form"
-        .h4 = 'Режим отбора записей'
+        .h4 = t('Entry selection mode')
         .form-group
           .radio
             label
               = radio_button 'setting', 'mode', true
               = t('Manual selection is disabled')
-          p.help-block = 'Все загруженные записи отображаются автоматически'
+          p.help-block = t('All downloaded entries will be shown automatically')
           .radio
             label
               = radio_button 'setting', 'mode', false
               = t('Manual selection is enabled')
 
-        .h4 = 'Стиль отображения новостей'
+        .h4 = t('News display style')
         .form-group
           .radio
             label
@@ -26,7 +26,7 @@
               = radio_button 'setting', 'style', 2
               = '2 lorem ipsum'
 
-        h4 = 'Прочее'
+        h4 = t('Misc')
         .form-group
           = label_tag 'expiration', t('Entry expiration time')
           = number_field 'setting', 'expiration', min: 100, class: "form-control"
@@ -40,14 +40,14 @@
             label
               = check_box 'setting', 'autocleanup'
               = t('Clean up expired entries')
-          p.help-block = 'При каждом выполнении работы устаревшие записи будут очищены. В ручном режиме отбора очищаются только неотобранные записи.'
+          p.help-block = t(:cleanuphelp)
         .form-group
           button.col-xs-12.btn.btn-success name='commit' value='save' data-disable-with=t('Wait')
             span.glyphicon.glyphicon-ok
             span = ' ' +t('Save settings')
 
     .col-xs-5
-      h3 = t('Источники новостей')
+      h3 = t('News sources')
       table.table.table-hover.table-bordered
         thead
           tr
