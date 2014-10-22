@@ -13,7 +13,7 @@ class Entry < ActiveRecord::Base
     unchecked.update_all(checked: true)
   end
 
-  def self.clean_all checked
+  def self.clean_all(checked = false)
     where(checked: checked).delete_all
   end
 

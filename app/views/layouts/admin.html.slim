@@ -1,22 +1,23 @@
 doctype html
 html
   head
-    title Informator
+    title = t('Informator')
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  body
-    .navbar.navbar-default role='navigation'
-      .navbar-header = link_to 'Informator', {action: 'index'}, class: "navbar-brand"
-      .collapse.navbar-collapse
-        ul.nav.navbar-nav
-          li class=("active" if action_name=='index')
-            = link_to t('Index'), action: 'index'
-          li class=("active" if action_name=='select')
-            = link_to content_tag(:span, @uncheckedsize, class: "badge pull-right") + t('Entry Selection'), action: 'select'
-          li class=("active" if action_name=='shown')
-            = link_to content_tag(:span, @shownsize, class: "badge pull-right") + t('Shown Entries'), action: 'shown'
-          li class=("active" if action_name=='notice')
-            = link_to t('Announcements'), action: 'notice'
+  body style="padding-top: 70px;"
+    .navbar.navbar-default.navbar-fixed-top role='navigation'
+      .container
+        .navbar-header = link_to t('Informator'), {action: 'index'}, class: "navbar-brand"
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li class=("active" if action_name=='index')
+              = link_to t('Index'), action: 'index'
+            li class=("active" if action_name=='select')
+              = link_to content_tag(:span, @uncheckedsize, class: "badge pull-right") + t('Entry Selection'), action: 'select'
+            li class=("active" if action_name=='shown')
+              = link_to content_tag(:span, @shownsize, class: "badge pull-right") + t('Shown Entries'), action: 'shown'
+            li class=("active" if action_name=='notice')
+              = link_to t('Announcements'), action: 'notice'
 
     = yield

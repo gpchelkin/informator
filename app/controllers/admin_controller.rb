@@ -2,6 +2,7 @@ class AdminController < ApplicationController
   layout 'admin'
   before_action :set_sizes, only: [:index, :select, :shown, :notice]
   before_action :set_mode, only: [:select, :shown, :entrytask]
+  http_basic_authenticate_with name: "admin", password: "admin"
 
   def index
     @feeds = Feed.all
@@ -21,20 +22,13 @@ class AdminController < ApplicationController
   end
 
   def setting
-    setting = Setting.first
-    setting.update(setting_params)
+    @setting = Setting.first
+    @setting.update(setting_params[:setting])
     render nothing: true
   end
 
   def togglefeed
-    feed = Feed.find(params[:feed_id])
-    case params[:commit]
-      when 'enable'
-        feed.update_use(true, false)
-      when 'disable'
-        feed.update_use(false, false)
-      else
-    end
+    Feed.find(params[:feed]).update(feed_params)
     render json: {done: params[:commit]}
   end
 
@@ -89,7 +83,11 @@ class AdminController < ApplicationController
   end
 
   def setting_params
-    params.permit(:frequency,:expiration,:mode)
+    params.permit(setting: [:mode, :style, :expiration, :frequency, :autocleanup])
+  end
+
+  def feed_params
+    params.permit(:use)
   end
 
 end

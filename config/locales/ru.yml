@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
+  Informator: Информатор
   Disabled: Выключен
   Enabled: Включен
   Feed Title and URL: Название и URL источника
@@ -45,6 +46,7 @@ ru:
   Announcements: Объявления
   No entries found: Нет записей
   Save settings: Сохранить настройки
-  Fetch frequency: Интервал загрузки
-  Expiration time: Время устаревания
+  Entry expiration time: Время устаревания записи
+  Job execution frequency: Интервал выполнения работы
+  Clean up expired entries: Очищать устаревшие записи
   Settings: Настройки

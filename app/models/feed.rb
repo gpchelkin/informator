@@ -1,14 +1,25 @@
 class Feed < ActiveRecord::Base
   has_many :entries, dependent: :delete_all
 
+  before_update do |feed|
+    if feed.use_changed? and not feed.use
+      feed.entries.clear
+      feed.last_updated = Time.at(0)
+    end
+  end
+
+  after_save do |feed|
+    Feed.save_file
+  end
+
   def self.load_file(feedlist = Setting.first.feedlist)
     all.each {|feed| feed.entries.clear}
     delete_all
     IO.readlines(Rails.root.join(feedlist)).map(&:strip).each do |line|
       if line.match(/^#\s*/)
-        create(use: false, url: url=line.gsub(/^#\s*/,''))
+        create(use: false, url: line.gsub(/^#\s*/,''))
       else
-        create(use: true, url: url=line)
+        create(use: true, url: line)
       end
     end
     add_titles
@@ -30,19 +41,15 @@ class Feed < ActiveRecord::Base
     end
   end
 
-  def update_use(fuse=false, ffetch=false, mode=false)
-    update(use: fuse)
-    revert unless use
-    fetch mode if use and ffetch # Fetch on enabling
-    Feed.save_file
-  end
-
   def self.fetch_all(mode=Setting.first.mode)
     where(use: true).each {|feed| feed.fetch mode }
   end
 
   def self.revert_all
-    all.each { |feed| feed.revert }
+    all.each do |feed|
+      feed.entries.clear
+      feed.update(last_updated: Time.at(0))
+    end
   end
 
   def fetch(mode=Setting.first.mode, exp=Setting.first.expiration)
@@ -64,11 +71,6 @@ class Feed < ActiveRecord::Base
     failure_callback = lambda { |curl, err| puts err }
     Feedjira::Feed.fetch_and_parse url, on_success: success_callback, on_failure: failure_callback
     update(last_updated: Time.now)
-  end
-
-  def revert
-    entries.clear
-    update(last_updated: Time.at(0))
   end
 
 end

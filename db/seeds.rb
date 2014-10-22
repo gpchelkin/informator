@@ -7,4 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Default settings:
-Setting.create
+Setting.create(mode: false, style: 1, expiration: 86400, frequency: 14400, autocleanup: true)

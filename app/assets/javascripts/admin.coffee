@@ -6,11 +6,10 @@ ready = ->
 
   $(".toggleFeed").on "ajax:success", ( e, data, status, xhr ) ->
     switch data.done
-      when "enable"  then $( this ).find( ".toggleBtn" ).val("disable")
-      when "disable" then $( this ).find( ".toggleBtn" ).val("enable")
+      when "true"  then $( this ).find( ".toggleBtn" ).val("false")
+      when "false" then $( this ).find( ".toggleBtn" ).val("true")
       else
-    $( this ).parents( "tr" ).toggleClass("success")
-    $( this ).parents( "tr" ).toggleClass("warning")
+    $( this ).parents( "tr" ).toggleClass("success").toggleClass("warning")
     $( this ).find(".toggleText").toggle()
 
   $("#jobToolbar").on "ajax:success", ( e, data, status, xhr ) ->

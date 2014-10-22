@@ -1,5 +1,5 @@
-http://news.yandex.ru/index.rss
-http://news.yandex.ru/hardware.rss
+#http://news.yandex.ru/index.rss
+#http://news.yandex.ru/hardware.rss
 #http://news.yandex.ru/software.rss
 #http://news.yandex.ru/computers.rss
 #http://news.yandex.ru/security.rss
@@ -7,4 +7,4 @@ http://news.yandex.ru/hardware.rss
 #http://news.yandex.ru/internet.rss
 #http://news.yandex.ru/science.rss
 #http://news.yandex.ru/society.rss
-http://lenta.ru/rss
+#http://lenta.ru/rss
