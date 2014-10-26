@@ -1,31 +1,27 @@
-= form_tag 'entrytask', remote: true, id: "jobToolbar", "data-type" => "html"
+= form_tag({controller: 'admin', action: 'entrytask'}, remote: true, id: "entryTask")
   = hidden_field_tag 'action_name', action_name
   .btn-toolbar role="toolbar"
+    .btn-group.col-xs-8
+      button.col-xs-4.btn.btn-primary name='commit' value='refresh' data-disable-with=t('wait')
+        span.glyphicon.glyphicon-repeat
+        span = ' ' + t('refresh_list')
 
-    button.col-xs-2.btn.btn-primary name='commit' value='refresh' data-disable-with=t('Wait')
-      span.glyphicon.glyphicon-repeat
-      span = ' ' + t('Refresh')
+      - unless @mode==false and action_name == 'shown'
+        button.col-xs-4.btn.btn-primary name='commit' value='fetchall' data-disable-with=t('wait')
+          span.glyphicon.glyphicon-download
+          span = ' ' + t('fetch_new')
 
-    - unless @mode==false and action_name == 'shown'
-      button.col-xs-2.btn.btn-primary name='commit' value='fetchall' data-disable-with=t('Wait')
-        span.glyphicon.glyphicon-download
-        span = ' ' + t('Fetch new')
+      button.col-xs-4.btn.btn-primary name='commit' value='cleanup' data-disable-with=t('wait')
+        span.glyphicon.glyphicon-time
+        span = ' ' + t('cleanup_old')
 
-    button.col-xs-2.btn.btn-primary name='commit' value='cleanup' data-disable-with=t('Wait')
-      span.glyphicon.glyphicon-time
-      span = ' ' + t('Delete old')
-
-    button.col-xs-2.btn.btn-danger name='commit' value='revertall' data-disable-with=t('Wait')
-      span.glyphicon.glyphicon-remove-sign
-      span = ' ' + t('Revert all')
-
-    .col-xs-3.pull-right
+    .btn-group.col-xs-3.pull-right
 
       - if action_name == 'select'
-        button.col-xs-6.btn.btn-success name='commit' value='showall' data-disable-with=t('Wait')
+        button.col-xs-6.btn.btn-success name='commit' value='showall' data-disable-with=t('wait')
           span.glyphicon.glyphicon-ok
-          span = ' ' + t('Show all')
+          span = ' ' + t('show_all')
 
-      button.col-xs-6.btn.btn-danger name='commit' value='deleteall' data-disable-with=t('Wait')
+      button.col-xs-6.pull-right.btn.btn-danger name='commit' value='deleteall' data-disable-with=t('wait')
         span.glyphicon.glyphicon-remove
-        span = ' ' + t('Delete all')
+        span = ' ' + t('delete_all')

@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
-  layout 'admin'
   before_action :set_sizes, only: [:index, :select, :shown, :notice]
-  before_action :set_mode, only: [:select, :shown, :entrytask]
+  before_action :set_mode, only: [:index, :select, :shown, :notice, :entrytask, :maintask]
+  before_action :set_locale
   http_basic_authenticate_with name: "admin", password: "admin"
 
   def index
@@ -22,14 +22,22 @@ class AdminController < ApplicationController
   end
 
   def setting
-    @setting = Setting.first
-    @setting.update(setting_params[:setting])
-    render nothing: true
+    setting = Setting.first
+    case params[:commit]
+      when 'save'
+        setting.update(setting_params[:setting])
+      when 'default'
+        setting.delete
+        setting = Setting.create
+      else
+    end
+    render json: {mode: setting.mode, sizes: set_sizes}
   end
 
   def togglefeed
-    Feed.find(params[:feed]).update(feed_params)
-    render json: {done: params[:commit]}
+    feed = Feed.find(params[:feed])
+    feed.update(feed_params)
+    render json: {use: feed.use, sizes: set_sizes}
   end
 
   def entrytask
@@ -57,7 +65,20 @@ class AdminController < ApplicationController
         @entries = Entry.unchecked.desc_ord
       else
     end
-    render partial: 'entrytable', locals: {action_name: params[:action_name]}
+    render json: { table: render_to_string(partial: 'entrytable', locals: {action_name: params[:action_name]}), sizes: set_sizes }
+  end
+
+  def maintask
+    case params[:commit]
+      when 'fetchall'
+        Feed.fetch_all @mode
+      when 'cleanup'
+        Entry.clean_up @mode
+      when 'revertall'
+        Feed.revert_all
+      else
+    end
+    render json: { sizes: set_sizes }
   end
 
   def checkentry
@@ -65,21 +86,28 @@ class AdminController < ApplicationController
     case params[:commit]
       when 'show'
         entry.update(checked: true)
+        done = true
       when 'delete'
         entry.delete
+        done = false
       else
+        done = 0
     end
-    render json: {done: params[:commit]}
+    render json: {done: done, sizes: set_sizes}
   end
 
   private
-  def set_sizes
-    @uncheckedsize = Entry.unchecked.size
-    @shownsize = Entry.shown.size
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
   end
 
   def set_mode
     @mode = Setting.first.mode
+  end
+
+  def set_sizes
+    @sizes = {unchecked: Entry.unchecked.size, shown: Entry.shown.size}
   end
 
   def setting_params

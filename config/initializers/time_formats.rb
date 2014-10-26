@@ -1,1 +1,0 @@
-Time::DATE_FORMATS[:russian] = '%d.%m.%Y %R'

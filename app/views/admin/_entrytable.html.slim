@@ -1,51 +1,49 @@
-#entryTable
+- if @entries.empty?
 
-  - if @entries.empty?
+  br
+  .alert.alert-info.col-xs-5 = t('no_entries_found')
 
-    br
-    .alert.alert-info.col-xs-5 = t('No entries found.')
+- else
 
-  - else
+  table.table.table-hover
 
-    table.table.table-hover
+    thead
+      tr
+        th.col-xs-5 = t('entry')
+        th.col-xs-2 = t('image')
+        th class=("col-xs-" + (action_name=='select' ? "2" : "1"))
+          = t('show')
 
-      thead
+    tbody
+      - @entries.each do |entry|
         tr
-          th.col-xs-5 = t('Entry')
-          th.col-xs-2 = t("Image (if any)")
-          th class=("col-xs-" + (action_name=='select' ? "2" : "1"))
-            = t('Show')
 
-      tbody
-        - @entries.each do |entry|
-          tr
+          td colspan=("2" unless entry.image)
+            strong = link_to sanitize(entry.title), entry.url, target: "_blank"
+            br
+            small = l(entry.published)
+            br
+            = sanitize entry.summary
 
-            td colspan=("2" unless entry.image)
-              strong = link_to sanitize(entry.title), entry.url, target: "_blank"
-              br
-              small = entry.published.to_formatted_s(:russian)
-              br
-              = sanitize entry.summary
-
-            - if entry.image
-              td
-                a href=entry.image target="_blank"
-                  = image_tag entry.image, size: "150x100", alt: sanitize(entry.title)
-
+          - if entry.image
             td
-              span.showEntry style="display: none;" = t('Entry will be shown')
-              span.deleteEntry style="display: none;" = t('Entry was deleted')
+              a href=entry.image target="_blank"
+                = image_tag entry.image, size: "150x100", alt: sanitize(entry.title)
 
-              = form_tag 'checkentry', remote: true, class: 'checkEntry', "data-type" => 'json'
-                = hidden_field_tag 'entry_id', entry.id
-                .btn-group
+          td
+            span.showEntry style="display: none;" = t('entry_will_be_shown')
+            span.deleteEntry style="display: none;" = t('entry_was_deleted')
 
-                  - if action_name == 'select'
-                    button.btn.btn-success name='commit' value='show' data-disable-with=t('Wait')
-                      span.glyphicon.glyphicon-ok
-                      span = ' ' +t('Show')
+            = form_tag({controller: 'admin', action: 'checkentry'}, remote: true, class: 'checkEntry', "data-type" => 'json')
+              = hidden_field_tag 'entry_id', entry.id
+              .btn-group
 
-                  button.btn.btn-danger name='commit' value='delete' data-disable-with=t('Wait')
-                    span.glyphicon.glyphicon-remove
-                    span = ' ' +t('Delete')
+                - if action_name == 'select'
+                  button.btn.btn-success name='commit' value='show' data-disable-with=t('wait')
+                    span.glyphicon.glyphicon-ok
+                    span = ' ' +t('show')
+
+                button.btn.btn-danger name='commit' value='delete' data-disable-with=t('wait')
+                  span.glyphicon.glyphicon-remove
+                  span = ' ' +t('delete')
 

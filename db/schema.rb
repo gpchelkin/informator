@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022192200) do
+ActiveRecord::Schema.define(version: 20141026005446) do
 
   create_table "entries", force: true do |t|
     t.string   "url"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20141022192200) do
     t.boolean  "checked"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "published"
   end
 
   create_table "settings", force: true do |t|
@@ -52,7 +53,7 @@ ActiveRecord::Schema.define(version: 20141022192200) do
     t.boolean  "mode",        default: false
     t.integer  "style",       default: 1
     t.integer  "expiration",  default: 86400
-    t.boolean  "autocleanup"
+    t.boolean  "autocleanup", default: true
   end
 
 end

@@ -1,70 +1,94 @@
 .container-fluid
   .row
     .col-xs-5
-      h3 = t('Settings')
-      = form_tag 'setting', remote: true, id: 'setting', role: "form"
-        .h4 = t('Entry selection mode')
-        .form-group
-          .radio
-            label
-              = radio_button 'setting', 'mode', true
-              = t('Manual selection is disabled')
-          p.help-block = t('All downloaded entries will be shown automatically')
-          .radio
-            label
-              = radio_button 'setting', 'mode', false
-              = t('Manual selection is enabled')
+      h3 = t('settings')
+      = form_tag({controller: 'admin', action: 'setting'}, remote: true, id: 'setting', role: "form")
 
-        .h4 = t('News display style')
         .form-group
-          .radio
-            label
-              = radio_button 'setting', 'style', 1
-              = '1 lorem ipsum'
-          .radio
-            label
-              = radio_button 'setting', 'style', 2
-              = '2 lorem ipsum'
+          label for="modeRadio" = t('mode')
+          p.help-block = t('mode_help')
+          .controls#modeRadio
+            .radio
+              label
+                = radio_button 'setting', 'mode', true
+                = t('mode_auto')
+              p.help-block = t('mode_auto_help')
+            .radio
+              label
+                = radio_button 'setting', 'mode', false
+                = t('mode_manual')
+              p.help-block = t('mode_manual_help')
 
-        h4 = t('Misc')
         .form-group
-          = label_tag 'expiration', t('Entry expiration time')
+          label for="styleRadio" = t('style')
+          .controls#styleRadio
+            .radio
+              label
+                = radio_button 'setting', 'style', 1
+                = '1 Lorem Ipsum'
+            .radio
+              label
+                = radio_button 'setting', 'style', 2
+                = '2 Dolor Sit Amet'
+
+        .form-group
+          = label_tag 'expiration', t('expiration')
           = number_field 'setting', 'expiration', min: 100, class: "form-control"
+          p.help-block = t('in_seconds')
 
         h4 = 'Clockwork'
         .form-group
-          = label_tag 'frequency', t('Job execution frequency')
+          = label_tag 'frequency', t('frequency')
           = number_field 'setting', 'frequency', min: 100, class: "form-control"
+          p.help-block = t('in_seconds')
         .form-group
           .checkbox
             label
               = check_box 'setting', 'autocleanup'
-              = t('Clean up expired entries')
-          p.help-block = t(:cleanuphelp)
+              = t('autocleanup')
+          p.help-block = t('autocleanup_help')
         .form-group
-          button.col-xs-12.btn.btn-success name='commit' value='save' data-disable-with=t('Wait')
+          button.col-xs-12.btn.btn-success name='commit' value='save' data-disable-with=t('wait')
             span.glyphicon.glyphicon-ok
-            span = ' ' +t('Save settings')
+            span = ' ' +t('save_settings')
 
-    .col-xs-5
-      h3 = t('News sources')
-      table.table.table-hover.table-bordered
-        thead
-          tr
-            th.col-xs-5 = t('Feed Title and URL')
-            th.col-xs-2 = t('Use')
-        tbody
-          - @feeds.each do |feed|
-            tr class=(feed.use? ? "success" : "warning")
-              td = link_to sanitize(feed.title), feed.url, target: "_blank"
 
-              td
-                = form_tag 'togglefeed', remote: true, class: 'toggleFeed'
-                  = hidden_field_tag 'feed', feed.id.to_s
+    .col-xs-7
+      h3 = t('maintask')
+      .row
+        = form_tag({controller: 'admin', action: 'maintask'}, remote: true, class: "form-inline", id: "mainTask", role: "form")
+          .btn-group.col-xs-12
+            button.col-xs-4.btn.btn-primary name='commit' value='fetchall' data-disable-with=t('wait')
+              span.glyphicon.glyphicon-download
+              span = ' ' + t('fetch_new')
+            button.col-xs-4.btn.btn-primary name='commit' value='cleanup' data-disable-with=t('wait')
+              span.glyphicon.glyphicon-time
+              span = ' ' + t('cleanup_old')
+            button.col-xs-4.btn.btn-danger name='commit' value='revertall' data-disable-with=t('wait')
+              span.glyphicon.glyphicon-remove-circle
+              span = ' ' +t('revert_all')
+      h3 = t('news_sources')
+      .row
+        .col-xs-9
+          table.table.table-hover.table-bordered
+            thead
+              tr
+                th.col-xs-5 = t('feed_title_and_url')
+                th.col-xs-2 = t('use')
+            tbody
+              - @feeds.each do |feed|
+                tr class=("success" if feed.use?)
+                  td = link_to sanitize(feed.title), feed.url, target: "_blank"
 
-                  span.col-xs-8.toggleText style=("display: none;" unless feed.use?)
-                    = ' ' +t('Enabled')
-                  span.col-xs-8.toggleText style=("display: none;" if feed.use?)
-                    = ' ' +t('Disabled')
-                  button.col-xs-4.btn.btn-info.toggleBtn name='use' value=(feed.use? ? 'false' : 'true') data-disable-with="<span class='glyphicon glyphicon-refresh'></span>"
-                    span.glyphicon.glyphicon-off
+                  td
+                    = form_tag({controller: 'admin', action: 'togglefeed'}, remote: true, class: 'toggleFeed')
+                      = hidden_field_tag 'feed', feed.id.to_s
+
+                      button.col-xs-3.btn.btn-default.toggleBtn name='use' value=(feed.use? ? 'false' : 'true') data-disable-with=("#{content_tag(:span, nil, class: "glyphicon glyphicon-refresh")}")
+                        span.glyphicon.glyphicon-off
+                      .col-xs-9
+                        span.toggleText class=("hidden" unless feed.use?)
+                          = ' ' +t('enabled')
+                        span.toggleText class=("hidden" if feed.use?)
+                          = ' ' +t('disabled')
+

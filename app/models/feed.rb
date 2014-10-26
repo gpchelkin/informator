@@ -54,9 +54,8 @@ class Feed < ActiveRecord::Base
 
   def fetch(mode=Setting.first.mode, exp=Setting.first.expiration)
     success_callback = lambda do |url, f|
-      time = [Time.now-exp, last_updated].max
       f.entries.each do |entry|
-        if entry.published > time and not Entry.exists?(url: entry.url)
+        if entry.published > last_updated and not Entry.exists?(url: entry.url)
           entries.create(
               url:          entry.url,
               title:        entry.title,
@@ -68,7 +67,7 @@ class Feed < ActiveRecord::Base
         end
       end
     end
-    failure_callback = lambda { |curl, err| puts err }
+    failure_callback = lambda { |curl, err| logger.debug err }
     Feedjira::Feed.fetch_and_parse url, on_success: success_callback, on_failure: failure_callback
     update(last_updated: Time.now)
   end

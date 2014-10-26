@@ -1,2 +1,1 @@
-Feed.load_file Setting.first.feedlist
-#EntryUpdateJob.perform_later
+Feed.load_file

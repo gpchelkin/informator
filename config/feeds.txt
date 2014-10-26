@@ -1,3 +1,5 @@
+#http://lenta.ru/rss
+https://meduza.io/rss/news
 #http://news.yandex.ru/index.rss
 #http://news.yandex.ru/hardware.rss
 #http://news.yandex.ru/software.rss
@@ -7,4 +9,3 @@
 #http://news.yandex.ru/internet.rss
 #http://news.yandex.ru/science.rss
 #http://news.yandex.ru/society.rss
-#http://lenta.ru/rss

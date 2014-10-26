@@ -20,39 +20,48 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
-  Informator: Информатор
-  Disabled: Выключен
-  Enabled: Включен
-  Feed Title and URL: Название и URL источника
-  Use: Использование
-  Entry: Запись
-  Show: Отображать
-  Delete: Удалить
-  Entry was deleted: Запись удалена
-  Entry will be shown: Запись будет отображена
-  Refresh: Обновить
-  Delete old: Удалить устаревшие
-  Fetch new: Загрузить новые
-  Image (if any): Изображение (если есть)
-  Wait: Подождите
-  Revert all: Сбросить все
-  Show all: Отображать все
-  Delete all: Удалить все
-  Entry Selection: Отбор записей
-  Shown Entries: Отображаемые записи
-  Manual selection is disabled: "Ручной отбор выключен"
-  Manual selection is enabled: "Ручной отбор включен"
-  Index: "Главная"
-  Announcements: Объявления
-  No entries found: Нет записей
-  Save settings: Сохранить настройки
-  Entry expiration time: Время устаревания записи
-  Job execution frequency: Интервал выполнения работы
-  Clean up expired entries: Очищать устаревшие записи
-  Settings: Настройки
-  News sources: Источники новостей
-  Misc: Прочее
-  News display style: Стиль отображения новостей
-  Entry selection mode: Режим отбора записей
-  All downloaded entries will be shown automatically: Все загруженные записи будут отображены автоматически
-  cleanuphelp: При каждом выполнении работы устаревшие записи будут очищены. В ручном режиме отбора очищаются только неотобранные записи.
+  time:
+    formats:
+      default: '%d.%m.%Y %R'
+
+  informator: "Информатор"
+  disabled: "Выключен"
+  enabled: "Включен"
+  feed_title_and_url: "Название и URL источника"
+  use: "Использование"
+  entry: "Запись"
+  show: "Отображать"
+  delete: "Удалить"
+  entry_was_deleted: "Запись удалена"
+  entry_will_be_shown: "Запись будет отображена"
+  refresh_list: "Обновить список"
+  cleanup_old: "Удалить устаревшие записи"
+  fetch_new: "Загрузить новые записи"
+  image: "Изображение (если есть)"
+  wait: "Подождите"
+  revert_all: "Сбросить базу записей"
+  show_all: "Отображать все"
+  delete_all: "Удалить все"
+  entry_selection: "Отбор записей"
+  shown_entries: "Отображаемые записи"
+  mode_auto: "Ручной отбор выключен"
+  mode_manual: "Ручной отбор включен"
+  index: "Главная"
+  announcements: "Объявления"
+  no_entries_found: "Нет записей"
+  save_settings: "Сохранить настройки"
+  expiration: "Время устаревания записи"
+  frequency: "Интервал выполнения работы по загрузке новых записей"
+  autocleanup: "Удалять устаревшие записи при каждом выполнении работы"
+  settings: "Настройки"
+  news_sources: "Источники новостей"
+  misc: "Прочее"
+  style: "Стиль отображения новостей"
+  mode: "Режим отбора записей"
+  mode_auto_help: "Все загруженные записи будут отображены автоматически"
+  autocleanup_help: "В режиме ручного отбора будут удаляться только неотобранные записи"
+  no_entries_found: "Записи не найдены"
+  mode_manual_help: "Все загруженные записи должны пройти проверку администратором"
+  mode_help: "При смене режима будет произведен сброс базы записей"
+  maintask: "Действия над базой записей"
+  in_seconds: "в секундах (WIP)"

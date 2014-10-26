@@ -1,23 +1,32 @@
 doctype html
 html
   head
-    title = t('Informator')
+    title = t('informator')
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  body style="padding-top: 70px;"
+  body style="padding-top: 60px;"
     .navbar.navbar-default.navbar-fixed-top role='navigation'
-      .container
-        .navbar-header = link_to t('Informator'), {action: 'index'}, class: "navbar-brand"
+      .container-fluid
+        .navbar-header
+          = link_to t('informator'), {action: 'index'}, class: "navbar-brand"
         .collapse.navbar-collapse
           ul.nav.navbar-nav
             li class=("active" if action_name=='index')
-              = link_to t('Index'), action: 'index'
-            li class=("active" if action_name=='select')
-              = link_to content_tag(:span, @uncheckedsize, class: "badge pull-right") + t('Entry Selection'), action: 'select'
+              = link_to t('index'), action: 'index'
+            li class=("active" if action_name=='select') class=("hidden" if @mode) id='selectLink'
+              = link_to (content_tag(:span,t('entry_selection'))+content_tag(:span, @sizes[:unchecked], class: "badge progress-bar-info", id: 'uncheckedLabel')), action: 'select'
             li class=("active" if action_name=='shown')
-              = link_to content_tag(:span, @shownsize, class: "badge pull-right") + t('Shown Entries'), action: 'shown'
+              = link_to (content_tag(:span,t('shown_entries'))+content_tag(:span, @sizes[:shown], class: "badge progress-bar-success", id: 'shownLabel')), action: 'shown'
             li class=("active" if action_name=='notice')
-              = link_to t('Announcements'), action: 'notice'
+              = link_to t('announcements'), action: 'notice'
+            li.navbar-right
+              - case params[:locale]
+                - when 'en'
+                  = link_to 'RU', locale: :ru
+                - when 'ru'
+                  = link_to 'EN', locale: :en
+                - else
+                  = link_to 'EN', locale: :en
 
     = yield

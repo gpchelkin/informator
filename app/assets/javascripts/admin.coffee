@@ -2,26 +2,38 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+labels = (sizes) ->
+  $("#shownLabel").html( sizes.shown )
+  $("#uncheckedLabel").html( sizes.unchecked )
+
 ready = ->
+  $("#setting").on "ajax:success", ( e, data, status, xhr ) ->
+    switch data.mode
+      when true  then $( "#selectLink" ).addClass("hidden")
+      when false then $( "#selectLink" ).removeClass("hidden")
+      else
+    labels(data.sizes)
+
+  $("#mainTask").on "ajax:success", ( e, data, status, xhr ) ->
+    labels(data.sizes)
 
   $(".toggleFeed").on "ajax:success", ( e, data, status, xhr ) ->
-    switch data.done
-      when "true"  then $( this ).find( ".toggleBtn" ).val("false")
-      when "false" then $( this ).find( ".toggleBtn" ).val("true")
+    switch data.use
+      when true  then $( this ).find(".toggleText").toggleClass("hidden").parents( "tr" ).addClass("success").find( ".toggleBtn" ).val("false")
+      when false then $( this ).find(".toggleText").toggleClass("hidden").parents( "tr" ).removeClass("success").find( ".toggleBtn" ).val("true")
       else
-    $( this ).parents( "tr" ).toggleClass("success").toggleClass("warning")
-    $( this ).find(".toggleText").toggle()
+    labels(data.sizes)
 
-  $("#jobToolbar").on "ajax:success", ( e, data, status, xhr ) ->
-    $( "#entryTable" ).html( data )
+  $("#entryTask").on "ajax:success", ( e, data, status, xhr ) ->
+    $( "#entryTable" ).html( data.table )
+    labels(data.sizes)
 
   $("#entryTable").on "ajax:success", ".checkEntry", ( e, data, status, xhr ) ->
     switch data.done
-      when "show"   then  $( this ).parents( "tr" ).addClass("success")
-      when "delete" then  $( this ).parents( "tr" ).addClass("danger")
+      when true  then $( this ).toggle().parents( "tr" ).addClass("success").find( ".showEntry" ).toggle()
+      when false then $( this ).toggle().parents( "tr" ).addClass("danger").find( ".deleteEntry" ).toggle()
       else
-    $( this ).parents( "td" ).find( "."+data.done+"Entry" ).toggle()
-    $( this ).toggle()
+    labels(data.sizes)
 
 $(document).ready ready
-$(document).on 'page:load', ready
+$(document).on "page:load", ready # Turbolinks

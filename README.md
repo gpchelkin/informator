@@ -4,15 +4,15 @@ Informator
 Системные зависимости
 ----------
 
-* [Ruby](https://www.ruby-lang.org/) version 2.1.3
+* [Ruby](https://www.ruby-lang.org/) version 2.1.3 (рекомендуется [rbenv](https://github.com/sstephenson/rbenv))
 
 * Gem [Feedjira](https://github.com/feedjira/feedjira), применяемый для быстрой загрузки и разбора потоков,
-использует для запросов Gem [Curb](https://github.com/taf2/curb), который является
+использует для загрузки Gem [Curb](https://github.com/taf2/curb), который является
 привязкой системной библиотеки [libcurl](http://curl.haxx.se/libcurl/) к языку _Ruby_.
 Поэтому в системе перед установкой **Feedjira** должна быть установлена библиотека [libcurl](http://curl.haxx.se/libcurl/).
 Описание установки см. на указанных страницах.
 
-* Остальные требуемые расширения- **Ruby Gems** см. в файле `Gemfile`. Для их автоматической установки следует использовать Gem Bundler: установка `gem install bundler`, затем выполнить `bundle install`
+* Все используемые расширения _Ruby Gems_ см. в файле `Gemfile`. Для их автоматической установки следует использовать Gem [Bundler](http://bundler.io/): установка: `gem install bundler`, затем выполнить `bundle install` в каталоге приложения.
 
 
 Пояснения к принятым решениям
@@ -45,21 +45,24 @@ Informator
 
 ### Сервер Unicorn
 
-Используется сервер [Unicorn](http://unicorn.bogomips.org/)
-
-Запуск:
+Используется сервер [Unicorn](http://unicorn.bogomips.org/). Запуск:
 
 `unicorn_rails`
 
 ### Clockwork
 
-Для запуска Jobs с определенным интервалом используется Gem [Clockwork](https://github.com/tomykaira/clockwork) - удобная альтернатива cron для Ruby.
-**Clockwork** использует таблицу настройку `:frequency` таблицы `Setting` и меняет частоту выполнения заданий без перезапуска (см. раздел **Use with database events** в описании расширения).
+Для запуска Jobs с определенным интервалом используется [Clockwork](https://github.com/tomykaira/clockwork) - удобная альтернатива cron для Ruby.
+**Clockwork** использует таблицу настройку `:frequency` таблицы `Setting` и благодаря этому меняет интервал выполнения заданий без перезапуска (см. раздел **Use with database events** в описании расширения).
 В файле `config/clock.rb` указаны выполняемые Jobs.
 
-Команды управления daemon'ом:
+В комплекте с Clockwork идёт daemon (сервисный вариант приложения) clockworkd.
+Для управления daemon'ом следует использовать следующую строку:
 
-`bin/clockd start|stop|restart`
+`bin/clockworkd --clock config/clock.rb --log --log-dir=log start|stop|restart`
+
+Для удобства запуска в корне приложения создан скрипт `jobsender` с этой строчкой, который запускается так:
+
+`./jobsender start|stop|restart`
 
 ### Delayed::Job
 
@@ -80,27 +83,31 @@ rake db:migrate
 
 `bin/delayed_job start|stop|restart`
 
-Принцип работы приложения
------
+После этих действий все Jobs, посылаемые Clockwork'ом на выполнение, буду обработаны worker'ом Delayed::Job и выполнены асинхронно с основным приложением.
 
-Настройки содержатся в единственной записи таблицы `Setting`.
+Принцип работы приложения
+-------
+
+Настройки приложения содержатся в единственной записи таблицы `Setting`.
 `Setting.first.feedlist` - Имя файла (относительно корневого пути приложения) со списком источников.
-По умолчанию: `"config/feeds.txt"`.
-Нельзя изменить из интерфейса в целях безопасности.
-Формат файла: построчный список с комментарием `#` для отключенных источников.
+По умолчанию: `"config/feeds.txt"`. Нельзя изменить из интерфейса приложения в целях безопасности.
+
+Формат файла: построчный список с комментарием `#` для выключенных источников.
 ```
 #http://выключенный.источник
 http://включенный.источник
 ```
 
+При запуске приложения файл считывается в базу источников.
+При каждом изменении базы источников приложение перезаписывает файл с новыми настройками.
+
+Другие настройки описаны в административном интерфейсе приложения.
 
 TODO
 ----------
 
 * Объявления
 * Поля времени заменить на удобные
-* Бейджи обновлять аяксом(?)
-* Турболинкс показывать ожидание(?)
 * Картинки сохранять в базу(?)
 * Отображение новостей с [WebSockets](https://developer.mozilla.org/en-US/docs/WebSockets) и [DOM Storage](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Storage)
 * Тесты

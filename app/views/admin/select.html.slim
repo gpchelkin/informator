@@ -1,11 +1,5 @@
 .container-fluid
 
-  - if @mode
-
-    .alert.alert-info.col-xs-5 = t('Manual selection is disabled')
-
-  - else
-
-    == render 'toolbar'
-
+  == render 'toolbar'
+  #entryTable
     == render 'entrytable'
