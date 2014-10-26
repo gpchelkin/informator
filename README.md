@@ -27,10 +27,7 @@ Informator
 используя один из предоставленных адаптеров к существующим queue-системам выполнения заданий. 
 Также предоставлен простейший Inline-адаптер, который не требует сторонних queue-систем и дополнительных процессов, 
 но не является _асинхронным_, т.е. вызвавший процесс ждет выполнения **Job** и странички не будут загружаться, пока выполняется действие. 
-Для асинхронного выполнения заданий можно использовать адаптер и queue-систему [Delayed::Job](https://github.com/collectiveidea/delayed_job), 
-который требует доп. таблицу в БД и запущенный фоновый процесс (worker). 
-При этом для переключения с **Inline** на **Delayed::Job** необходимо лишь поменять 
-соответствующую установку в `config/application.rb`, в самом приложении изменений не требуется.
+Для асинхронного выполнения заданий можно использовать адаптер и queue-систему [Delayed::Job](https://github.com/collectiveidea/delayed_job) (см. ниже). 
 
 * Подробнее об **Active Job** и адаптерах:
 [edgeguides.rubyonrails.org](http://edgeguides.rubyonrails.org/active_job_basics.html)
@@ -45,9 +42,9 @@ Informator
 
 ### Сервер Unicorn
 
-Используется сервер [Unicorn](http://unicorn.bogomips.org/). Запуск:
+Используется сервер [Thin](http://code.macournoyer.com/thin/). Запуск:
 
-`unicorn_rails`
+`rails s`
 
 ### Clockwork
 
@@ -66,7 +63,8 @@ Informator
 
 ### Delayed::Job
 
-Если требуется асинхронное выполнение заданий (jobs), можно использовать queue-систему [Delayed::Job](https://github.com/collectiveidea/delayed_job).
+Для асинхронного выполнения заданий (jobs) вместо Inline-адаптера Active Job можно использовать адаптер к queue-системе [Delayed::Job](https://github.com/collectiveidea/delayed_job).
+Delayed::Job требует дополнительную таблицу в БД и запущенный фоновый процесс (worker). 
 Для этого надо раскомментировать соответствующую строку в `Gemfile`: `gem 'delayed_job_active_record'` и произвести установку `bundle install`. 
 Затем следует сгенерировать таблицу, необходимую для Delayed::Job, следующим образом:
 
@@ -75,7 +73,7 @@ rails generate delayed_job:active_record
 rake db:migrate
 ```
 
-В файле `config/application.rb` нужно установить соответствующий адаптер вместо `:inline`:
+В файле `config/application.rb` нужно установить соответствующий Active Job-адаптер  вместо `:inline`:
 
 `config.active_job.queue_adapter = :delayed_job`
 
@@ -84,6 +82,7 @@ rake db:migrate
 `bin/delayed_job start|stop|restart`
 
 После этих действий все Jobs, посылаемые Clockwork'ом на выполнение, буду обработаны worker'ом Delayed::Job и выполнены асинхронно с основным приложением.
+Никаких других изменений в самом приложении не требуется.
 
 Принцип работы приложения
 -------
