@@ -9,4 +9,8 @@ class Setting < ActiveRecord::Base
     nil
   end
 
+  def name # For Clockwork Log
+    'Entry_Update_and_Cleanup_Jobs'
+  end
+
 end

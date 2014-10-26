@@ -6,8 +6,8 @@ gem 'rails', '~> 4.2.0.beta2'
 gem 'feedjira', '~> 1.4.0'
 # Use Delayed::Job as Active Job backend
 # gem 'delayed_job_active_record', '~> 4.0.2'
-# Use Clockwork as a cron alternative for starting jobs every defined interval
-gem 'clockwork',  '~> 1.0.0'
+# Use Clockwork as a cron alternative for starting jobs every defined interval (github version with fixed db bug)
+gem 'clockwork', github: 'tomykaira/clockwork'
 # Use Daemons to daemonize processes
 gem 'daemons', '~> 1.1.9'
 # Use sqlite3 as the database for Active Record
@@ -34,8 +34,8 @@ gem 'jbuilder', '~> 2.2.4'
 # gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-# Use unicorn as the app server
-gem 'unicorn', '~> 4.8.3'
+# Use thin as the app server (because it is EventMachine-Based)
+gem 'thin', '~> 1.6.3'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

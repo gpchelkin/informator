@@ -15,11 +15,11 @@ html
             li class=("active" if action_name=='index')
               = link_to t('index'), action: 'index'
             li class=("active" if action_name=='select') class=("hidden" if @mode) id='selectLink'
-              = link_to (content_tag(:span,t('entry_selection'))+content_tag(:span, @sizes[:unchecked], class: "badge progress-bar-info", id: 'uncheckedLabel')), action: 'select'
+              = link_to (content_tag(:span,t('entry_selection'))+content_tag(:span, @sizes[:unchecked], class: "badge progress-bar-warning", id: 'uncheckedLabel')), action: 'select'
             li class=("active" if action_name=='shown')
               = link_to (content_tag(:span,t('shown_entries'))+content_tag(:span, @sizes[:shown], class: "badge progress-bar-success", id: 'shownLabel')), action: 'shown'
             li class=("active" if action_name=='notice')
-              = link_to t('announcements'), action: 'notice'
+              = link_to (content_tag(:span,t('announcements'))+content_tag(:span, @sizes[:notice], class: "badge progress-bar-info", id: 'noticeLabel')), action: 'notice'
             li.navbar-right
               - case params[:locale]
                 - when 'en'

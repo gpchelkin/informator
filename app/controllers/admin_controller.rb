@@ -1,7 +1,6 @@
 class AdminController < ApplicationController
   before_action :set_sizes, only: [:index, :select, :shown, :notice]
   before_action :set_mode, only: [:index, :select, :shown, :notice, :entrytask, :maintask]
-  before_action :set_locale
   http_basic_authenticate_with name: "admin", password: "admin"
 
   def index
@@ -18,19 +17,12 @@ class AdminController < ApplicationController
   end
 
   def notice
-    @notices = Notice.all
+    @notices = Notice.all.desc_ord
   end
 
   def setting
     setting = Setting.first
-    case params[:commit]
-      when 'save'
-        setting.update(setting_params[:setting])
-      when 'default'
-        setting.delete
-        setting = Setting.create
-      else
-    end
+    setting.update(setting_params[:setting])
     render json: {mode: setting.mode, sizes: set_sizes}
   end
 
@@ -65,7 +57,7 @@ class AdminController < ApplicationController
         @entries = Entry.unchecked.desc_ord
       else
     end
-    render json: { table: render_to_string(partial: 'entrytable', locals: {action_name: params[:action_name]}), sizes: set_sizes }
+    render json: {table: render_to_string(partial: 'entrytable', locals: {action_name: params[:action_name]}), sizes: set_sizes}
   end
 
   def maintask
@@ -78,7 +70,7 @@ class AdminController < ApplicationController
         Feed.revert_all
       else
     end
-    render json: { sizes: set_sizes }
+    render json: {sizes: set_sizes}
   end
 
   def checkentry
@@ -96,18 +88,20 @@ class AdminController < ApplicationController
     render json: {done: done, sizes: set_sizes}
   end
 
-  private
-
-  def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+  def togglenotice
+    notice = Notice.find(params[:notice])
+    notice.update(notice_params)
+    render json: {checked: notice.checked, sizes: set_sizes}
   end
+
+  private
 
   def set_mode
     @mode = Setting.first.mode
   end
 
   def set_sizes
-    @sizes = {unchecked: Entry.unchecked.size, shown: Entry.shown.size}
+    @sizes = {unchecked: Entry.unchecked.size, shown: Entry.shown.size, notice: Notice.all.size}
   end
 
   def setting_params
@@ -116,6 +110,10 @@ class AdminController < ApplicationController
 
   def feed_params
     params.permit(:use)
+  end
+
+  def notice_params
+    params.permit(:checked)
   end
 
 end

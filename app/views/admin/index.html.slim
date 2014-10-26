@@ -33,13 +33,13 @@
 
         .form-group
           = label_tag 'expiration', t('expiration')
-          = number_field 'setting', 'expiration', min: 100, class: "form-control"
+          = number_field 'setting', 'expiration', min: 10, class: "form-control"
           p.help-block = t('in_seconds')
 
         h4 = 'Clockwork'
         .form-group
           = label_tag 'frequency', t('frequency')
-          = number_field 'setting', 'frequency', min: 100, class: "form-control"
+          = number_field 'setting', 'frequency', min: 10, class: "form-control"
           p.help-block = t('in_seconds')
         .form-group
           .checkbox
@@ -69,26 +69,7 @@
               span = ' ' +t('revert_all')
       h3 = t('news_sources')
       .row
-        .col-xs-9
-          table.table.table-hover.table-bordered
-            thead
-              tr
-                th.col-xs-5 = t('feed_title_and_url')
-                th.col-xs-2 = t('use')
-            tbody
-              - @feeds.each do |feed|
-                tr class=("success" if feed.use?)
-                  td = link_to sanitize(feed.title), feed.url, target: "_blank"
+        #feedTable.col-xs-8
+          == render 'feedtable'
 
-                  td
-                    = form_tag({controller: 'admin', action: 'togglefeed'}, remote: true, class: 'toggleFeed')
-                      = hidden_field_tag 'feed', feed.id.to_s
-
-                      button.col-xs-3.btn.btn-default.toggleBtn name='use' value=(feed.use? ? 'false' : 'true') data-disable-with=("#{content_tag(:span, nil, class: "glyphicon glyphicon-refresh")}")
-                        span.glyphicon.glyphicon-off
-                      .col-xs-9
-                        span.toggleText class=("hidden" unless feed.use?)
-                          = ' ' +t('enabled')
-                        span.toggleText class=("hidden" if feed.use?)
-                          = ' ' +t('disabled')
 

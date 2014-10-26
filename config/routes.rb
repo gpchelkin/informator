@@ -5,11 +5,12 @@ Rails.application.routes.draw do
   get 'admin/shown'
   get 'admin/notice'
 
+  post 'admin/setting'
+  post 'admin/maintask'
   post 'admin/togglefeed'
   post 'admin/entrytask'
   post 'admin/checkentry'
-  post 'admin/setting'
-  post 'admin/maintask'
+  post 'admin/togglenotice'
 
   root 'admin#index'
   get 'admin' => 'admin#index'

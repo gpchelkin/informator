@@ -2,67 +2,50 @@ class Feed < ActiveRecord::Base
   has_many :entries, dependent: :delete_all
 
   before_update do |feed|
-    if feed.use_changed? and not feed.use
+    if feed.use_changed? and not feed.use # Если выключаем источник, его записи стираются
       feed.entries.clear
       feed.last_updated = Time.at(0)
     end
   end
 
-  after_save do |feed|
-    Feed.save_file
-  end
-
   def self.load_file(feedlist = Setting.first.feedlist)
-    all.each {|feed| feed.entries.clear}
+    require 'open-uri'
+    all.each { |feed| feed.entries.clear }
     delete_all
-    IO.readlines(Rails.root.join(feedlist)).map(&:strip).each do |line|
-      if line.match(/^#\s*/)
-        create(use: false, url: line.gsub(/^#\s*/,''))
-      else
-        create(use: true, url: line)
-      end
-    end
-    add_titles
-  end
-
-  def self.add_titles
-    all.each do |feed|
-      success_callback = lambda { |url, f|    feed.update(title: f.title) }
-      failure_callback = lambda { |curl, err| feed.update(title: curl.url) }
+    open(feedlist).each_line do |line|
+      feed = new
+      feed.use = false
+      feed.url = line.strip
+      success_callback = lambda { |url, f| feed.title = f.title }
+      failure_callback = lambda { |curl, err| feed.title = curl.url }
       Feedjira::Feed.fetch_and_parse feed.url, on_success: success_callback, on_failure: failure_callback
-    end
-  end
-
-  def self.save_file(feedlist = Setting.first.feedlist)
-    File.open(Rails.root.join(feedlist), "w") do |f|
-      all.each do |feed|
-        f.puts (feed.use ? '' : '#') + feed.url
-      end
+      feed.save
     end
   end
 
   def self.fetch_all(mode=Setting.first.mode)
-    where(use: true).each {|feed| feed.fetch mode }
+    where(use: true).each { |feed| feed.fetch mode }
   end
 
   def self.revert_all
     all.each do |feed|
       feed.entries.clear
-      feed.update(last_updated: Time.at(0))
+      feed.last_updated = Time.at(0)
+      feed.save
     end
   end
 
-  def fetch(mode=Setting.first.mode, exp=Setting.first.expiration)
+  def fetch(mode=Setting.first.mode)
     success_callback = lambda do |url, f|
       f.entries.each do |entry|
         if entry.published > last_updated and not Entry.exists?(url: entry.url)
           entries.create(
-              url:          entry.url,
-              title:        entry.title,
-              summary:      entry.summary,
-              image:        entry.image,
-              published:    entry.published,
-              checked:      mode
+              url: entry.url,
+              title: entry.title,
+              summary: entry.summary,
+              image: entry.image,
+              published: entry.published,
+              checked: mode
           )
         end
       end
