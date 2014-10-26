@@ -55,6 +55,7 @@ en:
   style: "Entry display style"
   mode: "Entry selection mode"
   mode_auto_help: "All downloaded entries will be shown automatically"
+  mode_manual_help: "All downloaded entries will be selected by administrator"
   autocleanup_help: "When manual selection is enabled only unselected entries will be cleaned up"
   no_entries_found: "No entries found"
   mode_help: "Entry database will revert if mode is changed"
