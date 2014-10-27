@@ -12,6 +12,12 @@ Informator
 Поэтому в системе перед установкой **Feedjira** должна быть установлена библиотека [libcurl](http://curl.haxx.se/libcurl/).
 Описание установки см. на указанных страницах.
 
+Для Ubuntu:
+```
+apt-get install libcurl3 libcurl3-gnutls libcurl4-openssl-dev
+apt-get install libsqlite3-dev
+```
+
 * Все используемые расширения _Ruby Gems_ см. в файле `Gemfile`. Для их автоматической установки следует использовать Gem [Bundler](http://bundler.io/): установка: `gem install bundler`, затем выполнить `bundle install` в каталоге приложения.
 
 
