@@ -38,4 +38,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Mounts the terminal at /console https://github.com/rails/web-console
+  config.web_console.automount = true
+  config.web_console.style.colors = 'monokai'
 end
