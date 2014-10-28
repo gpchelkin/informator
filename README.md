@@ -52,7 +52,7 @@ bin/setup
 ```
 Для запуска приложения:
 ```
-bin/rails s
+bin/rails s -b 0.0.0.0
 ```
 
 Запуск в production режиме:
