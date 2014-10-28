@@ -24,8 +24,8 @@ Dir.chdir APP_ROOT do
   system "rm -f log/*"
   system "rm -rf tmp/cache"
 
-  # puts "\n== Precompiling assets =="
-  # system "bin/rake assets:precompile"
+  puts "\n== Precompiling assets =="
+  system "bin/rake assets:precompile"
 
   # puts "\n== Restarting application server =="
   # system "touch tmp/restart.txt"
