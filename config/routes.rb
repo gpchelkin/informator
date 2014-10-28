@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'display/index'
   get 'admin/index'
   get 'admin/select'
   get 'admin/shown'
@@ -14,7 +15,8 @@ Rails.application.routes.draw do
 
   root 'admin#index'
   get 'admin' => 'admin#index'
-
+  get 'display' => 'display#index'
+  get 'displayshow' => 'display#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

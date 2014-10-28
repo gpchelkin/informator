@@ -34,8 +34,8 @@ gem 'jbuilder', '~> 2.2.4'
 # gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-# Use thin as the app server (because it is EventMachine-Based)
-gem 'thin', '~> 1.6.3'
+# Use puma as the app server for Server-sent events support
+gem 'puma', '~> 2.9.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

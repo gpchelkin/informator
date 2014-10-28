@@ -116,12 +116,15 @@ rake db:migrate
 
 Данные для входа в административный интерфейс: `admin:admin`
 
+Отображение новостей доступно по адресу: `/display/index`.
+
+
 TODO
 ----------
 
 * Загрузка объявлений. Так как разрешенные источники берутся из внешнего файла ради безопасности, то и объявления организации имеет смысл брать из внешнего источника, представленного RSS-лентой.
 Т.е реализовать как отдельно взятый из сети / локально файл-RSS-источник в своей вкладке с выбором отображения / неотображения (наподобие таблицы фидов) сообщений? А источник уже будет защищенно в другом месте редактироваться ручками, как и feeds.txt.
-* Отображение новостей с [WebSockets](https://developer.mozilla.org/en-US/docs/WebSockets) либо [Server-sent events](https://developer.mozilla.org/en-US/docs/Server-sent_events) (первое предпочтительнее) и [DOM Storage](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Storage) (для хранения на клиенте в случае разрыва).
+* Отображение новостей с [ActionController::Live](http://edgeguides.rubyonrails.org/action_controller_overview.html#live-streaming-of-arbitrary-data) и [Server-sent events](https://developer.mozilla.org/en-US/docs/Server-sent_events).
 * Нормальная аутентификация
 * Поля времени заменить на удобные
 * Тесты
