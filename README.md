@@ -12,7 +12,8 @@ Informator
 Поэтому в системе перед установкой **Feedjira** должна быть установлена библиотека [libcurl](http://curl.haxx.se/libcurl/).
 Описание установки см. на указанных страницах.
 
-Для Ubuntu системные зависимости устанавливаются так:
+Для Ubuntu 14.XX системные зависимости устанавливаются так:
+
 ```
 sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlite3-dev
 ```
@@ -42,23 +43,25 @@ sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlit
 Сервисы
 ----------
 
-### Сервер Thin
+### Сервер Puma
 
-Используется сервер [Thin](http://code.macournoyer.com/thin/). Запуск:
-Перед первым запуском приложения следует установить `bundler`, необходимые Gems из `Gemfile`,
-создать БД, загрузить схему БД и заполнить данные (настройки) по умолчанию, в Rails 4.2 за это отвечает скрипт:
-```
-bin/setup
-```
+Используется сервер [Puma](http://puma.io), т.к. поддерживает Server-sent events.
+Перед первым запуском приложения следует установить Gem `bundler`, необходимые Gems из `Gemfile`,
+создать БД, загрузить схему БД и заполнить данные (настройки) по умолчанию, в Rails 4.2 эти действия автоматически выполняет скрипт:
+`bin/setup` для среды разработки development или `RAILS_ENV=production bin/setup` для среды production.
+
 Запуск приложения в среде разработки development:
+
 ```
-bin/rails s -b 0.0.0.0
+bin/rails s -b localhost
 ```
 
-Запуск приложения в среде production:
+В среде production:
+
 ```
-SECRET_KEY_BASE=$(rake secret) bin/rails s -e production -b 0.0.0.0
+SECRET_KEY_BASE=$(rake secret) bin/rails s -e production -b 0.0.0.0 -p 80
 ```
+
 ### Clockwork
 
 Для запуска Jobs с определенным интервалом используется [Clockwork](https://github.com/tomykaira/clockwork) - удобная альтернатива cron для Ruby.
@@ -73,6 +76,7 @@ clockworkd --clock=config/clock.rb --dir=. --log --log-dir=log start|stop|restar
 ```
 
 Для удобства запуска созданы binstubs с уже заданными параметрами командной строки, которые запускаются так:
+
 ```
 bin/clockwork
 bin/clockworkd start|stop|restart
