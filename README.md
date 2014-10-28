@@ -4,7 +4,7 @@ Informator
 Системные зависимости
 ----------
 
-* [Ruby](https://www.ruby-lang.org/) version 2.1.3 (рекомендуется [rbenv](https://github.com/sstephenson/rbenv))
+* [Ruby](https://www.ruby-lang.org/) version 2.0.0 (рекомендуется [rbenv](https://github.com/sstephenson/rbenv) + [ruby-build](https://github.com/sstephenson/ruby-build) 2.1.4)
 
 * Gem [Feedjira](https://github.com/feedjira/feedjira), применяемый для быстрой загрузки и разбора потоков,
 использует для загрузки Gem [Curb](https://github.com/taf2/curb), который является
@@ -12,21 +12,17 @@ Informator
 Поэтому в системе перед установкой **Feedjira** должна быть установлена библиотека [libcurl](http://curl.haxx.se/libcurl/).
 Описание установки см. на указанных страницах.
 
-Для Ubuntu:
+Для Ubuntu системные зависимости устанавливаются так:
 ```
-apt-get install libcurl3 libcurl3-gnutls libcurl4-openssl-dev
-apt-get install libsqlite3-dev
+sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlite3-dev
 ```
-
-* Все используемые расширения _Ruby Gems_ см. в файле `Gemfile`. Для их автоматической установки следует использовать Gem [Bundler](http://bundler.io/): установка: `gem install bundler`, затем выполнить `bundle install` в каталоге приложения.
-
 
 Пояснения к принятым решениям
 ----------
 
 ### Ruby on Rails 4.2
 
-Предварительная версия Gem [Ruby on Rails 4.2.0.beta2](https://github.com/rails/rails) необходима для использования
+Предварительная версия [Ruby on Rails 4.2.0.beta2](https://github.com/rails/rails) необходима для использования
 нового фреймворка [Active Job](https://github.com/rails/rails/tree/master/activejob). 
 Он позволяет планировать и запускать отдельные задания (такие, 
 которые нужно периодически запускать в фоне, например, обновление записей в базе) — **Jobs** `(app/jobs)`,
@@ -36,40 +32,53 @@ apt-get install libsqlite3-dev
 Для асинхронного выполнения заданий можно использовать адаптер и queue-систему [Delayed::Job](https://github.com/collectiveidea/delayed_job) (см. ниже). 
 
 * Подробнее об **Active Job** и адаптерах:
-[edgeguides.rubyonrails.org](http://edgeguides.rubyonrails.org/active_job_basics.html)
-[edgeapi.rubyonrails.org](http://edgeapi.rubyonrails.org/classes/ActiveJob.html)
+[RoR Guides](http://edgeguides.rubyonrails.org/active_job_basics.html) |
+[RoR API](http://edgeapi.rubyonrails.org/classes/ActiveJob.html)
 
 * Указания к обновлению приложения до **Ruby on Rails 4.2**:
-[edgeguides.rubyonrails.org](http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html)
-[railsapps.github.io](http://railsapps.github.io/updating-rails.html)
+[RoR Guides](http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html) |
+[RailsApps](http://railsapps.github.io/updating-rails.html)
 
 Сервисы
 ----------
 
 ### Сервер Thin
 
-Перед первым запуском приложения следует создать базу данных, загрузить схему и заполнить настройки по умолчанию командой:
-
-`rake db:setup`
-
 Используется сервер [Thin](http://code.macournoyer.com/thin/). Запуск:
+Перед первым запуском приложения следует установить `bundler`, необходимые Gems из `Gemfile`,
+создать БД, загрузить схему БД и заполнить данные (настройки) по умолчанию, в Rails 4.2 за это отвечает скрипт:
+```
+bin/setup
+```
+Для запуска приложения:
+```
+bin/rails s
+```
 
-`rails s`
-
+Запуск в production режиме:
+```
+RAILS_ENV=production bin/setup
+RAILS_ENV=production bin/rake assets:precompile
+SECRET_KEY_BASE=$(rake secret) bin/rails s -e production
+```
 ### Clockwork
 
 Для запуска Jobs с определенным интервалом используется [Clockwork](https://github.com/tomykaira/clockwork) - удобная альтернатива cron для Ruby.
 **Clockwork** использует таблицу настройку `:frequency` таблицы `Setting` и благодаря этому меняет интервал выполнения заданий без перезапуска (см. раздел **Use with database events** в описании расширения).
 В файле `config/clock.rb` указаны выполняемые Jobs.
+Clockwork включает в себя как обычное консольное приложение, так и daemon - сервисный вариант приложения - clockworkd.
+Для управления Clockwork и Clockworkd следует использовать следующие строки:
 
-В комплекте с Clockwork идёт daemon (сервисный вариант приложения) clockworkd.
-Для управления daemon'ом следует использовать следующую строку:
+```
+clockwork config/clock.rb
+clockworkd --clock=config/clock.rb --dir=. --log --log-dir=log start|stop|restart
+```
 
-`bin/clockworkd --clock config/clock.rb --dir=. --log --log-dir=log start|stop|restart`
-
-Для удобства запуска в корне приложения создан скрипт `jobsender` с этой строчкой, который запускается так:
-
-`./jobsender start|stop|restart`
+Для удобства запуска созданы binstubs с уже заданными параметрами командной строки, которые запускаются так:
+```
+bin/clockwork
+bin/clockworkd start|stop|restart
+```
 
 ### Delayed::Job
 

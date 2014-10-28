@@ -6,6 +6,9 @@
 # this file is here to facilitate running it.
 #
 
+#For easy running
+ARGV.unshift("config/clock.rb")
+
 require 'pathname'
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile",
   Pathname.new(__FILE__).realpath)

@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-bin/clockworkd --clock config/clock.rb --dir=. --log --log-dir=log "$@"
