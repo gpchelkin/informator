@@ -50,16 +50,15 @@ sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlit
 ```
 bin/setup
 ```
-Для запуска приложения:
+Запуск приложения в среде разработки development:
 ```
 bin/rails s -b 0.0.0.0
 ```
 
-Запуск в production режиме:
+Запуск приложения в среде production:
 ```
-RAILS_ENV=production bin/setup
 RAILS_ENV=production bin/rake assets:precompile
-SECRET_KEY_BASE=$(rake secret) bin/rails s -e production
+SECRET_KEY_BASE=$(rake secret) bin/rails s -e production -b 0.0.0.0
 ```
 ### Clockwork
 
