@@ -129,6 +129,7 @@ TODO
 И эта лента будет защищенно редактироваться вручную в другом месте, как и feeds.txt.
 Применять такой подход? Можно Markdown использовать вместо RSS, так еще удобнее, на мой взгляд.
 * Отображение новостей с [ActionController::Live](http://edgeguides.rubyonrails.org/action_controller_overview.html#live-streaming-of-arbitrary-data) и [Server-sent events](https://developer.mozilla.org/en-US/docs/Server-sent_events) (начато)
+    * ваы
 * Нормальная аутентификация
 * Поля времени заменить на удобные
 * Тесты

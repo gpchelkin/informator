@@ -10,13 +10,14 @@ class Feed < ActiveRecord::Base
 
   def self.load_file(feedlist = Setting.first.feedlist)
     require 'open-uri'
+    full_sanitizer = Rails::Html::FullSanitizer.new
     all.each { |feed| feed.entries.clear }
     delete_all
     open(feedlist).each_line do |line|
       feed = new
       feed.use = false
       feed.url = line.strip
-      success_callback = lambda { |url, f| feed.title = f.title }
+      success_callback = lambda { |url, f| feed.title = full_sanitizer.sanitize(f.title) }
       failure_callback = lambda { |curl, err| feed.title = curl.url }
       Feedjira::Feed.fetch_and_parse feed.url, on_success: success_callback, on_failure: failure_callback
       feed.save
@@ -36,13 +37,14 @@ class Feed < ActiveRecord::Base
   end
 
   def fetch(mode=Setting.first.mode)
+    full_sanitizer = Rails::Html::FullSanitizer.new
     success_callback = lambda do |url, f|
       f.entries.each do |entry|
         if entry.published > last_updated and not Entry.exists?(url: entry.url)
           entries.create(
-              url: entry.url,
-              title: entry.title,
-              summary: entry.summary,
+              url:  entry.url,
+              title: full_sanitizer.sanitize(entry.title),
+              summary: full_sanitizer.sanitize(entry.summary),
               image: entry.image,
               published: entry.published,
               checked: mode

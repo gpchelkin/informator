@@ -23,12 +23,12 @@
             br
             small = l(entry.published)
             br
-            = sanitize entry.summary
+            = entry.summary
 
           - if entry.image
             td
               a href=entry.image target="_blank"
-                = image_tag entry.image, size: "150x100", alt: sanitize(entry.title)
+                = image_tag entry.image, size: "150x100", alt: entry.title
 
           td
             span.showEntry style="display: none;" = t('entry_will_be_shown')

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # Use Ruby on Rails 4.2 for Active Job implementation
 gem 'rails', '~> 4.2.0.beta2'
+gem 'rails-html-sanitizer', '~> 1.0.1'
 # Use Feedjira feed parser
 gem 'feedjira', '~> 1.4.0'
 # Use Delayed::Job as Active Job backend

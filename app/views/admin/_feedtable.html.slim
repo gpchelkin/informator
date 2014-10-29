@@ -13,7 +13,7 @@
     tbody
       - @feeds.each do |feed|
         tr class=("success" if feed.use?)
-          td = link_to sanitize(feed.title), feed.url, target: "_blank"
+          td = link_to feed.title, feed.url, target: "_blank"
 
           td
             = form_tag({controller: 'admin', action: 'togglefeed'}, remote: true, class: 'toggleFeed')
