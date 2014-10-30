@@ -90,7 +90,7 @@ class AdminController < ApplicationController
 
   def reloadnotices
     @notices = Notice.all.desc_ord
-    Notice.load_file
+    Notice.load_file Rails.root.join(Setting.first.noticelist)
     render json: {table: render_to_string(partial: 'noticetable'), sizes: set_sizes}
   end
 
