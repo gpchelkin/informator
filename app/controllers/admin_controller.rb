@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   before_action :set_sizes, only: [:index, :select, :shown, :notice]
   before_action :set_mode, only: [:index, :select, :shown, :notice, :entrytask, :maintask]
-  http_basic_authenticate_with name: "admin", password: "admin"
+  http_basic_authenticate_with name: ENV["ADMIN_NAME"], password: ENV["ADMIN_PASSWORD"]
 
   def index
     @feeds = Feed.all
@@ -86,6 +86,12 @@ class AdminController < ApplicationController
         done = 0
     end
     render json: {done: done, sizes: set_sizes}
+  end
+
+  def reloadnotices
+    @notices = Notice.all.desc_ord
+    Notice.load_file
+    render json: {table: render_to_string(partial: 'noticetable'), sizes: set_sizes}
   end
 
   def togglenotice

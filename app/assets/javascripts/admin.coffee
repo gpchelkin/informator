@@ -37,6 +37,10 @@ ready = ->
       else
     labels(data.sizes)
 
+  $("#noticeReload").on "ajax:success", (e, data, status, xhr) ->
+    $("#noticeTable").html(data.table)
+    labels(data.sizes)
+
   $("#noticeTable").on "ajax:success", ".toggleNotice", (e, data, status, xhr) ->
     switch data.checked
       when true  then $(this).find(".toggleText").toggleClass("hidden").parents("tr").addClass("success").find(".toggleBtn").val("false")

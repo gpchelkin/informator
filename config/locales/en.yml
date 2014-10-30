@@ -65,3 +65,5 @@ en:
   notice_shown: "Shown"
   notice_unshown: "Unshown"
   no_feeds_found: "No feeds found"
+  no_notices_found: "No announcements found"
+  reload_notice: "Load announcements"

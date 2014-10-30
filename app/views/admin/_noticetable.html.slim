@@ -1,0 +1,31 @@
+- if @notices.empty?
+
+  br
+  .alert.alert-info.col-xs-5 = t('no_notices_found')
+
+- else
+
+  table.table.table-hover.table-bordered.table-condensed
+    thead
+      tr
+        th.col-xs-5 = t('notice')
+        th.col-xs-1 = t('show')
+    tbody
+      - @notices.each do |notice|
+        tr class=("success" if notice.checked?)
+          td
+            /strong = notice.title
+            == notice.summary
+
+          td
+            = form_tag({controller: 'admin', action: 'togglenotice'}, remote: true, class: 'toggleNotice')
+              = hidden_field_tag 'notice', notice.id.to_s
+
+              .col-xs-8
+                span.toggleText class=("hidden" unless notice.checked?)
+                  = ' ' +t('notice_shown')
+                span.toggleText class=("hidden" if notice.checked?)
+                  = ' ' +t('notice_unshown')
+              .col-xs-4
+                button.btn.btn-primary.toggleBtn name='checked' value=(notice.checked? ? 'false' : 'true') data-disable-with=("#{content_tag(:span, nil, class: 'glyphicon glyphicon-refresh')}")
+                  span.glyphicon.glyphicon-off

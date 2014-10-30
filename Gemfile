@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 gem 'rails', '~> 4.2.0.beta2'
 gem 'rails-html-sanitizer', '~> 1.0.1'
 # Use Feedjira feed parser
-gem 'feedjira', '~> 1.4.0'
+gem 'feedjira', '~> 1.5.0'
+gem 'kramdown', '~> 1.5.0'
 # Use Delayed::Job as Active Job backend
 # gem 'delayed_job_active_record', '~> 4.0.2'
 # Use Clockwork as a cron alternative for starting jobs every defined interval (github version with fixed db bug)
@@ -23,7 +24,7 @@ gem 'bootstrap-sass', '~> 3.2.0.2'
 gem 'uglifier', '~> 2.5.3'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# For CoffeeScript support
 gem 'therubyracer',  platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 3.1.2'

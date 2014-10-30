@@ -17,7 +17,7 @@ class Feed < ActiveRecord::Base
       feed = new
       feed.use = false
       feed.url = line.strip
-      success_callback = lambda { |url, f| feed.title = full_sanitizer.sanitize(f.title) }
+      success_callback = lambda { |url, f   | feed.title = full_sanitizer.sanitize(f.title) }
       failure_callback = lambda { |curl, err| feed.title = curl.url }
       Feedjira::Feed.fetch_and_parse feed.url, on_success: success_callback, on_failure: failure_callback
       feed.save

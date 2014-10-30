@@ -19,10 +19,11 @@
             = form_tag({controller: 'admin', action: 'togglefeed'}, remote: true, class: 'toggleFeed')
               = hidden_field_tag 'feed', feed.id.to_s
 
-              .col-xs-9
+              .col-xs-7
                 span.toggleText class=("hidden" unless feed.use?)
                   = ' ' +t('enabled')
                 span.toggleText class=("hidden" if feed.use?)
                   = ' ' +t('disabled')
-              button.col-xs-3.btn.btn-default.toggleBtn name='use' value=(feed.use? ? 'false' : 'true') data-disable-with=("#{content_tag(:span, nil, class: "glyphicon glyphicon-refresh")}")
-                span.glyphicon.glyphicon-off
+              .col-xs-5
+                button.btn.btn-default.toggleBtn name='use' value=(feed.use? ? 'false' : 'true') data-disable-with=("#{content_tag(:span, nil, class: "glyphicon glyphicon-refresh")}")
+                  span.glyphicon.glyphicon-off

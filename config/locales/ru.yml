@@ -77,3 +77,5 @@ ru:
   notice_shown: "Отображается"
   notice_unshown: "Не отображается"
   no_feeds_found: "Источники не найдены"
+  no_notices_found: "Объявления не найдены"
+  reload_notice: "Загрузить объявления"

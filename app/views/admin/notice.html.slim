@@ -1,30 +1,11 @@
 .container-fluid
-  h2 To be done
-  .row
-    #noticeTable.col-xs-10
-      table.table.table-hover.table-bordered.table-condensed
-        thead
-          tr
-            th.col-xs-5 = t('notice')
-            th.col-xs-1 = t('show')
-        tbody
-          - @notices.each do |notice|
-            tr class=("success" if notice.checked?)
-              td
-                strong = notice.title
-                br
-                small = l(notice.published)
-                br
-                = notice.summary
+  = form_tag({controller: 'admin', action: 'reloadnotices'}, remote: true, id: "noticeReload")
+    .btn-toolbar role="toolbar"
+      .btn-group.col-xs-3
+        button.btn.col-xs-12.btn-default name='commit' value='reloadnotices' data-disable-with=t('wait')
+          span.glyphicon.glyphicon-remove
+          span = ' ' + t('reload_notice')
+    br
 
-              td
-                = form_tag({controller: 'admin', action: 'togglenotice'}, remote: true, class: 'toggleNotice')
-                  = hidden_field_tag 'notice', notice.id.to_s
-
-                  .col-xs-9
-                    span.toggleText class=("hidden" unless notice.checked?)
-                      = ' ' +t('notice_shown')
-                    span.toggleText class=("hidden" if notice.checked?)
-                      = ' ' +t('notice_unshown')
-                  button.col-xs-3.btn.btn-primary.toggleBtn name='checked' value=(notice.checked? ? 'false' : 'true') data-disable-with=("#{content_tag(:span, nil, class: 'glyphicon glyphicon-refresh')}")
-                    span.glyphicon.glyphicon-off
+  #noticeTable.col-xs-12
+    == render 'noticetable'

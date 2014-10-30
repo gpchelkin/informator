@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post 'admin/entrytask'
   post 'admin/checkentry'
   post 'admin/togglenotice'
+  post 'admin/reloadnotices'
 
   root 'admin#index'
   get 'admin' => 'admin#index'
