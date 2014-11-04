@@ -30,6 +30,11 @@
               label
                 = radio_button 'setting', 'style', 2
                 = '2 Dolor Sit Amet'
+        .form-group
+          = label_tag 'display_frequency', t('display_frequency')
+          = number_field 'setting', 'display_frequency', min: 0, class: "form-control text_field", step: 0.1
+          p.help-block = t('in_seconds')
+          p.help-block = t('display_frequency_help')
 
         .form-group
           = label_tag 'expiration', t('expiration')

@@ -4,6 +4,10 @@ class Notice < ActiveRecord::Base
   scope :unshown, -> { where(checked: false) }
   scope :desc_ord, -> { order(published: :desc) }
 
+  after_commit do
+    Setting.first.touch
+  end
+
   def self.load_file(noticelist = Setting.first.noticelist)
     require 'open-uri'
     delete_all

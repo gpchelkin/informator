@@ -6,15 +6,25 @@ class DisplayController < ApplicationController
   end
 
   def show
-    @shownentries = Entry.shown
     response.headers['Content-Type'] = 'text/event-stream'
-    @shownentries.each do |entry|
-      response.stream.write "event: new\n"
-      response.stream.write "data: #{render_to_string(json: entry)}\n\n"
-      sleep 6
+    sse = SSE.new(response.stream, retry: 120000, event: "entry")
+    Setting.uncached do
+      Entry.uncached do
+        loop do
+          fr = Setting.first.display_frequency
+          logger.info "DB Changed or Looped."
+          Entry.shown.desc_ord.each do |entry|
+            sse.write entry.to_builder.target!, id: entry.id
+            sleep slp = fr*(entry.title.split.size + entry.summary.split.size)
+            break if Setting.first.updated_at > Time.now-slp
+          end
+        end
+      end
     end
+  rescue ClientDisconnected
+    logger.info "Client Disconnected."
   ensure
-    response.stream.close
+    sse.close
   end
 
 end

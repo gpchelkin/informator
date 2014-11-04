@@ -18,17 +18,17 @@
       - @entries.each do |entry|
         tr
 
-          td colspan=("2" unless entry.image)
-            strong = link_to sanitize(entry.title), entry.url, target: "_blank"
+          td colspan=("2" unless entry.image.exists?)
+            strong = link_to raw(entry.title), entry.url, target: "_blank"
             br
-            small = l(entry.published)
+            small = l(entry.published) if entry.published
             br
-            = entry.summary
+            = raw(entry.summary)
 
-          - if entry.image
+          - if entry.image.exists?
             td
-              a href=entry.image target="_blank"
-                = image_tag entry.image, size: "150x100", alt: entry.title
+              a href=entry.image.url(:medium) target="_blank"
+                = image_tag entry.image.url(:thumb)
 
           td
             span.showEntry style="display: none;" = t('entry_will_be_shown')

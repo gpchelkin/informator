@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+//= require jquery.qrcode-0.11.0.min

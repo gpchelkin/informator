@@ -80,7 +80,7 @@ class AdminController < ApplicationController
         entry.update(checked: true)
         done = true
       when 'delete'
-        entry.delete
+        entry.destroy
         done = false
       else
         done = 0
@@ -90,7 +90,7 @@ class AdminController < ApplicationController
 
   def reloadnotices
     @notices = Notice.all.desc_ord
-    Notice.load_file Rails.root.join(Setting.first.noticelist)
+    Notice.load_file # TODO Puma daemon fail: not loading file if local
     render json: {table: render_to_string(partial: 'noticetable'), sizes: set_sizes}
   end
 
@@ -111,7 +111,7 @@ class AdminController < ApplicationController
   end
 
   def setting_params
-    params.permit(setting: [:mode, :style, :expiration, :frequency, :autocleanup])
+    params.permit(setting: [:mode, :style, :expiration, :frequency, :autocleanup, :display_frequency])
   end
 
   def feed_params

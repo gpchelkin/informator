@@ -1,5 +1,5 @@
 class Setting < ActiveRecord::Base
-  after_save do |setting|
+  before_update do |setting| # Если меняем режим, сбрасываем все источники
     if setting.mode_changed?
       Feed.revert_all
     end

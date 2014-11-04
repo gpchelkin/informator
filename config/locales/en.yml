@@ -67,3 +67,5 @@ en:
   no_feeds_found: "No feeds found"
   no_notices_found: "No announcements found"
   reload_notice: "Load announcements"
+  display_frequency: "Time for reading one word"
+  display_frequency_help: "News will be shown for words count multiplied by this number"

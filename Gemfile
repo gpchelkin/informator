@@ -6,6 +6,7 @@ gem 'rails-html-sanitizer', '~> 1.0.1'
 # Use Feedjira feed parser
 gem 'feedjira', '~> 1.5.0'
 gem 'kramdown', '~> 1.5.0'
+gem 'paperclip', '~> 4.2.0'
 # Use Delayed::Job as Active Job backend
 # gem 'delayed_job_active_record', '~> 4.0.2'
 # Use Clockwork as a cron alternative for starting jobs every defined interval (github version with fixed db bug)
