@@ -1,0 +1,72 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   .idea/.generators
+#	new file:   .idea/.rakeTasks
+#	new file:   .idea/dataSources.ids
+#	new file:   .idea/dataSources.xml
+#	new file:   .idea/encodings.xml
+#	new file:   .idea/informator.iml
+#	new file:   .idea/misc.xml
+#	new file:   .idea/modules.xml
+#	new file:   .idea/runConfigurations/Development__informator.xml
+#	new file:   .idea/runConfigurations/Production__informator.xml
+#	new file:   .idea/runConfigurations/spec__informator.xml
+#	new file:   .idea/runConfigurations/test__informator.xml
+#	new file:   .idea/scopes/scope_settings.xml
+#	new file:   .idea/vcs.xml
+#	new file:   .idea/workspace.xml
+#	modified:   Gemfile
+#	modified:   Gemfile.lock
+#	modified:   README.md
+#	modified:   app/assets/javascripts/application.js
+#	modified:   app/assets/javascripts/display.coffee
+#	modified:   app/controllers/admin_controller.rb
+#	modified:   app/controllers/display_controller.rb
+#	modified:   app/models/entry.rb
+#	modified:   app/models/feed.rb
+#	modified:   app/models/notice.rb
+#	modified:   app/models/setting.rb
+#	modified:   app/views/admin/_entrytable.html.slim
+#	modified:   app/views/admin/index.html.slim
+#	modified:   app/views/display/index.html.slim
+#	modified:   bin/bundle
+#	modified:   bin/clockwork
+#	modified:   bin/clockworkd
+#	modified:   bin/rails
+#	modified:   bin/rake
+#	modified:   bin/setup
+#	modified:   config/environments/development.rb
+#	modified:   config/feeds.txt
+#	modified:   config/locales/en.yml
+#	modified:   config/locales/ru.yml
+#	modified:   config/routes.rb
+#	new file:   db/migrate/20141102114425_add_display_frequency_and_last_updated_to_settings.rb
+#	new file:   db/migrate/20141102114637_rename_last_update_on_feeds.rb
+#	new file:   db/migrate/20141102120956_remove_display_frequency_from_settings.rb
+#	new file:   db/migrate/20141102121205_remove_again_last_updated_from_settings.rb
+#	new file:   db/migrate/20141102121349_add_display_frequency_to_settings.rb
+#	new file:   db/migrate/20141103091138_remove_last_fetched_from_feeds.rb
+#	new file:   db/migrate/20141103091500_add_last_fetched_to_feeds.rb
+#	new file:   db/migrate/20141103091909_remove_again_display_frequency_from_settings.rb
+#	new file:   db/migrate/20141103093220_add_aggain_display_frequency_to_settings.rb
+#	new file:   db/migrate/20141103102022_add_attachment_image_to_entries.rb
+#	new file:   db/migrate/20141103102128_remove_attachment_image_from_entries.rb
+#	new file:   db/migrate/20141103102129_remove_image_from_entries.rb
+#	new file:   db/migrate/20141103102945_add_attachment_image_to_entries.rb
+#	modified:   db/schema.rb
+#	modified:   db/seeds.rb
+#	new file:   vendor/assets/javascripts/jquery.qrcode-0.11.0.min.js
+#
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	deleted:    db/migrate/20141103102022_add_attachment_image_to_entries.rb
+#
+
+Many changes on display (QR code, images, two news at once, display time depends on words count).

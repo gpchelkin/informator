@@ -12,7 +12,7 @@ Informator
 Поэтому в системе перед установкой **Feedjira** должна быть установлена библиотека [libcurl](http://curl.haxx.se/libcurl/).
 Описание установки см. на указанных страницах.
 
-Для Ubuntu 14.XX системные зависимости устанавливаются так:
+Для Ubuntu 14.XX системные зависимости устанавливаются так: 
 
 ```
 sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlite3-dev
