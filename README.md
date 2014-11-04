@@ -9,13 +9,16 @@ Informator
 * Gem [Feedjira](https://github.com/feedjira/feedjira), применяемый для быстрой загрузки и разбора потоков,
 использует для загрузки Gem [Curb](https://github.com/taf2/curb), который является
 привязкой системной библиотеки [libcurl](http://curl.haxx.se/libcurl/) к языку _Ruby_.
-Поэтому в системе перед установкой **Feedjira** должна быть установлена библиотека [libcurl](http://curl.haxx.se/libcurl/).
-Описание установки см. на указанных страницах.
+Описание установки libcurl см. на указанных страницах.
+
+* Gem [Paperclip](https://github.com/thoug*htbot/paperclip), применяемый для изменения размера и хранения изображений,
+использует системный пакет программ [ImageMagick](http://www.imagemagick.org/).
+Описание установки см. на указанной странице.
 
 Для Ubuntu 14.XX системные зависимости устанавливаются так: 
 
 ```
-sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlite3-dev
+sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlite3-dev ImageMagick
 ```
 
 Пояснения к принятым решениям
@@ -53,7 +56,7 @@ sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlit
 Запуск приложения в среде разработки development:
 
 ```
-ADMIN_NAME=admin ADMIN_PASSWORD=admin bin/rails s -b localhost
+ADMIN_NAME=admin ADMIN_PASSWORD=admin bin/rails s
 ```
 
 В среде production:
@@ -134,7 +137,9 @@ rake db:migrate
 
 Данные для входа в административный интерфейс задаются переменными окружения при запуске `ADMIN_NAME=admin ADMIN_PASSWORD=admin`
 
-Отображение новостей доступно по адресу: `/display/index`.
+Отображение новостей доступно по корневому адресу.
+
+Приложение доступно в интернете по адресу http://178.62.102.238/
 
 
 TODO
@@ -142,8 +147,18 @@ TODO
 
 * Фон
 * FeedTable: цветные кнопки
-* EntryTable: колонка - цветное устаревание и дата
+* EntryTable: колонка с цветным устареванием и временем
 * Плавное прокручивание
 * Поля ввода времени
 * Сообщения
-* Spritz?
+* Devise
+* [Spritz](https://spritzinc.atlassian.net/wiki/display/jssdk/Version+1.2) ?
+
+### DONE
+
+* /display на /
+* Две новости на экране
+* Время отображения зависит от количества слов, коэффициент в настройках
+* Дата в региональном формате (в зависимости от локали)
+* QR code
+* Картинки (можно проверить с источником lenta.ru)
