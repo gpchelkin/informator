@@ -40,8 +40,9 @@ class Feed < ActiveRecord::Base
   def fetch(mode=Setting.first.mode)
     full_sanitizer = Rails::Html::FullSanitizer.new
     success_callback = lambda do |url, f|
+      time = [last_fetched, Time.now-Setting.first.expiration].max
       f.entries.each do |entry|
-        if ((not entry.published) or (entry.published > last_fetched)) and (not Entry.exists?(url: entry.url)) # For Yandex.News
+        if ((not entry.published) or (entry.published > time)) and (not Entry.exists?(url: entry.url)) # For Yandex.News
           entries.create(
               url:  entry.url,
               title: full_sanitizer.sanitize(entry.title),
