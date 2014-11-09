@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Use Ruby on Rails 4.2 for Active Job implementation
-gem 'rails', '~> 4.2.0.beta2'
+gem 'rails', '~> 4.2.0.beta4'
 gem 'rails-html-sanitizer', '~> 1.0.1'
 # Use Feedjira feed parser
 gem 'feedjira', '~> 1.5.0'
@@ -14,7 +14,7 @@ gem 'clockwork', github: 'tomykaira/clockwork'
 # Use Daemons to daemonize processes
 gem 'daemons', '~> 1.1.9'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.3.9'
+gem 'sqlite3', '~> 1.3.10'
 # Use Slim template engine for views
 gem 'slim-rails', '~> 2.1.5'
 # Use SCSS for stylesheets - pre for Rails 4.2 support
@@ -38,7 +38,7 @@ gem 'jbuilder', '~> 2.2.4'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # Use puma as the app server for Server-sent events support
-gem 'puma', '~> 2.9.1'
+gem 'puma', '~> 2.9.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

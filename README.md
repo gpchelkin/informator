@@ -48,7 +48,7 @@ sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlit
 
 ### Ruby on Rails 4.2
 
-Предварительная версия [Ruby on Rails 4.2.0.beta2](https://github.com/rails/rails) необходима для использования
+Предварительная версия [Ruby on Rails 4.2.0.beta4](https://github.com/rails/rails) необходима для использования
 нового фреймворка [Active Job](https://github.com/rails/rails/tree/master/activejob). 
 Он позволяет планировать и запускать отдельные задания (такие, 
 которые нужно периодически запускать в фоне, например, обновление записей в базе) — **Jobs** `(app/jobs)`,
