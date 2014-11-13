@@ -14,3 +14,7 @@ $(document).ready () ->
       if (obj.image) then $("#n1 > .image").attr( "src", obj.image ).show() else $("#n1 > .image").hide()
       $("#n1 > .feed").text( obj.feed )
       $("#n1 > .qrcode").empty().qrcode({"render":"image", "text": obj.url, "size": 200})
+
+    evtSource.addEventListener 'background', (e) ->
+      obj = $.parseJSON(e.data)
+      $( "body" ).css("background-image", "url("+obj.url+")")

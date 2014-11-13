@@ -11,10 +11,12 @@ class DisplayController < ApplicationController
     Setting.uncached do
       Entry.uncached do
         loop do
+          sleep 5
+          sse.write({url: Setting.first.background.url}, event: 'background')
           fr = Setting.first.display_frequency
           logger.info "DB Changed or Looped."
           Entry.shown.desc_ord.each do |entry|
-            sse.write entry.to_builder.target!, id: entry.id
+            sse.write(entry.to_builder.target!, id: entry.id)
             sleep slp = fr*(entry.title.split.size + entry.summary.split.size)
             break if Setting.first.updated_at > Time.now-slp
           end

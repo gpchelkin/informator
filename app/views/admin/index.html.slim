@@ -2,7 +2,7 @@
   .row
     .col-xs-5
       h3 = t('settings')
-      = form_tag({controller: 'admin', action: 'setting'}, remote: true, id: 'setting', role: "form")
+      = form_tag({controller: 'admin', action: 'setting'}, multipart: true, id: 'setting', role: "form")
 
         .form-group
           label for="modeRadio" = t('mode')
@@ -30,6 +30,10 @@
               label
                 = radio_button 'setting', 'style', 2
                 = '2 Dolor Sit Amet'
+
+        = image_tag @setting.background.url(:medium)
+        = file_field 'setting', 'background'
+
         .form-group
           = label_tag 'display_frequency', t('display_frequency')
           = number_field 'setting', 'display_frequency', min: 0, class: "form-control text_field", step: 0.1
@@ -53,7 +57,7 @@
               = t('autocleanup')
           p.help-block = t('autocleanup_help')
         .form-group
-          button.col-xs-12.btn.btn-success name='commit' value='save' data-disable-with=t('wait')
+          button.col-xs-12.btn.btn-success name='commit' value='save'
             span.glyphicon.glyphicon-ok
             span = ' ' +t('save_settings')
 

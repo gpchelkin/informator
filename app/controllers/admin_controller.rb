@@ -23,7 +23,10 @@ class AdminController < ApplicationController
   def setting
     setting = Setting.first
     setting.update(setting_params[:setting])
-    render json: {mode: setting.mode, sizes: set_sizes}
+    respond_to do |format|
+      format.html { redirect_to action: 'index'}
+      format.json { render json: {mode: setting.mode, sizes: set_sizes} }
+    end
   end
 
   def togglefeed
@@ -111,7 +114,7 @@ class AdminController < ApplicationController
   end
 
   def setting_params
-    params.permit(setting: [:mode, :style, :expiration, :frequency, :autocleanup, :display_frequency])
+    params.permit(setting: [:mode, :style, :expiration, :frequency, :autocleanup, :display_frequency, :background])
   end
 
   def feed_params

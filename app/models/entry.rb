@@ -10,7 +10,7 @@ class Entry < ActiveRecord::Base
 
   after_commit :touch_setting, on: [:destroy, :update]
 
-  def self.clean_up mode=Setting.first.mode, time=Setting.first.expiration
+  def self.clean_up(mode = Setting.first.mode, time = Setting.first.expiration)
     where("checked = ? AND published < ?", mode, Time.now-time).destroy_all
   end
 
