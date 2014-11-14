@@ -4,14 +4,16 @@ Informator
 TODO
 ----------
 
+Приложение доступно в интернете по адресу http://178.62.102.238/
+
 * Плавная прокрутка
 * Показывать сообщения организации
-* Devise
-* Поля ввода времени
+* Поля ввода времени с часами и минутами
 * [Spritz](https://spritzinc.atlassian.net/wiki/display/jssdk/Version+1.2) (?)
 
 ### DONE
 
+* Вход с Devise
 * Фон для отображения
 * EntryTable: колонка с цветным устареванием и временем
 * FeedTable: цветные кнопки
@@ -78,13 +80,13 @@ sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlit
 Запуск приложения в среде разработки development:
 
 ```
-ADMIN_NAME=admin ADMIN_PASSWORD=admin bin/rails s
+bin/rails s
 ```
 
 В среде production:
 
 ```
-ADMIN_NAME=admin ADMIN_PASSWORD=admin SECRET_KEY_BASE=$(rake secret) bin/rails s -e production -b 0.0.0.0 -p 80
+SECRET_KEY_BASE=$(rake secret) bin/rails s -e production -b 0.0.0.0 -p 80
 ```
 
 ### Clockwork
@@ -157,8 +159,17 @@ rake db:migrate
 
 Другие настройки описаны в административном интерфейсе приложения `/admin/index`.
 
-Данные для входа в административный интерфейс задаются переменными окружения при запуске `ADMIN_NAME=admin ADMIN_PASSWORD=admin`
+Данные для входа в административный интерфейс задаются созданием пользователя в консоли:
+
+```
+bin/rails console -env p
+Admin.create!(email: "test@test.ru", password: "password", password_confirmation: "password")
+```
+
+Смена пароля:
+
+```
+Admin.find_by(email: "test@test.ru").update!(password: "new_password", password_confirmation: "new_password")
+```
 
 Отображение новостей доступно по корневому адресу.
-
-Приложение доступно в интернете по адресу http://178.62.102.238/

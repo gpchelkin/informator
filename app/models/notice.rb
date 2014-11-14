@@ -26,7 +26,7 @@ class Notice < ActiveRecord::Base
     notice = new
     notice.checked = false
     notice.title = text.lines.first.sub(/^#\s+/, '')
-    notice.summary = Kramdown::Document.new(text, input: 'markdown').to_html
+    notice.summary = Kramdown::Document.new(text, input: 'markdown').to_html # TODO Fix: except first line
     notice.save
   end
 end

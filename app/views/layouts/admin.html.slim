@@ -17,6 +17,8 @@ html
         section.top-bar-section
           ul.right
             li
+              = link_to t('logout'), destroy_admin_session_path, method: :delete
+            li
               - case params[:locale]
                 - when 'en'
                   = link_to 'RU', locale: :ru

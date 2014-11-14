@@ -56,9 +56,10 @@ ready = ->
 
   $("#noticeTable").on "ajax:success", ".toggleNotice", (e, data, status, xhr) ->
     switch data.checked
-      when true  then $(this).find(".toggleText").toggleClass("hidden").parents("tr").addClass("success").find(".toggleBtn").val("false")
-      when false then $(this).find(".toggleText").toggleClass("hidden").parents("tr").removeClass("success").find(".toggleBtn").val("true")
+      when true  then $(this).find(".toggleBtn").val("false").toggleClass('success warning')
+      when false then $(this).find(".toggleBtn").val("true").toggleClass('success warning')
       else
+    $(this).find(".toggleText").toggle()
     labels(data.sizes)
 
 $(document).ready ready

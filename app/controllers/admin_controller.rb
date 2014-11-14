@@ -1,8 +1,8 @@
 class AdminController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_sizes, only: [:index, :select, :shown, :notice]
   before_action :set_mode, only: [:index, :select, :shown, :notice, :entrytask, :maintask]
   before_action :set_expiration, only: [:select, :shown]
-  http_basic_authenticate_with name: ENV["ADMIN_NAME"], password: ENV["ADMIN_PASSWORD"]
 
   def index
     @feeds = Feed.all

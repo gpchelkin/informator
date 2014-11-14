@@ -1,6 +1,6 @@
 .small-5.columns
   h3 = t('settings')
-  = form_tag({controller: 'admin', action: 'setting'}, multipart: true, id: 'setting')
+  = form_tag(admin_setting_path, multipart: true, id: 'setting')
     fieldset
 
       legend
@@ -63,7 +63,7 @@
 .small-7.columns
   h3 = t('maintask')
   .row
-    = form_tag({controller: 'admin', action: 'maintask'}, remote: true, id: "mainTask")
+    = form_tag(admin_maintask_path, remote: true, id: "mainTask")
       .small-12.columns
         ul.button-group.radius
           li

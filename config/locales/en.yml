@@ -71,3 +71,5 @@ en:
   display_frequency: "Time for reading one word"
   display_frequency_help: "News will be shown for words count multiplied by this number"
   clockwork_help: "Background service for downloading news"
+  login: "Log in"
+  logout: "Log out"

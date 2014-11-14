@@ -22,10 +22,10 @@
                 = link_to feed.title, feed.url, target: "_blank"
 
               td
-                = form_tag({controller: 'admin', action: 'togglefeed'}, remote: true, class: 'toggleFeed')
+                = form_tag(admin_togglefeed_path, remote: true, class: 'toggleFeed')
                   = hidden_field_tag 'feed', feed.id.to_s
                   button.small.radius.toggleBtn name='use' value=(feed.use? ? 'false' : 'true') class=(feed.use? ? 'success' : 'warning') style="margin-bottom: 0;"
-                    span.toggleText class=("hide" unless feed.use)
+                    span.toggleText class=("hide" unless feed.use?)
                       = icon("power-off", t('enabled'))
-                    span.toggleText class=("hide" if feed.use)
+                    span.toggleText class=("hide" if feed.use?)
                       = icon("power-off", t('disabled'))

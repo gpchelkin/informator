@@ -1,4 +1,4 @@
-= form_tag({controller: 'admin', action: 'reloadnotices'}, remote: true, id: "noticeReload")
+= form_tag(admin_reloadnotices_path, remote: true, id: "noticeReload")
   .small-12.columns
     button.small.radius.success name='commit' value='reloadnotices' data-disable-with=t('wait')
       = icon("download", t('reload_notice'))
