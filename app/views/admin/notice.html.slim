@@ -1,11 +1,8 @@
-.container-fluid
-  = form_tag({controller: 'admin', action: 'reloadnotices'}, remote: true, id: "noticeReload")
-    .btn-toolbar role="toolbar"
-      .btn-group.col-xs-3
-        button.btn.col-xs-12.btn-default name='commit' value='reloadnotices' data-disable-with=t('wait')
-          span.glyphicon.glyphicon-remove
-          span = ' ' + t('reload_notice')
-    br
+= form_tag({controller: 'admin', action: 'reloadnotices'}, remote: true, id: "noticeReload")
+  .small-12.columns
+    button.small.radius.success name='commit' value='reloadnotices' data-disable-with=t('wait')
+      = icon("download", t('reload_notice'))
+br
 
-  #noticeTable.col-xs-12
-    == render 'noticetable'
+#noticeTable
+  == render 'noticetable'

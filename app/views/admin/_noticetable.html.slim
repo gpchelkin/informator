@@ -1,7 +1,9 @@
 - if @notices.empty?
 
   br
-  .alert.alert-info.col-xs-5 = t('no_notices_found')
+  .small-5.columns
+    .panel.callout.radius
+      = t('no_notices_found')
 
 - else
 

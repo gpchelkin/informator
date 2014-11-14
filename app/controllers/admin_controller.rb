@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
   before_action :set_sizes, only: [:index, :select, :shown, :notice]
   before_action :set_mode, only: [:index, :select, :shown, :notice, :entrytask, :maintask]
+  before_action :set_expiration, only: [:select, :shown]
   http_basic_authenticate_with name: ENV["ADMIN_NAME"], password: ENV["ADMIN_PASSWORD"]
 
   def index
@@ -111,6 +112,10 @@ class AdminController < ApplicationController
 
   def set_sizes
     @sizes = {unchecked: Entry.unchecked.size, shown: Entry.shown.size, notice: Notice.all.size}
+  end
+
+  def set_expiration
+    @expiration = Setting.first.expiration
   end
 
   def setting_params

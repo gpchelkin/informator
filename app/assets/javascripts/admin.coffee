@@ -7,7 +7,20 @@ labels = (sizes) ->
   $("#uncheckedLabel").text(sizes.unchecked)
   $("#noticeLabel").text(sizes.notice)
 
+btn = 'button[data-disable-with]' # To prevent buttons from resizing with Wait-text
+frm = 'form[data-remote]:has(' + btn + ')' # http://stackoverflow.com/questions/20813607/
+
 ready = ->
+
+  $(frm).on 'ajax:before', ->
+    $(@).find(btn).each ->
+      input = $(@)
+      input.css('width', input.css('width'))
+
+  $(frm).on 'ajax:complete', ->
+    $(@).find(btn).each ->
+      $(@).css('width', '')
+
   $("#setting").on "ajax:success", (e, data, status, xhr) ->
     switch data.mode
       when true  then $("#selectLink").addClass("hidden")
@@ -16,14 +29,14 @@ ready = ->
     labels(data.sizes)
 
   $("#mainTask").on "ajax:success", (e, data, status, xhr) ->
-#    if data.table then $( "#feedTable" ).html( data.table )
     labels(data.sizes)
 
   $("#feedTable").on "ajax:success", ".toggleFeed", (e, data, status, xhr) ->
     switch data.use
-      when true  then $(this).find(".toggleText").toggleClass("hidden").parents("tr").addClass("success").find(".toggleBtn").val("false")
-      when false then $(this).find(".toggleText").toggleClass("hidden").parents("tr").removeClass("success").find(".toggleBtn").val("true")
+      when true  then $(this).find(".toggleBtn").val("false").toggleClass('success warning')
+      when false then $(this).find(".toggleBtn").val("true").toggleClass('success warning')
       else
+    $(this).find(".toggleText").toggle()
     labels(data.sizes)
 
   $("#entryTask").on "ajax:success", (e, data, status, xhr) ->
@@ -32,8 +45,8 @@ ready = ->
 
   $("#entryTable").on "ajax:success", ".checkEntry", (e, data, status, xhr) ->
     switch data.done
-      when true  then $(this).toggle().parents("tr").addClass("success").find(".showEntry").toggle()
-      when false then $(this).toggle().parents("tr").addClass("danger").find(".deleteEntry").toggle()
+      when true  then $(this).toggle().parents("td").find(".showEntry").toggle()
+      when false then $(this).toggle().parents("td").find(".deleteEntry").toggle()
       else
     labels(data.sizes)
 

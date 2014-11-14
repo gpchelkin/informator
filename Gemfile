@@ -7,6 +7,7 @@ gem 'rails-html-sanitizer', '~> 1.0.1'
 gem 'feedjira', '~> 1.5.0'
 gem 'kramdown', '~> 1.5.0'
 gem 'paperclip', '~> 4.2.0'
+gem 'devise', '~> 3.4.1'
 # Use Delayed::Job as Active Job backend
 # gem 'delayed_job_active_record', '~> 4.0.2'
 # Use Clockwork as a cron alternative for starting jobs every defined interval (github version with fixed db bug)
@@ -19,8 +20,9 @@ gem 'sqlite3', '~> 1.3.10'
 gem 'slim-rails', '~> 2.1.5'
 # Use SCSS for stylesheets - pre for Rails 4.2 support
 gem 'sass-rails', '~> 5.0.0.beta1'
-# Use Bootstrap CSS Framework
-gem 'bootstrap-sass', '~> 3.2.0.2'
+# Use Zurb Foundation CSS Framework and Font Awesome icon font
+gem 'foundation-rails', '~> 5.4.5.0'
+gem 'font-awesome-sass', '~> 4.2.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 2.5.3'
 # Use CoffeeScript for .js.coffee assets and views

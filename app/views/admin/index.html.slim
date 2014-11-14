@@ -1,84 +1,83 @@
-.container-fluid
-  .row
-    .col-xs-5
-      h3 = t('settings')
-      = form_tag({controller: 'admin', action: 'setting'}, multipart: true, id: 'setting', role: "form")
+.small-5.columns
+  h3 = t('settings')
+  = form_tag({controller: 'admin', action: 'setting'}, multipart: true, id: 'setting')
+    fieldset
 
-        .form-group
-          label for="modeRadio" = t('mode')
-          p.help-block = t('mode_help')
-          .controls#modeRadio
-            .radio
-              label
-                = radio_button 'setting', 'mode', true
-                = t('mode_auto')
-              p.help-block = t('mode_auto_help')
-            .radio
-              label
-                = radio_button 'setting', 'mode', false
-                = t('mode_manual')
-              p.help-block = t('mode_manual_help')
+      legend
+        span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('mode_help')
+          = t('mode')
+      .row
+        = radio_button 'setting', 'mode', true, id: "mode_auto"
+        label for="mode_auto"
+          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('mode_auto_help')
+            = t('mode_auto')
 
-        .form-group
-          label for="styleRadio" = t('style')
-          .controls#styleRadio
-            .radio
-              label
-                = radio_button 'setting', 'style', 1
-                = '1 Lorem Ipsum'
-            .radio
-              label
-                = radio_button 'setting', 'style', 2
-                = '2 Dolor Sit Amet'
+      .row
+        = radio_button 'setting', 'mode', false, id: "mode_manual"
+        label for="mode_manual"
+          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('mode_manual_help')
+            = t('mode_manual')
 
+    fieldset
+
+      legend
+        = t('style')
+
+      .row
         = image_tag @setting.background.url(:medium)
         = file_field 'setting', 'background'
 
-        .form-group
-          = label_tag 'display_frequency', t('display_frequency')
-          = number_field 'setting', 'display_frequency', min: 0, class: "form-control text_field", step: 0.1
-          p.help-block = t('in_seconds')
-          p.help-block = t('display_frequency_help')
-
-        .form-group
-          = label_tag 'expiration', t('expiration')
-          = number_field 'setting', 'expiration', min: 10, class: "form-control"
-          p.help-block = t('in_seconds')
-
-        h4 = 'Clockwork'
-        .form-group
-          = label_tag 'frequency', t('frequency')
-          = number_field 'setting', 'frequency', min: 10, class: "form-control"
-          p.help-block = t('in_seconds')
-        .form-group
-          .checkbox
-            label
-              = check_box 'setting', 'autocleanup'
-              = t('autocleanup')
-          p.help-block = t('autocleanup_help')
-        .form-group
-          button.col-xs-12.btn.btn-success name='commit' value='save'
-            span.glyphicon.glyphicon-ok
-            span = ' ' +t('save_settings')
-
-
-    .col-xs-7
-      h3 = t('maintask')
       .row
-        = form_tag({controller: 'admin', action: 'maintask'}, remote: true, class: "form-inline", id: "mainTask", role: "form")
-          .btn-group.col-xs-12
-            button.col-xs-4.btn.btn-primary name='commit' value='fetchall' data-disable-with=t('wait')
-              span.glyphicon.glyphicon-download
-              span = ' ' + t('fetch_new')
-            button.col-xs-4.btn.btn-primary name='commit' value='cleanup' data-disable-with=t('wait')
-              span.glyphicon.glyphicon-time
-              span = ' ' + t('cleanup_old')
-            button.col-xs-4.btn.btn-danger name='commit' value='revertall' data-disable-with=t('wait')
-              span.glyphicon.glyphicon-remove-circle
-              span = ' ' +t('revert_all')
-      h3 = t('news_sources')
+        label
+          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=(t('in_seconds') + t('display_frequency_help'))
+            = t('display_frequency')
+          = number_field 'setting', 'display_frequency', min: 0, step: 0.1
+
       .row
-        #feedTable.col-xs-8
-          == render 'feedtable'
+        label
+          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('in_seconds')
+            = t('expiration')
+          = number_field 'setting', 'expiration', min: 10
+
+    fieldset
+
+      legend
+        span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('clockwork_help')
+          = 'Clockwork'
+
+      .row
+        label
+          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('in_seconds')
+            = t('frequency')
+          = number_field 'setting', 'frequency', min: 10
+
+      .row
+        = check_box 'setting', 'autocleanup', id: "autocleanup"
+        label for="autocleanup"
+          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('autocleanup_help') = t('autocleanup')
+
+    button.small.success.round name='commit' value='save'
+      = icon("check", t('save_settings'))
+
+
+.small-7.columns
+  h3 = t('maintask')
+  .row
+    = form_tag({controller: 'admin', action: 'maintask'}, remote: true, id: "mainTask")
+      .small-12.columns
+        ul.button-group.radius
+          li
+            button.small.success name='commit' value='fetchall' data-disable-with=t('wait')
+              = icon("download", t('fetch_new'))
+          li
+            button.small.warning name='commit' value='cleanup' data-disable-with=t('wait')
+              = icon("trash", t('cleanup_old'))
+          li
+            button.small.alert name='commit' value='revertall' data-disable-with=t('wait')
+              = icon("", t('revert_all'))
+
+  h3 = t('news_sources')
+  #feedTable
+    == render 'feedtable'
 
 

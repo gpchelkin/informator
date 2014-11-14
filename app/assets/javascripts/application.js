@@ -12,7 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
+//= require foundation/foundation.clearing
 //= require turbolinks
 //= require_tree .
-//= require bootstrap-sprockets
 //= require jquery.qrcode-0.11.0.min
+
+$(function(){ $(document).foundation(); });

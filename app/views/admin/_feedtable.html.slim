@@ -1,29 +1,31 @@
-- if @feeds.empty?
+.row
+  - if @feeds.empty?
 
-  br
-  .alert.alert-info.col-xs-5 = t('no_feeds_found')
+    br
+    .small-5.columns
+      .panel.callout.radius
+        = t('no_feeds_found')
 
-- else
+  - else
+    .small-12.columns
+      table
+        thead
+          tr
+            th width="60%"
+              = t('feed_title_and_url')
+            th width="40%"
+              = t('use')
+        tbody
+          - @feeds.each do |feed|
+            tr
+              td
+                = link_to feed.title, feed.url, target: "_blank"
 
-  table.table.table-hover.table-bordered.table-condensed
-    thead
-      tr
-        th.col-xs-4 = t('feed_title_and_url')
-        th.col-xs-1 = t('use')
-    tbody
-      - @feeds.each do |feed|
-        tr class=("success" if feed.use?)
-          td = link_to feed.title, feed.url, target: "_blank"
-
-          td
-            = form_tag({controller: 'admin', action: 'togglefeed'}, remote: true, class: 'toggleFeed')
-              = hidden_field_tag 'feed', feed.id.to_s
-
-              .col-xs-7
-                span.toggleText class=("hidden" unless feed.use?)
-                  = ' ' +t('enabled')
-                span.toggleText class=("hidden" if feed.use?)
-                  = ' ' +t('disabled')
-              .col-xs-5
-                button.btn.btn-default.toggleBtn name='use' value=(feed.use? ? 'false' : 'true') data-disable-with=("#{content_tag(:span, nil, class: "glyphicon glyphicon-refresh")}")
-                  span.glyphicon.glyphicon-off
+              td
+                = form_tag({controller: 'admin', action: 'togglefeed'}, remote: true, class: 'toggleFeed')
+                  = hidden_field_tag 'feed', feed.id.to_s
+                  button.small.radius.toggleBtn name='use' value=(feed.use? ? 'false' : 'true') class=(feed.use? ? 'success' : 'warning') style="margin-bottom: 0;"
+                    span.toggleText class=("hide" unless feed.use)
+                      = icon("power-off", t('enabled'))
+                    span.toggleText class=("hide" if feed.use)
+                      = icon("power-off", t('disabled'))

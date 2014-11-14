@@ -21,3 +21,4 @@
 # Ignore precompiled assets and Paperclip image attachments
 /public/assets
 /public/system
+tmp

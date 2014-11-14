@@ -1,27 +1,28 @@
 = form_tag({controller: 'admin', action: 'entrytask'}, remote: true, id: "entryTask")
   = hidden_field_tag 'action_name', action_name
-  .btn-toolbar role="toolbar"
-    .btn-group.col-xs-8
-      button.col-xs-4.btn.btn-primary name='commit' value='refresh' data-disable-with=t('wait')
-        span.glyphicon.glyphicon-repeat
-        span = ' ' + t('refresh_list')
+  .small-12.columns
+    .button-bar.clearfix
+      ul.button-group.radius.left
+        li
+          button.small name='commit' value='refresh' data-disable-with=t('wait')
+            = icon("refresh", t('refresh_list'))
 
-      - unless @mode==false and action_name == 'shown'
-        button.col-xs-4.btn.btn-primary name='commit' value='fetchall' data-disable-with=t('wait')
-          span.glyphicon.glyphicon-download
-          span = ' ' + t('fetch_new')
+        - unless @mode==false and action_name == 'shown'
+          li
+            button.small.success name='commit' value='fetchall' data-disable-with=t('wait')
+              = icon("download", t('fetch_new'))
 
-      button.col-xs-4.btn.btn-primary name='commit' value='cleanup' data-disable-with=t('wait')
-        span.glyphicon.glyphicon-time
-        span = ' ' + t('cleanup_old')
+        li
+          button.small.warning name='commit' value='cleanup' data-disable-with=t('wait')
+            = icon("trash", t('cleanup_old'))
 
-    .btn-group.col-xs-3.pull-right
+      ul.button-group.radius.right
 
-      - if action_name == 'select'
-        button.col-xs-6.btn.btn-success name='commit' value='showall' data-disable-with=t('wait')
-          span.glyphicon.glyphicon-ok
-          span = ' ' + t('show_all')
+        - if action_name == 'select'
+          li
+            button.small.success name='commit' value='showall' data-disable-with=t('wait')
+              = icon("check", t('show_all'))
 
-      button.col-xs-6.pull-right.btn.btn-danger name='commit' value='deleteall' data-disable-with=t('wait')
-        span.glyphicon.glyphicon-remove
-        span = ' ' + t('delete_all')
+        li
+          button.small.alert name='commit' value='deleteall' data-disable-with=t('wait')
+            = icon("remove", t('delete_all'))

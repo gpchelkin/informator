@@ -48,7 +48,7 @@ class Feed < ActiveRecord::Base
               title: full_sanitizer.sanitize(entry.title),
               summary: full_sanitizer.sanitize(entry.summary),
               image: entry.image ? URI.parse(entry.image) : nil,
-              published: entry.published,
+              published: entry.published ? entry.published : Time.now,
               checked: mode
           )
         end

@@ -1,26 +1,22 @@
 doctype html
 html
   head
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
     title = t('informator')
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag "vendor/modernizr"
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  body style="padding-top: 60px;"
-    .navbar.navbar-default.navbar-fixed-top role='navigation'
-      .container-fluid
-        .navbar-header
-          = link_to t('informator'), {action: 'index'}, class: "navbar-brand"
-        .collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li class=("active" if action_name=='index')
-              = link_to t('index'), action: 'index'
-            li class=("active" if action_name=='select') class=("hidden" if @mode) id='selectLink'
-              = link_to (content_tag(:span,t('entry_selection'))+content_tag(:span, @sizes[:unchecked], class: "badge progress-bar-warning", id: 'uncheckedLabel')), action: 'select'
-            li class=("active" if action_name=='shown')
-              = link_to (content_tag(:span,t('shown_entries'))+content_tag(:span, @sizes[:shown], class: "badge progress-bar-success", id: 'shownLabel')), action: 'shown'
-            li class=("active" if action_name=='notice')
-              = link_to (content_tag(:span,t('announcements'))+content_tag(:span, @sizes[:notice], class: "badge progress-bar-info", id: 'noticeLabel')), action: 'notice'
-            li.navbar-right
+  body
+    .sticky
+      nav.top-bar data-topbar="true" role='navigation'
+        ul.title-area
+          li.name
+            h1 = link_to t('informator'), {action: 'index'}
+        section.top-bar-section
+          ul.right
+            li
               - case params[:locale]
                 - when 'en'
                   = link_to 'RU', locale: :ru
@@ -29,4 +25,21 @@ html
                 - else
                   = link_to 'EN', locale: :en
 
+          ul.left
+            li class=("active" if action_name=='index')
+              = link_to t('index'), action: 'index'
+            li class=[("active" if action_name=='select'), ("hide" if @mode)] id='selectLink'
+              = link_to action: 'select'
+                = t('entry_selection') + "  "
+                span.label.warning.round#uncheckedLabel = @sizes[:unchecked]
+            li class=("active" if action_name=='shown')
+              = link_to action: 'shown'
+                = t('shown_entries') + "  "
+                span.label.success.round#shownLabel = @sizes[:shown]
+            li class=("active" if action_name=='notice')
+              = link_to action: 'notice'
+                = t('announcements') + "  "
+                span.label.primary.round#noticeLabel = @sizes[:notice]
+
+    br
     = yield
