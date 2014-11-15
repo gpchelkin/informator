@@ -7,8 +7,8 @@ labels = (sizes) ->
   $("#uncheckedLabel").text(sizes.unchecked)
   $("#noticeLabel").text(sizes.notice)
 
-btn = 'button[data-disable-with]' # To prevent buttons from resizing with Wait-text
-frm = 'form[data-remote]:has(' + btn + ')' # http://stackoverflow.com/questions/20813607/
+btn = 'button[data-disable-with]'           # To prevent buttons from resizing with Wait-text
+frm = 'form[data-remote]:has(' + btn + ')'  # http://stackoverflow.com/questions/20813607/
 
 ready = ->
 

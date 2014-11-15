@@ -15,7 +15,10 @@
 //= require foundation
 //= require foundation/foundation.clearing
 //= require turbolinks
-//= require_tree .
+// http://larsjung.de/jquery-qrcode/    https://github.com/lrsjng/jquery-qrcode
 //= require jquery.qrcode-0.11.0.min
+// http://bxslider.com/                 https://github.com/stevenwanderski/bxslider-4
+//= require jquery.bxslider.min
+//= require_tree .
 
 $(function(){ $(document).foundation(); });

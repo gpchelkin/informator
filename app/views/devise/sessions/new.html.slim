@@ -1,13 +1,12 @@
 h2 = t("login")
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   .field
-    = f.label :email
+    = f.label :username
     br
-    = f.email_field :email, autofocus: true
+    = f.text_field :username, autofocus: true
   .field
     = f.label :password
     br
     = f.password_field :password, autocomplete: "off"
   .actions
     = f.submit t("login")
-= render "devise/shared/links"

@@ -20,7 +20,7 @@ Rails.application.configure do
   # NGINX, varnish or squid.
   # config.action_dispatch.rack_cache = true
 
-  # Enable Rails's static asset server (Apache or NGINX will already do this, but Thin doesn't).
+  # Enable Rails's static asset server (Apache or NGINX will already do this, but Puma doesn't).
   config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.

@@ -13,7 +13,7 @@ html
       nav.top-bar data-topbar="true" role='navigation'
         ul.title-area
           li.name
-            h1 = link_to t('informator'), {action: 'index'}
+            h1 = link_to t('informator'), admin_index_path
         section.top-bar-section
           ul.right
             li
@@ -29,17 +29,17 @@ html
 
           ul.left
             li class=("active" if action_name=='index')
-              = link_to t('index'), action: 'index'
+              = link_to t('index'), admin_index_path
             li class=[("active" if action_name=='select'), ("hide" if @mode)] id='selectLink'
-              = link_to action: 'select'
+              = link_to admin_select_path
                 = t('entry_selection') + "  "
                 span.label.warning.round#uncheckedLabel = @sizes[:unchecked]
             li class=("active" if action_name=='shown')
-              = link_to action: 'shown'
+              = link_to admin_shown_path
                 = t('shown_entries') + "  "
                 span.label.success.round#shownLabel = @sizes[:shown]
             li class=("active" if action_name=='notice')
-              = link_to action: 'notice'
+              = link_to admin_notice_path
                 = t('announcements') + "  "
                 span.label.primary.round#noticeLabel = @sizes[:notice]
 

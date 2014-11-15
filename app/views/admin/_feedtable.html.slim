@@ -24,7 +24,7 @@
               td
                 = form_tag(admin_togglefeed_path, remote: true, class: 'toggleFeed')
                   = hidden_field_tag 'feed', feed.id.to_s
-                  button.small.radius.toggleBtn name='use' value=(feed.use? ? 'false' : 'true') class=(feed.use? ? 'success' : 'warning') style="margin-bottom: 0;"
+                  button.small.radius.toggleBtn name='use' value=(feed.use? ? 'false' : 'true') class=(feed.use? ? 'success' : 'warning') style="padding: 8px; margin-bottom: 0;"
                     span.toggleText class=("hide" unless feed.use?)
                       = icon("power-off", t('enabled'))
                     span.toggleText class=("hide" if feed.use?)

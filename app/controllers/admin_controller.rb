@@ -2,7 +2,7 @@ class AdminController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_sizes, only: [:index, :select, :shown, :notice]
   before_action :set_mode, only: [:index, :select, :shown, :notice, :entrytask, :maintask]
-  before_action :set_expiration, only: [:select, :shown]
+  before_action :set_expiration, only: [:select, :shown, :entrytask]
 
   def index
     @feeds = Feed.all
@@ -23,9 +23,15 @@ class AdminController < ApplicationController
 
   def setting
     setting = Setting.first
-    setting.update(setting_params[:setting])
+    case params[:commit]
+      when "save"
+        setting.update(setting_params[:setting])
+      when "deletebackground"
+        setting.update(background: nil)
+      else
+    end
     respond_to do |format|
-      format.html { redirect_to action: 'index'}
+      format.html { redirect_to admin_index_path}
       format.json { render json: {mode: setting.mode, sizes: set_sizes} }
     end
   end

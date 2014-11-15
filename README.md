@@ -6,14 +6,13 @@ TODO
 
 Приложение доступно в интернете по адресу http://178.62.102.238/
 
-* Плавная прокрутка
 * Показывать сообщения организации
-* Поля ввода времени с часами и минутами
 * [Spritz](https://spritzinc.atlassian.net/wiki/display/jssdk/Version+1.2) (?)
 
 ### DONE
 
-* Вход с Devise
+* Плавная прокрутка
+* Вход с Devise по именипользователя и паролю
 * Фон для отображения
 * EntryTable: колонка с цветным устареванием и временем
 * FeedTable: цветные кнопки
@@ -163,13 +162,14 @@ rake db:migrate
 
 ```
 bin/rails console -env p
-Admin.create!(email: "test@test.ru", password: "password", password_confirmation: "password")
+Admin.create!(username: "admin", password: "password", password_confirmation: "password")
 ```
 
 Смена пароля:
 
 ```
-Admin.find_by(email: "test@test.ru").update!(password: "new_password", password_confirmation: "new_password")
+bin/rails console -env p
+Admin.find_by(username: "admin").update!(password: "newpassword", password_confirmation: "newpassword")
 ```
 
 Отображение новостей доступно по корневому адресу.

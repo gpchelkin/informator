@@ -25,10 +25,9 @@
           tr
 
             td colspan=("2" unless entry.image.exists?)
-              strong
-                = link_to raw(entry.title), entry.url, target: "_blank"
-              br
-              = raw(entry.summary)
+              div
+                strong = link_to raw(entry.title), entry.url, target: "_blank"
+              div = raw(entry.summary)
 
             - if entry.image.exists?
               td
@@ -37,7 +36,8 @@
                     = link_to entry.image.url, class: "th"
                       = image_tag entry.image.url(:thumb)
             td
-              = l(entry.published)
+              div = entry.feed.title
+              div = l(entry.published)
               - exp = 100*(1-(Time.now-entry.published)/@expiration)
               - case exp
                 - when 15..100

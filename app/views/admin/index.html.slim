@@ -1,22 +1,38 @@
 .small-5.columns
   h3 = t('settings')
+
   = form_tag(admin_setting_path, multipart: true, id: 'setting')
+
     fieldset
 
       legend
         span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('mode_help')
           = t('mode')
       .row
-        = radio_button 'setting', 'mode', true, id: "mode_auto"
-        label for="mode_auto"
-          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('mode_auto_help')
-            = t('mode_auto')
+        .small-12.columns
+          = radio_button 'setting', 'mode', true, id: "mode_auto"
+          label for="mode_auto"
+            span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('mode_auto_help')
+              = t('mode_auto')
 
       .row
-        = radio_button 'setting', 'mode', false, id: "mode_manual"
-        label for="mode_manual"
-          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('mode_manual_help')
-            = t('mode_manual')
+        .small-12.columns
+          = radio_button 'setting', 'mode', false, id: "mode_manual"
+          label for="mode_manual"
+            span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('mode_manual_help')
+              = t('mode_manual')
+
+      .row
+        .small-7.columns
+          label.inline for="expiration-label"
+            strong
+              = t('expiration')
+        .small-5.columns
+          .row.collapse.postfix-radius
+            .small-7.columns
+              = number_field 'setting', 'expiration', min: 10, id: "expiration-label"
+            .small-5.columns
+              span.postfix = t("sec")
 
     fieldset
 
@@ -24,20 +40,34 @@
         = t('style')
 
       .row
-        = image_tag @setting.background.url(:medium)
-        = file_field 'setting', 'background'
+        .small-5.columns
+          label for="background-label"
+            strong = t("background")
+        .small-4.columns
+          = file_field 'setting', 'background', id: "background-label"
+
+        - if @setting.background.exists?
+          .small-3.columns
+            button.tiny.alert.radius name='commit' value='deletebackground' style="padding: 4px;"
+              = icon("trash", t('delete_background'))
+
+      - if @setting.background.exists?
+        .row
+          .small-12.columns
+            = link_to @setting.background.url, class: "th"
+              = image_tag @setting.background.url(:thumb)
 
       .row
-        label
-          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=(t('in_seconds') + t('display_frequency_help'))
-            = t('display_frequency')
-          = number_field 'setting', 'display_frequency', min: 0, step: 0.1
-
-      .row
-        label
-          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('in_seconds')
-            = t('expiration')
-          = number_field 'setting', 'expiration', min: 10
+        .small-7.columns
+          label.inline for="displayfrequency-label"
+            span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('display_frequency_help')
+              = t('display_frequency')
+        .small-5.columns
+          .row.collapse.postfix-radius
+            .small-6.columns
+              = number_field 'setting', 'display_frequency', min: 0, step: 0.1, id: "displayfrequency-label"
+            .small-6.columns
+              span.postfix = t("sec")
 
     fieldset
 
@@ -46,18 +76,27 @@
           = 'Clockwork'
 
       .row
-        label
-          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('in_seconds')
-            = t('frequency')
-          = number_field 'setting', 'frequency', min: 10
+        .small-7.columns
+          label for="frequency-label"
+            strong
+              = t('frequency')
+        .small-5.columns.end
+          .row.collapse.postfix-radius
+            .small-6.columns
+              = number_field 'setting', 'frequency', min: 10, id: "frequency-label"
+            .small-6.columns
+              span.postfix = t("sec")
 
       .row
-        = check_box 'setting', 'autocleanup', id: "autocleanup"
-        label for="autocleanup"
-          span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('autocleanup_help') = t('autocleanup')
-
-    button.small.success.round name='commit' value='save'
-      = icon("check", t('save_settings'))
+        .small-12.columns
+          = check_box 'setting', 'autocleanup', id: "autocleanup"
+          label for="autocleanup"
+            span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('autocleanup_help')
+              = t('autocleanup')
+    .row
+      .small-12.columns
+        button.small.success.round name='commit' value='save'
+          = icon("check", t('save_settings'))
 
 
 .small-7.columns
@@ -74,7 +113,7 @@
               = icon("trash", t('cleanup_old'))
           li
             button.small.alert name='commit' value='revertall' data-disable-with=t('wait')
-              = icon("", t('revert_all'))
+              = icon("reply", t('revert_all'))
 
   h3 = t('news_sources')
   #feedTable

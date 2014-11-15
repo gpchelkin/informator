@@ -6,11 +6,13 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
-    .info#n1
-      h1.title
-      h2.summary
-      h4.published
-      h4.feed
-      img.image src="" style="display: none;"
-      .qrcode
-    .info#n2
+
+    ul.bxslider
+      - for i in 0..2
+        li class=("n"+i.to_s)
+          div style='height: 50%;'
+            .title
+            .published
+            .feed
+            .summary
+            .qrcode
