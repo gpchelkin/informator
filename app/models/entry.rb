@@ -25,8 +25,8 @@ class Entry < ActiveRecord::Base
   def to_builder
     Jbuilder.new do |entry|
       entry.(self, :title, :summary, :url)
-      entry.feed(feed ? feed.title : nil)
-      entry.published(published ? I18n.localize(published) : nil)
+      entry.feed(feed.title)
+      entry.published(I18n.localize(published))
       entry.image(image.exists? ? image.url(:medium) : nil)
     end
   end

@@ -3,26 +3,28 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready () ->
-  slider = $(".bxslider").bxSlider mode: 'vertical', speed: 2500, pager: false, controls: false, minSlides: 2, maxSlides: 2, moveSlides: 1
-  if $('.bxslider').length
-    evtSource = new EventSource('/display/show')
-    evtSource.addEventListener 'entry', (e) ->
+  if $('#slider').length
+    slider = $("#slider").slick vertical: true, speed: 1500, accessibility: false, arrows: false, draggable: false, pauseOnHover: false, slidesToShow: 2, slidesToScroll: 1
+    eventSource = new EventSource('/display/show')
+
+    eventSource.addEventListener 'entry', (e) ->
       obj = $.parseJSON(e.data)
+      $entry = $(".entry.hide").clone().removeClass("hide entry")
+      $entry.find(".title").html(obj.title)
+      $entry.find(".published").text(obj.published)
+      $entry.find(".feed").html(obj.feed)
+      $entry.find(".summary").html(obj.summary)
+      $entry.find(".qrcode").empty().qrcode render:"image", text: obj.url, size: 150, background: "#FFFFFF"
+      if obj.image
+        $entry.append("<img src=" + obj.image + "></img>")
+      slider.slickRemove(true)
+      slider.slickAdd($entry)
+      slider.slickNext()
 
-      currentSlide = slider.getCurrentSlide()
-      newSlide = (currentSlide + 2) % 3
-      $("li.n" + newSlide + " .title").html( obj.title )
-      $("li.n" + newSlide + " .published").text( obj.published )
-      $("li.n" + newSlide + " .feed").text( obj.feed )
-      $("li.n" + newSlide + " .summary").html( obj.summary )
-#      if (obj.image) then $("#n1 > .image").attr( "src", obj.image ).show() else $("#n1 > .image").hide()
-      $("li.n" + newSlide + " .qrcode").empty().qrcode render:"image", text: obj.url, size: 200
-
-      slider.reloadSlider mode: 'vertical', speed: 2500, pager: false, controls: false, minSlides: 2, maxSlides: 2, moveSlides: 1, startSlide: currentSlide
-      slider.goToNextSlide()
-
-    evtSource.addEventListener 'background', (e) ->
+    eventSource.addEventListener 'background', (e) ->
       obj = $.parseJSON(e.data)
-      $( "body" ).css("background-image", "url("+obj.url+")")
+      $( "body" ).css("background", obj.background)
 
-
+    eventSource.addEventListener 'empty', (e) ->
+      obj = $.parseJSON(e.data)
+      obj.empty # TODO Some Stuff

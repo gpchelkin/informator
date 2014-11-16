@@ -3,7 +3,7 @@ require 'open-uri'
 class Feed < ActiveRecord::Base
   has_many :entries, dependent: :destroy, inverse_of: :feed
 
-  before_update do |feed| # Если выключаем источник, сбрасываем его
+  before_update do |feed| # Feed is reverted when turned off
     if feed.use_changed? and not feed.use
       feed.entries.clear
       feed.last_fetched = Time.at(0)

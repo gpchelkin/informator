@@ -24,7 +24,7 @@ gem 'sass-rails', '~> 5.0.0.beta1'
 gem 'foundation-rails', '~> 5.4.5.0'
 gem 'font-awesome-sass', '~> 4.2.2'
 # Smooth scroll https://kenwheeler.github.io/slick/
-gem 'jquery-slick-rails', '~> 1.3.15'
+gem 'slick_rails', '~> 1.3.14'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 2.5.3'
 # Use CoffeeScript for .js.coffee assets and views

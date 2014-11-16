@@ -1,4 +1,4 @@
-.small-5.columns
+.small-6.columns
   h3 = t('settings')
 
   = form_tag(admin_setting_path, multipart: true, id: 'setting')
@@ -99,20 +99,20 @@
           = icon("check", t('save_settings'))
 
 
-.small-7.columns
+.small-6.columns
   h3 = t('maintask')
   .row
     = form_tag(admin_maintask_path, remote: true, id: "mainTask")
       .small-12.columns
         ul.button-group.radius
           li
-            button.small.success name='commit' value='fetchall' data-disable-with=t('wait')
+            button.small.success name='commit' value='fetchall' data-disable-with=t('wait') style="padding: 10px;"
               = icon("download", t('fetch_new'))
           li
-            button.small.warning name='commit' value='cleanup' data-disable-with=t('wait')
+            button.small.warning name='commit' value='cleanup' data-disable-with=t('wait') style="padding: 10px;"
               = icon("trash", t('cleanup_old'))
           li
-            button.small.alert name='commit' value='revertall' data-disable-with=t('wait')
+            button.small.alert name='commit' value='revertall' data-disable-with=t('wait') style="padding: 10px;"
               = icon("reply", t('revert_all'))
 
   h3 = t('news_sources')
