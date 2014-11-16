@@ -87,10 +87,16 @@ sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlit
 bin/rails s
 ```
 
-В среде production:
+В среде production (ключ -d для запуска как службы):
 
 ```
-SECRET_KEY_BASE=$(rake secret) bin/rails s -e production -b 0.0.0.0 -p 80
+SECRET_KEY_BASE=$(rake secret) bin/rails s -e production -b 0.0.0.0 -p 80 [-d]
+```
+
+Остановка службы:
+
+```
+kill -9 $(cat tmp/pids/server.pid)
 ```
 
 ### Clockwork
