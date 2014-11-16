@@ -10,8 +10,8 @@ Informator
 TODO
 ----------
 
-* Красивое оформление и 50% от экрана в высоту для новости
 * Показывать сообщения организации
+* Оформление
 * [Spritz](https://spritzinc.atlassian.net/wiki/display/jssdk/Version+1.2) (?)
 
 ### DONE
