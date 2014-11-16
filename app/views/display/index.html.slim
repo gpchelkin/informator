@@ -1,23 +1,15 @@
-doctype html
-html
-  head
-    title = t('informator')
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = csrf_meta_tags
-  body
-    div.entry.hide style="height: 512px;"
+div.entry.hide style="height: 512px;"
+  .title
+  .published
+  .feed
+  .summary
+  .qrcode
+
+div#slider
+  - for i in 1..3
+    div style="height: 512px;"
       .title
       .published
       .feed
       .summary
       .qrcode
-
-    div#slider
-      - for i in 1..3
-        div style="height: 512px;"
-          .title
-          .published
-          .feed
-          .summary
-          .qrcode

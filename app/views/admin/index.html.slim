@@ -10,14 +10,14 @@
           = t('mode')
       .row
         .small-12.columns
-          = radio_button 'setting', 'mode', true, id: "mode_auto"
+          = radio_button :setting, :mode, true, id: "mode_auto"
           label for="mode_auto"
             span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('mode_auto_help')
               = t('mode_auto')
 
       .row
         .small-12.columns
-          = radio_button 'setting', 'mode', false, id: "mode_manual"
+          = radio_button :setting, :mode, false, id: "mode_manual"
           label for="mode_manual"
             span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('mode_manual_help')
               = t('mode_manual')
@@ -30,7 +30,7 @@
         .small-5.columns
           .row.collapse.postfix-radius
             .small-7.columns
-              = number_field 'setting', 'expiration', min: 10, id: "expiration-label"
+              = number_field :setting, :expiration, min: 10, id: "expiration-label"
             .small-5.columns
               span.postfix = t("sec")
 
@@ -40,11 +40,11 @@
         = t('style')
 
       .row
-        .small-5.columns
+        .small-4.columns
           label for="background-label"
             strong = t("background")
-        .small-4.columns
-          = file_field 'setting', 'background', id: "background-label"
+        .small-5.columns
+          = file_field :setting, :background, id: "background-label"
 
         - if @setting.background.exists?
           .small-3.columns
@@ -65,7 +65,7 @@
         .small-5.columns
           .row.collapse.postfix-radius
             .small-6.columns
-              = number_field 'setting', 'display_frequency', min: 0, step: 0.1, id: "displayfrequency-label"
+              = number_field :setting, :display_frequency, min: 0, step: 0.1, id: "displayfrequency-label"
             .small-6.columns
               span.postfix = t("sec")
 
@@ -83,13 +83,13 @@
         .small-5.columns.end
           .row.collapse.postfix-radius
             .small-6.columns
-              = number_field 'setting', 'frequency', min: 10, id: "frequency-label"
+              = number_field :setting, :frequency, min: 10, id: "frequency-label"
             .small-6.columns
               span.postfix = t("sec")
 
       .row
         .small-12.columns
-          = check_box 'setting', 'autocleanup', id: "autocleanup"
+          = check_box :setting, :autocleanup, id: "autocleanup"
           label for="autocleanup"
             span.has-tip.tip-right data-tooltip="" aria-haspopup="true" title=t('autocleanup_help')
               = t('autocleanup')

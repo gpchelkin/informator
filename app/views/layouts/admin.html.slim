@@ -1,47 +1,38 @@
-doctype html
-html
-  head
-    meta charset="utf-8"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title = t('informator')
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag "vendor/modernizr"
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = csrf_meta_tags
-  body
-    .sticky
-      nav.top-bar data-topbar="true" role='navigation'
-        ul.title-area
-          li.name
-            h1 = link_to t('informator'), admin_index_path
-        section.top-bar-section
-          ul.right
-            li
-              = link_to t('logout'), destroy_admin_session_path, method: :delete
-            li
-              - case params[:locale]
-                - when 'en'
-                  = link_to 'RU', locale: :ru
-                - when 'ru'
-                  = link_to 'EN', locale: :en
-                - else
-                  = link_to 'EN', locale: :en
+- content_for :topbar do
+  .sticky
+    nav.top-bar data-topbar="true" role='navigation'
+      ul.title-area
+        li.name
+          h1 = link_to t('informator'), admin_index_path
+      section.top-bar-section
+        ul.right
+          li
+            = link_to t('logout'), destroy_admin_session_path, method: :delete
+          li
+            - case params[:locale]
+              - when 'en'
+                = link_to 'RU', locale: :ru
+              - when 'ru'
+                = link_to 'EN', locale: :en
+              - else
+                = link_to 'EN', locale: :en
 
-          ul.left
-            li class=("active" if action_name=='index')
-              = link_to t('index'), admin_index_path
-            li class=[("active" if action_name=='select'), ("hide" if @mode)] id='selectLink'
-              = link_to admin_select_path
-                = t('entry_selection') + "  "
-                span.label.warning.round#uncheckedLabel = @sizes[:unchecked]
-            li class=("active" if action_name=='shown')
-              = link_to admin_shown_path
-                = t('shown_entries') + "  "
-                span.label.success.round#shownLabel = @sizes[:shown]
-            li class=("active" if action_name=='notice')
-              = link_to admin_notice_path
-                = t('announcements') + "  "
-                span.label.primary.round#noticeLabel = @sizes[:notice]
+        ul.left
+          li class=("active" if action_name=='index')
+            = link_to t('index'), admin_index_path
+          li class=[("active" if action_name=='select'), ("hide" if @mode)] id='selectLink'
+            = link_to admin_select_path
+              = t('entry_selection') + "  "
+              span.label.warning.round#uncheckedLabel = @sizes[:unchecked]
+          li class=("active" if action_name=='shown')
+            = link_to admin_shown_path
+              = t('shown_entries') + "  "
+              span.label.success.round#shownLabel = @sizes[:shown]
+          li class=("active" if action_name=='notice')
+            = link_to admin_notice_path
+              = t('announcements') + "  "
+              span.label.primary.round#noticeLabel = @sizes[:notice]
 
-    br
-    = yield
+  br
+  = yield
+== render template: "layouts/application"

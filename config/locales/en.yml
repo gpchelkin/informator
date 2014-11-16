@@ -75,3 +75,5 @@ en:
   logout: "Log out"
   background: "Display background"
   delete_background: "Delete background"
+  username: "Username"
+  password: "Password"

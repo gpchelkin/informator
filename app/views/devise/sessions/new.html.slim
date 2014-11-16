@@ -1,12 +1,15 @@
-h2 = t("login")
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :username
-    br
-    = f.text_field :username, autofocus: true
-  .field
-    = f.label :password
-    br
-    = f.password_field :password, autocomplete: "off"
-  .actions
-    = f.submit t("login")
+.row
+  .small-12.columns
+    h2 = t("login")
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .row
+        .small-4.columns
+          label
+            = t("username")
+            = f.text_field :username, autofocus: true
+      .row
+        .small-4.columns
+          label
+            = t("password")
+            = f.password_field :password, autocomplete: "off"
+      = f.submit t("login")

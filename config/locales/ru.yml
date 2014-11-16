@@ -87,3 +87,5 @@ ru:
   logout: "Выйти"
   background: "Фон для отображения"
   delete_background: "Удалить фон"
+  username: "Имя пользователя"
+  password: "Пароль"
