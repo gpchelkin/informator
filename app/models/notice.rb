@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class Notice < ActiveRecord::Base
 
   scope :shown, -> { where(checked: true) }
@@ -9,24 +11,29 @@ class Notice < ActiveRecord::Base
   end
 
   def self.load_file(noticelist = Setting.first.noticelist)
-    require 'open-uri'
     delete_all
-    text=""
+    intext = false
+    title = ""
+    summary = ""
     open(noticelist).each_line do |line|
-      if line.match(/^#\s+.*$/) and not text==""
-        add_from_md text
-        text = ""
+      if line.match(/^#\s+.*$/)
+        if intext
+          summarymd = Kramdown::Document.new(summary, input: 'markdown').to_html
+          create(checked: false, title: title, summary: summarymd)
+          title = line.sub(/^#\s+/, '')
+          summary = ""
+        else
+          intext = true
+          title = line.sub(/^#\s+/, '')
+        end
+      else
+        if intext
+          summary += line
+        end
       end
-      text += line
     end
-    add_from_md text
+    summarymd = Kramdown::Document.new(summary, input: 'markdown').to_html
+    create(checked: false, title: title, summary: summarymd) if intext
   end
 
-  def self.add_from_md(text="")
-    notice = new
-    notice.checked = false
-    notice.title = text.lines.first.sub(/^#\s+/, '')
-    notice.summary = Kramdown::Document.new(text, input: 'markdown').to_html # TODO Fix: except first line
-    notice.save
-  end
 end
