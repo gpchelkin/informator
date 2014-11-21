@@ -11,7 +11,7 @@ gem 'devise', '~> 3.4.1'
 # Use Delayed::Job as Active Job backend
 # gem 'delayed_job_active_record', '~> 4.0.2'
 # Use Clockwork as a cron alternative for starting jobs every defined interval (github version with fixed db bug)
-gem 'clockwork', github: 'tomykaira/clockwork'
+gem 'clockwork', '~> 1.1.0'
 # Use Daemons to daemonize processes
 gem 'daemons', '~> 1.1.9'
 # Use sqlite3 as the database for Active Record
