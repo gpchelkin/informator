@@ -32,14 +32,14 @@ TODO
 Системные зависимости
 ----------
 
-* [Ruby](https://www.ruby-lang.org/) version 2.0.0 (рекомендуется [rbenv](https://github.com/sstephenson/rbenv) + [ruby-build](https://github.com/sstephenson/ruby-build) 2.1.4)
+* [Ruby](https://www.ruby-lang.org/) version 2.1.0 (рекомендуется [rbenv](https://github.com/sstephenson/rbenv) + [ruby-build](https://github.com/sstephenson/ruby-build) 2.1.4)
 
 * Gem [Feedjira](https://github.com/feedjira/feedjira), применяемый для быстрой загрузки и разбора потоков,
 использует для загрузки Gem [Curb](https://github.com/taf2/curb), который является
 привязкой системной библиотеки [libcurl](http://curl.haxx.se/libcurl/) к языку _Ruby_.
 Описание установки libcurl см. на указанных страницах.
 
-* Gem [Paperclip](https://github.com/thoug*htbot/paperclip), применяемый для изменения размера и хранения изображений,
+* Gem [Paperclip](https://github.com/thoughtbot/paperclip), применяемый для изменения размера и хранения изображений,
 использует системный пакет программ [ImageMagick](http://www.imagemagick.org/).
 Описание установки см. на указанной странице.
 
@@ -54,7 +54,7 @@ sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlit
 
 ### Ruby on Rails 4.2
 
-Предварительная версия [Ruby on Rails 4.2.0.beta4](https://github.com/rails/rails) необходима для использования
+Версия [Ruby on Rails 4.2.0](https://github.com/rails/rails) необходима для использования
 нового фреймворка [Active Job](https://github.com/rails/rails/tree/master/activejob). 
 Он позволяет планировать и запускать отдельные задания (такие, 
 которые нужно периодически запускать в фоне, например, обновление записей в базе) — **Jobs** `(app/jobs)`,
