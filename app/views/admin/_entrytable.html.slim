@@ -36,7 +36,7 @@
                     = link_to entry.image.url, class: "th"
                       = image_tag entry.image.url(:thumb)
             td
-              div = entry.feed.title
+              div = entry.feed.title if  entry.feed
               div = l(entry.published)
               - exp = 100*(1-(Time.now-entry.published)/@expiration)
               - case exp

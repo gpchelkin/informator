@@ -23,6 +23,6 @@ module Informator
     # Use Active Job Inline Adapter for running jobs immediately
     # Can be set to :delayed_job
     config.active_job.queue_adapter = :inline
-
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
