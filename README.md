@@ -1,10 +1,10 @@
 Informator
 ==========
 
-Приложение доступно в интернете:
+Приложение НЕ доступно в интернете:
 
-* [Отображение](http://178.62.102.238/)
-* [Панель администратора](http://178.62.102.238/admin)
+* [Отображение](http://no.pe/)
+* [Панель администратора](http://no.pe/admin)
 * Имя пользователя: `admin`, пароль: `password`
 
 TODO
@@ -14,7 +14,8 @@ TODO
 * Оформление
 * [Spritz](https://spritzinc.atlassian.net/wiki/display/jssdk/Version+1.2) (?)
 
-### DONE
+Особенности
+----------
 
 * Плавная прокрутка
 * Фон для отображения
@@ -27,12 +28,12 @@ TODO
 * Вход с Devise по имени пользователя и паролю
 * EntryTable: колонка с цветным устареванием и временем
 * FeedTable: цветные кнопки
-* Переезд с Bootstrap на Foundation
+* ZURB Foundation
 
 Системные зависимости
 ----------
 
-* [Ruby](https://www.ruby-lang.org/) version 2.1.0 (рекомендуется [rbenv](https://github.com/sstephenson/rbenv) + [ruby-build](https://github.com/sstephenson/ruby-build) 2.1.4)
+* [Ruby](https://www.ruby-lang.org/) version 2.2.0 (рекомендуется [rbenv](https://github.com/sstephenson/rbenv) + [ruby-build](https://github.com/sstephenson/ruby-build) 2.1.4)
 
 * Gem [Feedjira](https://github.com/feedjira/feedjira), применяемый для быстрой загрузки и разбора потоков,
 использует для загрузки Gem [Curb](https://github.com/taf2/curb), который является
