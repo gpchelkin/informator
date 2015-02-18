@@ -33,7 +33,7 @@ TODO
 Системные зависимости
 ----------
 
-* [Ruby](https://www.ruby-lang.org/) version 2.2.0 (рекомендуется [rbenv](https://github.com/sstephenson/rbenv) + [ruby-build](https://github.com/sstephenson/ruby-build) 2.1.4)
+* [Ruby](https://www.ruby-lang.org/) version 2.2.0 (рекомендуется [chruby](https://github.com/postmodern/chruby) + [ruby-install](https://github.com/postmodern/ruby-install))
 
 * Gem [Feedjira](https://github.com/feedjira/feedjira), применяемый для быстрой загрузки и разбора потоков,
 использует для загрузки Gem [Curb](https://github.com/taf2/curb), который является
@@ -44,10 +44,10 @@ TODO
 использует системный пакет программ [ImageMagick](http://www.imagemagick.org/).
 Описание установки см. на указанной странице.
 
-Для Ubuntu 14.XX системные зависимости устанавливаются так: 
+Для Debian / Ubuntu системные зависимости устанавливаются так:
 
 ```
-sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlite3-dev ImageMagick
+sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlite3-dev imagemagick
 ```
 
 Пояснения к принятым решениям
