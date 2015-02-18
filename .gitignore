@@ -22,4 +22,6 @@
 /public/assets
 /public/system
 
-Gemfile.lock
+/Gemfile.lock
+/config/notices.md
+/config/feeds.txt

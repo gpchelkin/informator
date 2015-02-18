@@ -18,9 +18,9 @@ $(document).ready () ->
       $entry.find(".qrcode").qrcode render:"image", text: obj.url, size: 150, background: "#FFFFFF"
       if obj.image
         $entry.find(".image").append("<img src=" + obj.image + "></img>")
-      slider.slickRemove(true)
-      slider.slickAdd($entry)
-      slider.slickNext()
+      slider.slick 'slickRemove', true
+      slider.slick 'slickAdd', $entry
+      slider.slick 'slickNext'
 
     eventSource.addEventListener 'background', (e) ->
       obj = $.parseJSON(e.data)

@@ -36,7 +36,7 @@ ready = ->
       when true  then $(this).find(".toggleBtn").val("false").toggleClass('success warning')
       when false then $(this).find(".toggleBtn").val("true").toggleClass('success warning')
       else
-    $(this).find(".toggleText").toggle()
+    $(this).find(".toggleText").toggleClass("hide")
     labels(data.sizes)
 
   $("#entryTask").on "ajax:success", (e, data, status, xhr) ->
@@ -45,8 +45,8 @@ ready = ->
 
   $("#entryTable").on "ajax:success", ".checkEntry", (e, data, status, xhr) ->
     switch data.done
-      when true  then $(this).toggle().parents("td").find(".showEntry").toggle()
-      when false then $(this).toggle().parents("td").find(".deleteEntry").toggle()
+      when true  then $(this).toggle().parents("td").find(".showEntry").toggleClass("hide")
+      when false then $(this).toggle().parents("td").find(".deleteEntry").toggleClass("hide")
       else
     labels(data.sizes)
 
@@ -59,7 +59,7 @@ ready = ->
       when true  then $(this).find(".toggleBtn").val("false").toggleClass('success warning')
       when false then $(this).find(".toggleBtn").val("true").toggleClass('success warning')
       else
-    $(this).find(".toggleText").toggle()
+    $(this).find(".toggleText").toggleClass("hide")
     labels(data.sizes)
 
 $(document).ready ready

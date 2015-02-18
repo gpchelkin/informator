@@ -8,3 +8,5 @@
 
 # Default settings:
 Setting.create(mode: false, style: 1, expiration: 86400, frequency: 14400, autocleanup: true, feedlist: 'config/feeds.txt', noticelist: 'config/notices.md', display_frequency: 0.5)
+# Default admin with password:
+Admin.create(username: "admin", password: "password", password_confirmation: "password")
