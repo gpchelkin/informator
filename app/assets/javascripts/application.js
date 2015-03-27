@@ -17,8 +17,7 @@
 //= require turbolinks
 // http://larsjung.de/jquery-qrcode/    https://github.com/lrsjng/jquery-qrcode
 //= require jquery.qrcode-0.11.0.min
-// http://kenwheeler.github.io/slick/   https://github.com/kenwheeler/slick
 //= require slick
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(document).foundation();

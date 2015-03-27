@@ -51,9 +51,9 @@
                 span.meter style=("width: " + (10+0.9*exp).to_s + "%")
 
             td
-              .alert-box.success.radius.showEntry.hide data-alert="" style="margin-bottom: 0;"
+              .panel.callout.radius.showEntry.hide data-alert="" style="margin-bottom: 0;"
                 = t('entry_will_be_shown')
-              .alert-box.warning.radius.deleteEntry.hide data-alert="" style="margin-bottom: 0;"
+              .panel.callout.radius.deleteEntry.hide data-alert="" style="margin-bottom: 0;"
                 = t('entry_was_deleted')
 
               = form_tag(admin_checkentry_path, remote: true, class: 'checkEntry', "data-type" => 'json')

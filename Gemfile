@@ -22,7 +22,7 @@ gem 'slim-rails', '~> 3.0.1'
 # Use SCSS for stylesheets - pre for Rails 4.2 support
 gem 'sass-rails', '~> 5.0.1'
 # Use Zurb Foundation CSS Framework and Font Awesome icon font
-gem 'foundation-rails', '~> 5.5.1.1'
+gem 'foundation-rails', '= 5.5.1.0' # Wait for https://github.com/zurb/foundation-rails/releases/tag/v5.5.1.2
 gem 'font-awesome-sass', '~> 4.3.2.1'
 # Smooth scroll https://kenwheeler.github.io/slick/
 gem 'slick_rails', '~> 1.4.1'
