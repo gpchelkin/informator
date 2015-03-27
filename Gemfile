@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # Use Ruby on Rails 4.2 for Active Job implementation
-gem 'rails', '~> 4.2.0'
-gem 'rails-html-sanitizer', '~> 1.0.1'
+gem 'rails', '~> 4.2.1'
+gem 'rails-html-sanitizer', '~> 1.0.2'
 gem 'json', '~> 1.8.2'
 # Use Feedjira feed parser
 gem 'feedjira', '~> 1.6.0'
@@ -11,7 +11,7 @@ gem 'paperclip', '~> 4.2.1'
 gem 'devise', '~> 3.4.1'
 # Use Delayed::Job as Active Job backend
 gem 'delayed_job_active_record', '~> 4.0.3'
-# Use Clockwork as a cron alternative for starting jobs every defined interval (github version with fixed db bug)
+# Use Clockwork as a cron alternative for starting jobs every defined interval
 gem 'clockwork', '~> 1.1.0'
 # Use Daemons to daemonize processes
 gem 'daemons', '~> 1.1.9'
@@ -22,8 +22,8 @@ gem 'slim-rails', '~> 3.0.1'
 # Use SCSS for stylesheets - pre for Rails 4.2 support
 gem 'sass-rails', '~> 5.0.1'
 # Use Zurb Foundation CSS Framework and Font Awesome icon font
-gem 'foundation-rails', '~> 5.5.1.0'
-gem 'font-awesome-sass', '~> 4.3.1'
+gem 'foundation-rails', '~> 5.5.1.1'
+gem 'font-awesome-sass', '~> 4.3.2.1'
 # Smooth scroll https://kenwheeler.github.io/slick/
 gem 'slick_rails', '~> 1.4.1'
 # Use Uglifier as compressor for JavaScript assets
@@ -37,7 +37,7 @@ gem 'jquery-rails', '~> 4.0.3'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 2.5.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.2.7'
+gem 'jbuilder', '~> 2.2.12'
 # Use puma as the app server for Server-sent events support
 gem 'puma', '~> 2.11.1'
 # Use Capistrano for deployment

@@ -1,10 +1,10 @@
 Informator
 ==========
 
-Приложение НЕ доступно в интернете:
+Приложение доступно в интернете:
 
-* [Отображение](http://no.pe/)
-* [Панель администратора](http://no.pe/admin)
+* [Отображение](http://do.pchelk.in:3000/)
+* [Панель администратора](http://do.pchelk.in:3000/admin)
 * Имя пользователя: `admin`, пароль: `password`
 
 TODO
@@ -12,6 +12,7 @@ TODO
 
 * Показывать сообщения организации
 * Оформление
+* [Crono](https://rubygems.org/gems/crono)
 * [Spritz](https://spritzinc.atlassian.net/wiki/display/jssdk/JavaScript+SDK+Documentation) (?)
 
 Особенности

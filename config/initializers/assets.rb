@@ -8,4 +8,4 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w( slick.svg slick.eot slick.woff slick.ttf ajax-loader.gif )
+Rails.application.config.assets.precompile += %w(*.svg *.eot *.woff *.ttf *.gif)
