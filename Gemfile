@@ -20,12 +20,12 @@ gem 'sqlite3', '~> 1.3.10'
 # Use Slim template engine for views
 gem 'slim-rails', '~> 3.0.1'
 # Use SCSS for stylesheets - pre for Rails 4.2 support
-gem 'sass-rails', '~> 5.0.1'
+gem 'sass-rails', '~> 5.0.2'
 # Use Zurb Foundation CSS Framework and Font Awesome icon font
-gem 'foundation-rails', '= 5.5.1.0' # Wait for https://github.com/zurb/foundation-rails/releases/tag/v5.5.1.2
+gem 'foundation-rails', '~> 5.5.1.2'
 gem 'font-awesome-sass', '~> 4.3.2.1'
 # Smooth scroll https://kenwheeler.github.io/slick/
-gem 'slick_rails', '~> 1.4.1'
+gem 'slick_rails', '~> 1.5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 2.7.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -37,9 +37,9 @@ gem 'jquery-rails', '~> 4.0.3'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 2.5.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.2.12'
+gem 'jbuilder', '~> 2.2.13'
 # Use puma as the app server for Server-sent events support
-gem 'puma', '~> 2.11.1'
+gem 'puma', '~> 2.11.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
