@@ -80,7 +80,7 @@ sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlit
 
 Используется сервер [Puma](http://puma.io), т.к. поддерживает Server-sent events.
 Перед первым запуском приложения следует установить Gem `bundler`, необходимые Gems из `Gemfile`,
-создать БД, загрузить схему БД и заполнить данные (настройки) по умолчанию., в Rails 4.2 эти действия автоматически выполняет скрипт:
+создать БД, загрузить схему БД и заполнить данные (настройки) по умолчанию, в Rails 4.2 эти действия автоматически выполняет скрипт:
 `bin/setup` для среды разработки development или `RAILS_ENV=production bin/setup` для среды production.
 
 Запуск приложения в среде разработки development:
