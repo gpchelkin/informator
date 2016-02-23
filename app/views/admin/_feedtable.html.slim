@@ -1,20 +1,22 @@
-.row
+#feedTable
+
   - if @feeds.empty?
 
     br
     .small-5.columns
-      .panel.callout.radius
+      .callout.secondary
         = t('no_feeds_found')
 
   - else
-    .small-12.columns
-      table width="90%"
-        thead
-          tr
-            th width="80%"
-              = t('feed_title_and_url')
-            th width="20%"
-              = t('use')
+
+    div style="height: 75vh; overflow: scroll;"
+      table.hover
+        /thead
+        /  tr
+        /    th width="80%"
+        /      = t('feed_title_and_url')
+        /    th width="20%"
+        /      = t('use')
         tbody
           - @feeds.each do |feed|
             tr
@@ -24,7 +26,7 @@
               td
                 = form_tag(admin_togglefeed_path, remote: true, class: 'toggleFeed')
                   = hidden_field_tag 'feed', feed.id.to_s
-                  button.small.radius.toggleBtn name='use' value=(feed.use? ? 'false' : 'true') class=(feed.use? ? 'success' : 'warning') style="padding: 8px; margin-bottom: 0;"
+                  button.button.expanded.toggleBtn type="submit" name='use' value=(feed.use? ? 'false' : 'true') class=(feed.use? ? 'success' : 'warning') style="padding: 8px; margin-bottom: 0;"
                     span.toggleText class=("hide" unless feed.use?)
                       = icon("power-off", t('enabled'))
                     span.toggleText class=("hide" if feed.use?)

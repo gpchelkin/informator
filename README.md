@@ -1,10 +1,10 @@
 Informator
 ==========
 
-Приложение доступно в интернете:
+Приложение НЕдоступно в интернете:
 
-* [Отображение](http://do.pchelk.in:3000/)
-* [Панель администратора](http://do.pchelk.in:3000/admin)
+* [Отображение](http://no.pe/)
+* [Панель администратора](http://no.pe/admin)
 * Имя пользователя: `admin`, пароль: `password`
 
 TODO
@@ -29,17 +29,12 @@ TODO
 * Вход с Devise по имени пользователя и паролю
 * EntryTable: колонка с цветным устареванием и временем
 * FeedTable: цветные кнопки
-* ZURB Foundation
+* ZURB Foundation 6
 
 Системные зависимости
 ----------
 
-* [Ruby](https://www.ruby-lang.org/) version 2.2.0 (рекомендуется [chruby](https://github.com/postmodern/chruby) + [ruby-install](https://github.com/postmodern/ruby-install))
-
-* Gem [Feedjira](https://github.com/feedjira/feedjira), применяемый для быстрой загрузки и разбора потоков,
-использует для загрузки Gem [Curb](https://github.com/taf2/curb), который является
-привязкой системной библиотеки [libcurl](http://curl.haxx.se/libcurl/) к языку _Ruby_.
-Описание установки libcurl см. на указанных страницах.
+* [Ruby](https://www.ruby-lang.org/) version 2.3.0 (рекомендуется [rbenv](https://github.com/rbenv/rbenv) + [ruby-build](https://github.com/rbenv/ruby-build) или [chruby](https://github.com/postmodern/chruby) + [ruby-install](https://github.com/postmodern/ruby-install))
 
 * Gem [Paperclip](https://github.com/thoughtbot/paperclip), применяемый для изменения размера и хранения изображений,
 использует системный пакет программ [ImageMagick](http://www.imagemagick.org/).
@@ -48,7 +43,7 @@ TODO
 Для Debian / Ubuntu системные зависимости устанавливаются так:
 
 ```
-sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlite3-dev imagemagick
+sudo apt install libsqlite3-dev imagemagick
 ```
 
 Пояснения к принятым решениям
@@ -56,7 +51,7 @@ sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlit
 
 ### Ruby on Rails 4.2
 
-Версия [Ruby on Rails 4.2.0](https://github.com/rails/rails) необходима для использования
+Версия [Ruby on Rails 4.2](https://github.com/rails/rails) необходима для использования
 нового фреймворка [Active Job](https://github.com/rails/rails/tree/master/activejob). 
 Он позволяет планировать и запускать отдельные задания (такие, 
 которые нужно периодически запускать в фоне, например, обновление записей в базе) — **Jobs** `(app/jobs)`,
@@ -66,11 +61,11 @@ sudo apt-get install ruby libcurl3 libcurl3-gnutls libcurl4-openssl-dev libsqlit
 Для асинхронного выполнения заданий можно использовать адаптер и queue-систему [Delayed::Job](https://github.com/collectiveidea/delayed_job) (см. ниже). 
 
 * Подробнее об **Active Job** и адаптерах:
-[RoR Guides](http://edgeguides.rubyonrails.org/active_job_basics.html) |
-[RoR API](http://edgeapi.rubyonrails.org/classes/ActiveJob.html)
+[RoR Guides](http://guides.rubyonrails.org/active_job_basics.html) |
+[RoR API](http://api.rubyonrails.org/classes/ActiveJob.html)
 
 * Указания к обновлению приложения до **Ruby on Rails 4.2**:
-[RoR Guides](http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html) |
+[RoR Guides](http://guides.rubyonrails.org/upgrading_ruby_on_rails.html) |
 [RailsApps](http://railsapps.github.io/updating-rails.html)
 
 Сервисы

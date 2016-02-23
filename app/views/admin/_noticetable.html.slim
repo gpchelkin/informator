@@ -1,35 +1,37 @@
-- if @notices.empty?
+#noticeTable
 
-  br
-  .small-5.columns
-    .panel.callout.radius
-      = t('no_notices_found')
+  - if @notices.empty?
 
-- else
-  .small-12.columns
-    table width="100%"
+    .small-12.columns
+      .callout.secondary
+        = t('no_notices_found')
 
-      thead
-        tr
-          th width="80%"
-            = t('notice')
-          th width="20%"
-            = t('show')
+  - else
 
-      tbody
-        - @notices.each do |notice|
+    .small-12.columns
+      table.hover
+
+        thead
           tr
+            th width="80%"
+              = t('notice')
+            th width="20%"
+              = t('show')
 
-            td
-              h1 = notice.title
-              == notice.summary
+        tbody
+          - @notices.each do |notice|
+            tr
 
-            td
-              = form_tag(admin_togglenotice_path, remote: true, class: 'toggleNotice')
-                = hidden_field_tag 'notice', notice.id.to_s
+              td
+                h1 = notice.title
+                == notice.summary
 
-                button.small.radius.toggleBtn name='checked' value=(notice.checked? ? 'false' : 'true') class=(notice.checked? ? 'success' : 'warning') style="margin-bottom: 0;"
-                  span.toggleText class=("hide" unless notice.checked?)
-                    = icon("power-off", t('notice_shown'))
-                  span.toggleText class=("hide" if notice.checked?)
-                    = icon("power-off", t('notice_unshown'))
+              td
+                = form_tag(admin_togglenotice_path, remote: true, class: 'toggleNotice')
+                  = hidden_field_tag 'notice', notice.id.to_s
+
+                  button.button.toggleBtn type="submit" name='checked' value=(notice.checked? ? 'false' : 'true') class=(notice.checked? ? 'success' : 'warning') style="margin-bottom: 0;"
+                    span.toggleText class=("hide" unless notice.checked?)
+                      = icon("power-off", t('notice_shown'))
+                    span.toggleText class=("hide" if notice.checked?)
+                      = icon("power-off", t('notice_unshown'))

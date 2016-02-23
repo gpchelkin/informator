@@ -22,7 +22,7 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
-  config.serve_static_files = false # because of bug in Rails 4.2.0 when precompiled assets exist
+  config.serve_static_files = true # because of bug in Rails 4.2.0 when precompiled assets exist
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
@@ -42,5 +42,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Mounts the terminal at /console https://github.com/rails/web-console
-  config.web_console.automount = true
+  config.rvt.automount = true
 end

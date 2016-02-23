@@ -1,8 +1,7 @@
 = form_tag(admin_reloadnotices_path, remote: true, id: "noticeReload")
   .small-12.columns
-    button.small.radius.success name='commit' value='reloadnotices' data-disable-with=t('wait')
+    button.button.success type="submit" name='commit' value='reloadnotices' data-disable-with=t('wait')
       = icon("download", t('reload_notice'))
 br
 
-#noticeTable
-  == render 'noticetable'
+== render 'noticetable'

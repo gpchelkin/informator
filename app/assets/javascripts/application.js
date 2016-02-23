@@ -13,11 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require foundation/foundation.clearing
 //= require turbolinks
 // http://larsjung.de/jquery-qrcode/    https://github.com/lrsjng/jquery-qrcode
-//= require jquery.qrcode-0.11.0.min
+//= require jquery.qrcode-0.12.0.min
 //= require slick
 //= require_tree .
 
-$(document).foundation();
+$(function(){ $(document).foundation(); });

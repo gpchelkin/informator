@@ -18,9 +18,10 @@ class Feed < ActiveRecord::Base
       feed = new
       feed.use = false
       feed.url = line.strip
-      success_callback = lambda { |url, f   | feed.title = full_sanitizer.sanitize(f.title) }
-      failure_callback = lambda { |curl, err| feed.title = curl.url }
-      Feedjira::Feed.fetch_and_parse feed.url, on_success: success_callback, on_failure: failure_callback
+      #failure_callback = lambda { |curl, err| feed.title = curl.url }
+      #success_callback = lambda { |url, f   | feed.title = full_sanitizer.sanitize(f.title) }
+      Feedjira::Feed.fetch_and_parse(feed.url) #, on_success: success_callback, on_failure: failure_callback
+      feed.title = full_sanitizer.sanitize(Feedjira::Feed.fetch_and_parse(feed.url).title)
       feed.save
     end
   end
@@ -39,23 +40,22 @@ class Feed < ActiveRecord::Base
 
   def fetch(mode=Setting.first.mode)
     full_sanitizer = Rails::Html::FullSanitizer.new
-    success_callback = lambda do |url, f|
-      time = [last_fetched, Time.now-Setting.first.expiration].max
-      f.entries.each do |entry|
-        if ((not entry.published) or (entry.published > time)) and (not Entry.exists?(url: entry.url)) # For Yandex.News
-          entries.create(
-              url:  entry.url,
-              title: full_sanitizer.sanitize(entry.title),
-              summary: full_sanitizer.sanitize(entry.summary),
-              image: entry.image ? URI.parse(entry.image) : nil,
-              published: entry.published ? entry.published : Time.now,
-              checked: mode
-          )
-        end
+    time = [last_fetched, Time.now-Setting.first.expiration].max
+    Feedjira::Feed.fetch_and_parse(url).entries.each do |entry|
+      if ((not entry.published) or (entry.published > time)) and (not Entry.exists?(url: entry.url)) # For Yandex.News
+        entries.create(
+            url:  entry.url,
+            title: full_sanitizer.sanitize(entry.title),
+            summary: full_sanitizer.sanitize(entry.summary),
+            image: entry.image ? URI.parse(entry.image) : nil,
+            published: entry.published ? entry.published : Time.now,
+            checked: mode
+        )
       end
     end
-    failure_callback = lambda { |curl, err| logger.debug err }
-    Feedjira::Feed.fetch_and_parse url, on_success: success_callback, on_failure: failure_callback
+    #success_callback = lambda do |url, f|
+    #failure_callback = lambda { |curl, err| logger.debug err }
+    #Feedjira::Feed.fetch_and_parse url, on_success: success_callback, on_failure: failure_callback
     update(last_fetched: Time.now)
     Setting.first.touch
   end

@@ -1,38 +1,38 @@
 - content_for :topbar do
-  .sticky
-    nav.top-bar data-topbar="true" role='navigation'
-      ul.title-area
-        li.name
-          h1 = link_to t('informator'), admin_index_path
-      section.top-bar-section
-        ul.right
+  .top-bar
+    .top-bar-title
+      h4 = link_to t('informator'), admin_index_path
+
+    div
+      .top-bar-left
+        ul.menu
+          li class=("hide" if @mode) id='selectLink'
+            = link_to admin_select_path
+              span style=("font-weight: bold;" if action_name=='select') = t('entry_selection') + "  "
+              span.label.warning#uncheckedLabel = @sizes[:unchecked]
           li
-            = link_to t('logout'), destroy_admin_session_path, method: :delete
+            = link_to admin_shown_path
+              span style=("font-weight: bold;" if action_name=='shown') = t('shown_entries') + "  "
+              span.label.success#shownLabel = @sizes[:shown]
+          li
+            = link_to admin_notice_path
+              span style=("font-weight: bold;" if action_name=='notice') = t('announcements') + "  "
+              span.label.primary#noticeLabel = @sizes[:notice]
+
+      .top-bar-right
+        ul.menu
           li
             - case params[:locale]
-              - when 'en'
-                = link_to 'RU', locale: :ru
-              - when 'ru'
-                = link_to 'EN', locale: :en
-              - else
-                = link_to 'EN', locale: :en
-
-        ul.left
-          li class=("active" if action_name=='index')
-            = link_to t('index'), admin_index_path
-          li class=[("active" if action_name=='select'), ("hide" if @mode)] id='selectLink'
-            = link_to admin_select_path
-              = t('entry_selection') + "  "
-              span.label.warning.round#uncheckedLabel = @sizes[:unchecked]
-          li class=("active" if action_name=='shown')
-            = link_to admin_shown_path
-              = t('shown_entries') + "  "
-              span.label.success.round#shownLabel = @sizes[:shown]
-          li class=("active" if action_name=='notice')
-            = link_to admin_notice_path
-              = t('announcements') + "  "
-              span.label.primary.round#noticeLabel = @sizes[:notice]
+            - when 'en'
+              = link_to 'RUS', locale: :ru
+            - when 'ru'
+              = link_to 'ENG', locale: :en
+            - else
+              = link_to 'ENG', locale: :en
+          li
+            = link_to t('logout'), destroy_admin_session_path, method: :delete
 
   br
   == yield
+
 == render template: "layouts/application"

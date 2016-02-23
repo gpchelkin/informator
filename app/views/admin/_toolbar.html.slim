@@ -1,28 +1,22 @@
 = form_tag(admin_entrytask_path, remote: true, id: "entryTask")
   = hidden_field_tag 'action_name', action_name
   .small-12.columns
-    .button-bar.clearfix
-      ul.button-group.radius.left
-        li
-          button.small name='commit' value='refresh' data-disable-with=t('wait')
-            = icon("refresh", t('refresh_list'))
 
-        - unless @mode==false and action_name == 'shown'
-          li
-            button.small.success name='commit' value='fetchall' data-disable-with=t('wait')
-              = icon("download", t('fetch_new'))
+    .button-group.float-left
+      button.button type="submit" name='commit' value='refresh' data-disable-with=t('wait')
+        = icon("refresh", t('refresh_list'))
 
-        li
-          button.small.warning name='commit' value='cleanup' data-disable-with=t('wait')
-            = icon("trash", t('cleanup_old'))
+      - unless @mode==false and action_name == 'shown'
+        button.button.success type="submit" name='commit' value='fetchall' data-disable-with=t('wait')
+          = icon("download", t('fetch_new'))
 
-      ul.button-group.radius.right
+      button.button.warning type="submit" name='commit' value='cleanup' data-disable-with=t('wait')
+        = icon("trash", t('cleanup_old'))
 
-        - if action_name == 'select'
-          li
-            button.small.success name='commit' value='showall' data-disable-with=t('wait')
-              = icon("check", t('show_all'))
+    .button-group.float-right
+      - if action_name == 'select'
+        button.button.success type="submit" name='commit' value='showall' data-disable-with=t('wait')
+          = icon("check", t('show_all'))
 
-        li
-          button.small.alert name='commit' value='deleteall' data-disable-with=t('wait')
-            = icon("remove", t('delete_all'))
+      button.button.alert type="submit" name='commit' value='deleteall' data-disable-with=t('wait')
+        = icon("remove", t('delete_all'))
