@@ -1,18 +1,17 @@
 Informator
 ==========
 
-Приложение НЕдоступно в интернете:
+Приложение _доступно_ [2016.03.09] в интернете:
 
-* [Отображение](http://no.pe/)
-* [Панель администратора](http://no.pe/admin)
+* [Отображение новостей](http://178.62.56.106/)
+* [Панель администратора](http://178.62.56.106/admin)
 * Имя пользователя: `admin`, пароль: `password`
 
 TODO
 ----------
 
 * Показывать сообщения организации
-* Оформление
-* [Crono](https://rubygems.org/gems/crono)
+* [Crono](https://rubygems.org/gems/crono) (?)
 * [Spritz](https://spritzinc.atlassian.net/wiki/display/jssdk/JavaScript+SDK+Documentation) (?)
 
 Особенности
