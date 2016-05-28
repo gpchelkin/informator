@@ -1,39 +1,20 @@
 Informator
 ==========
 
-Приложение _доступно_ [2016.03.09] в интернете:
+Приложение для сбора новостей из заданных источников RSS и для отбора необходимых для отображения на удаленном мониторе.
 
-* [Отображение новостей](http://178.62.56.106/)
-* [Панель администратора](http://178.62.56.106/admin)
-* Имя пользователя: `admin`, пароль: `password`
-
-TODO
-----------
-
-* Показывать сообщения организации
-* [Crono](https://rubygems.org/gems/crono) (?)
-* [Spritz](https://spritzinc.atlassian.net/wiki/display/jssdk/JavaScript+SDK+Documentation) (?)
-
-Особенности
-----------
-
-* Плавная прокрутка
-* Фон для отображения
-* Две новости на экране
-* Время отображения зависит от количества слов, коэффициент в настройках
-* Дата в региональном формате (в зависимости от локали)
+Особенности фронтенда:
 * Картинки (можно проверить с источником Lenta.ru)
 * QR-коды
 * /display доступен на корне /
 * Вход с Devise по имени пользователя и паролю
-* EntryTable: колонка с цветным устареванием и временем
-* FeedTable: цветные кнопки
 * ZURB Foundation 6
+
 
 Системные зависимости
 ----------
 
-* [Ruby](https://www.ruby-lang.org/) version 2.3.0 (рекомендуется [rbenv](https://github.com/rbenv/rbenv) + [ruby-build](https://github.com/rbenv/ruby-build) или [chruby](https://github.com/postmodern/chruby) + [ruby-install](https://github.com/postmodern/ruby-install))
+* [Ruby](https://www.ruby-lang.org/) 2.3.0 (рекомендуется [rbenv](https://github.com/rbenv/rbenv) + [ruby-build](https://github.com/rbenv/ruby-build) или [chruby](https://github.com/postmodern/chruby) + [ruby-install](https://github.com/postmodern/ruby-install))
 
 * Gem [Paperclip](https://github.com/thoughtbot/paperclip), применяемый для изменения размера и хранения изображений,
 использует системный пакет программ [ImageMagick](http://www.imagemagick.org/).
@@ -45,29 +26,7 @@ TODO
 sudo apt install libsqlite3-dev imagemagick
 ```
 
-Пояснения к принятым решениям
-----------
-
-### Ruby on Rails 4.2
-
-Версия [Ruby on Rails 4.2](https://github.com/rails/rails) необходима для использования
-нового фреймворка [Active Job](https://github.com/rails/rails/tree/master/activejob). 
-Он позволяет планировать и запускать отдельные задания (такие, 
-которые нужно периодически запускать в фоне, например, обновление записей в базе) — **Jobs** `(app/jobs)`,
-используя один из предоставленных адаптеров к существующим queue-системам выполнения заданий. 
-Также предоставлен простейший Inline-адаптер, который не требует сторонних queue-систем и дополнительных процессов, 
-но не является _асинхронным_, т.е. вызвавший процесс ждет выполнения **Job** и странички не будут загружаться, пока выполняется действие. 
-Для асинхронного выполнения заданий можно использовать адаптер и queue-систему [Delayed::Job](https://github.com/collectiveidea/delayed_job) (см. ниже). 
-
-* Подробнее об **Active Job** и адаптерах:
-[RoR Guides](http://guides.rubyonrails.org/active_job_basics.html) |
-[RoR API](http://api.rubyonrails.org/classes/ActiveJob.html)
-
-* Указания к обновлению приложения до **Ruby on Rails 4.2**:
-[RoR Guides](http://guides.rubyonrails.org/upgrading_ruby_on_rails.html) |
-[RailsApps](http://railsapps.github.io/updating-rails.html)
-
-Сервисы
+Сервисы и их запуск
 ----------
 
 ### Сервер Puma
@@ -180,3 +139,32 @@ Admin.find_by(username: "admin").update!(password: "newpassword", password_confi
 Другие настройки описаны в административном интерфейсе приложения `/admin`.
 
 Отображение новостей доступно по корневому адресу.
+
+
+TODO
+----------
+
+* [Crono](https://rubygems.org/gems/crono) (?)
+* [Spritz](https://spritzinc.atlassian.net/wiki/display/jssdk/JavaScript+SDK+Documentation) (?)
+
+Пояснения к принятым решениям
+----------
+
+### Ruby on Rails 4.2
+
+Версия [Ruby on Rails 4.2](https://github.com/rails/rails) необходима для использования
+нового фреймворка [Active Job](https://github.com/rails/rails/tree/master/activejob). 
+Он позволяет планировать и запускать отдельные задания (такие, 
+которые нужно периодически запускать в фоне, например, обновление записей в базе) — **Jobs** `(app/jobs)`,
+используя один из предоставленных адаптеров к существующим queue-системам выполнения заданий. 
+Также предоставлен простейший Inline-адаптер, который не требует сторонних queue-систем и дополнительных процессов, 
+но не является _асинхронным_, т.е. вызвавший процесс ждет выполнения **Job** и странички не будут загружаться, пока выполняется действие. 
+Для асинхронного выполнения заданий можно использовать адаптер и queue-систему [Delayed::Job](https://github.com/collectiveidea/delayed_job) (см. ниже). 
+
+* Подробнее об **Active Job** и адаптерах:
+[RoR Guides](http://guides.rubyonrails.org/active_job_basics.html) |
+[RoR API](http://api.rubyonrails.org/classes/ActiveJob.html)
+
+* Указания к обновлению приложения до **Ruby on Rails 4.2**:
+[RoR Guides](http://guides.rubyonrails.org/upgrading_ruby_on_rails.html) |
+[RailsApps](http://railsapps.github.io/updating-rails.html)
